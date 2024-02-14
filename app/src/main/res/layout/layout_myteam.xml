@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:id="@+id/llInvite"
+        android:padding="@dimen/_10sdp"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/tvName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="tamil"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+            android:fontFamily="@font/poppins_medium"
+            />
+
+
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/tvMobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+            android:fontFamily="@font/poppins_medium"
+            />
+
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+    <ImageView
+        android:layout_below="@+id/llInvite"
+        android:layerType="software"
+        android:contentDescription="underline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/dottedline" />
+
+
+</RelativeLayout>

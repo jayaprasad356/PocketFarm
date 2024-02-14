@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.weagri.Acitivity.HomeActivity">
+
+
+
+    <RelativeLayout
+        android:background="@color/bg_color"
+        android:id="@+id/rlToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_12sdp">
+
+
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="WeAgri"
+            android:fontFamily="@font/poppins_semibold"
+            android:textSize="@dimen/_16sdp"
+            />
+
+
+    </RelativeLayout>
+
+
+    <FrameLayout
+        android:background="@color/bg_color"
+        android:layout_below="@+id/rlToolbar"
+        android:id="@+id/fragment_container"
+        android:layout_above="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    </FrameLayout>
+
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:background="@color/white"
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottom_navigation_menu"
+        app:itemTextColor="@drawable/bottom_navigation_item_selector"
+        app:itemIconTint="@drawable/bottom_navigation_item_selector"
+        />
+<!--        app:itemIconTint="@drawable/bottom_navigation_item_selector"-->
+<!--        app:itemTextColor="@drawable/bottom_navigation_item_selector"-->
+
+
+</RelativeLayout>

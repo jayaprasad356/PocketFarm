@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "768398220961",
+    "project_id": "weagri-9a5ac",
+    "storage_bucket": "weagri-9a5ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:768398220961:android:823aad21e1f15bb7025ae0",
+        "android_client_info": {
+          "package_name": "com.example.weagri"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLLN0cmxxKSkPKrhecZ1kHT94wSA6dGyY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

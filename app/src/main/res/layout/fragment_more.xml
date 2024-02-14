@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/_14sdp"
+    tools:context=".Fragment.MoreFragment">
+
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_140sdp"
+            android:background="@drawable/card_bg"
+            >
+
+
+            <LinearLayout
+                android:padding="@dimen/_16sdp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvRecharge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:fontFamily="@font/inter_semibold"
+                    android:textColor="@color/yellow_color"
+                    android:textSize="@dimen/_16sdp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Recharge balance"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/black"
+
+                    />
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:padding="@dimen/_16sdp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvTotalEarnings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:fontFamily="@font/inter_bold"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_24sdp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Total Earnings"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/white"
+                    />
+
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:cardBackgroundColor="@color/white"
+                app:cardUseCompatPadding="true"
+                >
+
+
+                <LinearLayout
+                    android:padding="@dimen/_10sdp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <RelativeLayout
+                        android:id="@+id/rlwithdraw"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp">
+
+                        <ImageView
+                            android:layout_centerVertical="true"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:background="@drawable/withdraw_ic"
+                            />
+
+                        <TextView
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/_50sdp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Withdraw"
+                            android:textSize="@dimen/_12sdp"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textColor="@color/black"
+                            />
+
+                        <com.google.android.material.divider.MaterialDivider
+                            android:layout_alignParentBottom="true"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:dividerThickness="1dp"
+                            app:dividerColor="@color/grey_extra_light"
+                            />
+
+                    </RelativeLayout>
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_10sdp"/>
+                    <RelativeLayout
+                        android:id="@+id/rlhistory"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp">
+
+                        <ImageView
+                            android:layout_centerVertical="true"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:background="@drawable/history_ic"
+                            />
+
+                        <TextView
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/_50sdp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="History Transaction"
+                            android:textSize="@dimen/_12sdp"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textColor="@color/black"
+                            />
+
+                        <com.google.android.material.divider.MaterialDivider
+                            android:layout_alignParentBottom="true"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:dividerThickness="1dp"
+                            app:dividerColor="@color/grey_extra_light"
+                            />
+
+                    </RelativeLayout>
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_10sdp"/>
+                    <RelativeLayout
+                        android:id="@+id/rlUpdateprofile"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp">
+
+                        <ImageView
+                            android:layout_centerVertical="true"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:background="@drawable/update_profile_ic"
+                            />
+
+                        <TextView
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/_50sdp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Update Profile"
+                            android:textSize="@dimen/_12sdp"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textColor="@color/black"
+                            />
+
+                        <com.google.android.material.divider.MaterialDivider
+                            android:layout_alignParentBottom="true"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:dividerThickness="1dp"
+                            app:dividerColor="@color/grey_extra_light"
+                            />
+
+                    </RelativeLayout>
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_10sdp"/>
+                    <RelativeLayout
+                        android:id="@+id/rlCutomerSupport"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp">
+
+                        <ImageView
+                            android:layout_centerVertical="true"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:background="@drawable/support_ic"
+                            />
+
+                        <TextView
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/_50sdp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Customer Support"
+                            android:textSize="@dimen/_12sdp"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textColor="@color/black"
+                            />
+
+                        <com.google.android.material.divider.MaterialDivider
+                            android:layout_alignParentBottom="true"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:dividerThickness="1dp"
+                            app:dividerColor="@color/grey_extra_light"
+                            />
+
+                    </RelativeLayout>
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_10sdp"/>
+                    <RelativeLayout
+                        android:id="@+id/rlLogout"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp">
+
+                        <ImageView
+                            android:layout_centerVertical="true"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:background="@drawable/logout_ic"
+                            />
+
+                        <TextView
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/_50sdp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Logout"
+                            android:textSize="@dimen/_12sdp"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textColor="@color/black"
+                            />
+
+                        
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+</FrameLayout>
