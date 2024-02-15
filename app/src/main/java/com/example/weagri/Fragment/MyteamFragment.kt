@@ -1,6 +1,8 @@
 package com.example.weagri.Fragment
 
 import android.app.Activity
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.weagri.Acitivity.HomeActivity
 import com.example.weagri.Adapter.MyTeamAdapter
 import com.example.weagri.Adapter.MyplansAdapter
 import com.example.weagri.Model.MyTeam
@@ -37,6 +40,45 @@ class MyteamFragment : Fragment() {
         activity = getActivity() as Activity
         session = com.example.weagri.helper.Session(activity)
 
+//        // Home Activity binding.rlHeader.visibility = View.GONE
+        (activity as HomeActivity).binding.rlToolbar.visibility = View.GONE
+
+
+
+        binding.rlBonus1.setOnClickListener {
+            binding.rlBonus1.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#02B153"))
+            binding.rlBonus2.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#BFF8DE"))
+            binding.rlBonus3.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#BFF8DE"))
+
+            binding.tvBonus1.setTextColor(Color.parseColor("#ffffff"))
+            binding.tvBonus2.setTextColor(Color.parseColor("#000000"))
+            binding.tvBonus3.setTextColor(Color.parseColor("#000000"))
+
+        }
+
+        binding.rlBonus2.setOnClickListener {
+            binding.rlBonus1.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#BFF8DE"))
+            binding.rlBonus2.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#02B153"))
+            binding.rlBonus3.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#BFF8DE"))
+
+            binding.tvBonus1.setTextColor(Color.parseColor("#000000"))
+            binding.tvBonus2.setTextColor(Color.parseColor("#ffffff"))
+            binding.tvBonus3.setTextColor(Color.parseColor("#000000"))
+        }
+
+        binding.rlBonus3.setOnClickListener {
+            binding.rlBonus1.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#BFF8DE"))
+            binding.rlBonus2.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#BFF8DE"))
+            binding.rlBonus3.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#02B153"))
+
+            binding.tvBonus1.setTextColor(Color.parseColor("#000000"))
+            binding.tvBonus2.setTextColor(Color.parseColor("#000000"))
+            binding.tvBonus3.setTextColor(Color.parseColor("#ffffff"))
+        }
+
+
+
+
         binding.tvCopy.text = session.getData(com.example.weagri.helper.Constant.REFER_CODE)
 
         binding.rlCopy.setOnClickListener {
@@ -57,13 +99,23 @@ class MyteamFragment : Fragment() {
             startActivity(android.content.Intent.createChooser(sharingIntent, "Share using"))
         }
 
+
+
+
+
         val linearLayoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         binding.rvMyTeam.layoutManager = linearLayoutManager
 
         referlist()
 
 
+
+
+
         return binding.root
+
+
+
     }
 
     private fun referlist() {

@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.example.weagri.Acitivity.HomeActivity
 import com.example.weagri.Adapter.ActivateplansAdapter
 import com.example.weagri.Adapter.MyplansAdapter
 import com.example.weagri.Model.MyPlan
@@ -42,9 +43,12 @@ class PlanFragment : Fragment() {
     ): View? {
         binding = FragmentPlanBinding.inflate(inflater, container, false)
 
+
         activity = requireActivity()
         session = com.example.weagri.helper.Session(activity)
         adapter = com.example.weagri.Adapter.SliderAdapterExample(getActivity())
+
+        (activity as HomeActivity).binding.rlToolbar.visibility = View.VISIBLE
 
         val swipeRefreshLayout: SwipeRefreshLayout = binding.swipeRefreshLayout
 

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.weagri.Acitivity.HomeActivity
 import com.example.weagri.Adapter.SliderAdapterExample
 import com.example.weagri.Model.Slide
 import com.example.weagri.databinding.FragmentExploreBinding
@@ -39,6 +40,7 @@ class ExploreFragment : Fragment() {
         activity = requireActivity()
         session = com.example.weagri.helper.Session(activity)
         adapter = com.example.weagri.Adapter.SliderAdapterExample(getActivity())
+        (activity as HomeActivity).binding.rlToolbar.visibility = View.VISIBLE
 
 
         slideslist()

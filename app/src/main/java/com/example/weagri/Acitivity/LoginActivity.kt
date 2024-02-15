@@ -55,8 +55,6 @@ class LoginActivity : AppCompatActivity() {
                 session.setData(Constant.MOBILE, binding.etPhoneNumber.text.toString())
                 val intent = Intent(activity, OtpActivity::class.java)
                 startActivity(intent)
-                finish()
-
             }
         }
     }

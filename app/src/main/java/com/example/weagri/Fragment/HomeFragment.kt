@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.weagri.Acitivity.HomeActivity
 import com.example.weagri.Acitivity.PaymentActivity
 import com.example.weagri.Adapter.TransactionAdapter
 import com.example.weagri.Model.Transaction
@@ -39,10 +40,12 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
 
+
+
         activity = getActivity() as Activity
         session = com.example.weagri.helper.Session(activity)
 
-
+        (activity as HomeActivity).binding.rlToolbar.visibility = View.VISIBLE
         binding.tvRecharge.text =  "Recharge Rs." + session.getData(Constant.RECHARGE_BALANCE)
         binding.tvTotalEarning.text = "₹" + session.getData(Constant.TOTAL_EARNINGS)
         binding.tvLast7DaysEarning.text = "₹" + session.getData(Constant.SEVEN_DAYS_EARN)

@@ -4,7 +4,9 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.text.Html
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.weagri.R
@@ -28,6 +30,12 @@ class SplashScreenActivity : AppCompatActivity() {
         activity = this
         session = com.example.weagri.helper.Session(activity)
         handler = Handler()
+
+        val tvTitle = "<font color='#F8B328'>Pocket</font> "+"<font color='#00B251'>Farm</font>"
+
+            val textView = findViewById<TextView>(R.id.textView)
+
+        textView.text = Html.fromHtml(tvTitle)
 
         GotoActivity()
 

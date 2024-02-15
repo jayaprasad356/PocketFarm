@@ -42,7 +42,7 @@ class MyTeamAdapter(
 
 
 
-        holder.tvName.text = report.name
+//        holder.tvName.text = report.name
         holder.tvMobile.text = report.mobile
 
 
@@ -54,13 +54,13 @@ class MyTeamAdapter(
     }
 
     internal class ItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvName: TextView
+//        val tvName: TextView
         val tvMobile: TextView
 
 
 
         init {
-            tvName = itemView.findViewById(R.id.tvName)
+//            tvName = itemView.findViewById(R.id.tvName)
             tvMobile = itemView.findViewById(R.id.tvMobile)
 
         }

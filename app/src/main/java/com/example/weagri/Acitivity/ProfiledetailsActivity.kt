@@ -126,7 +126,7 @@ class ProfiledetailsActivity : AppCompatActivity() {
                         session.setData(Constant.CITY, jsonArray.getJSONObject(0).getString(Constant.CITY))
                         session.setData(Constant.STATE, jsonArray.getJSONObject(0).getString(Constant.STATE))
                         session.setData(Constant.REFER_CODE,jsonArray.getJSONObject(0).getString(Constant.REFER_CODE))
-                        val intent = Intent(activity, HomeActivity::class.java)
+                        val intent = Intent(activity, SplashScreenActivity::class.java)
                         startActivity(intent)
                         finish()
 

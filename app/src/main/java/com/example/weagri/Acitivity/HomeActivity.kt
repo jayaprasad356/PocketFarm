@@ -40,7 +40,7 @@ class HomeActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         setContentView(binding.root)
 
         //tvTitle text is double color text "We" and "Agri"
-        val tvTitle = "<font color='#F8B328'>We</font> "+"<font color='#00B251'>Agri</font>"
+        val tvTitle = "<font color='#F8B328'>Pocket</font> "+"<font color='#00B251'>Farm</font>"
 
         binding.tvTitle.text = Html.fromHtml(tvTitle)
 

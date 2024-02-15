@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import com.example.weagri.Acitivity.HomeActivity
 import com.example.weagri.Acitivity.TransactionActivity
 import com.example.weagri.Acitivity.UpdateProfileActivity
 import com.example.weagri.Acitivity.WithdrawalActivity
@@ -33,10 +34,13 @@ class MoreFragment : Fragment() {
     ): View? {
         binding = FragmentMoreBinding.inflate(inflater, container, false)
 
+
+
+
         activity = getActivity() as Activity
         session = com.example.weagri.helper.Session(activity)
 
-
+        (activity as HomeActivity).binding.rlToolbar.visibility = View.VISIBLE
         binding.tvRecharge.text =  "₹" + session.getData(com.example.weagri.helper.Constant.RECHARGE_BALANCE)
         binding.tvTotalEarnings.text = "₹" + session.getData(com.example.weagri.helper.Constant.TOTAL_EARNINGS)
 

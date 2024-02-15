@@ -11,6 +11,7 @@
     <color name="grey_light">#959CA3</color>
     <color name="grey_extra_light">#EAE9E9</color>
     <color name="primary_color">#00B251</color>
+    <color name="primary_light">#BFF8DE</color>
     <color name="secondary_color">#F8B328</color>
     <color name="bg_color">#EFEFEF</color>
     <color name="gold_color">#C29217</color>

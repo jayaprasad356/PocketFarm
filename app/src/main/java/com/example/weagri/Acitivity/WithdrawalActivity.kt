@@ -63,9 +63,20 @@ class WithdrawalActivity : AppCompatActivity() {
 
 
 
-                //Toast.makeText()
+                val one = enteredText
+                val two = fivePercent
 
-//                binding.etIncome.setText("₹ "+result)
+                val result = one.toFloatOrNull()?.minus(two)
+
+
+
+                if (result== null) {
+                    binding.etIncome.setText("₹ 0")
+                }
+                else {
+                    binding.etIncome.setText("₹ " +result)
+                }
+
 
             }
 
@@ -93,9 +104,9 @@ class WithdrawalActivity : AppCompatActivity() {
         binding.rvHistory.layoutManager = linearLayoutManager
 
 
-        swipeRefreshLayout.setOnRefreshListener { history(swipeRefreshLayout) }
+       // swipeRefreshLayout.setOnRefreshListener { history(swipeRefreshLayout) }
 
-        history(swipeRefreshLayout)
+      //  history(swipeRefreshLayout)
 
 
         setContentView(binding.root)
