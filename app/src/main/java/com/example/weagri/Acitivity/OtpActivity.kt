@@ -3,6 +3,7 @@ package com.example.weagri.Acitivity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -11,18 +12,9 @@ import com.example.weagri.R
 import com.example.weagri.databinding.ActivityOtpBinding
 import com.example.weagri.helper.Constant
 import com.example.weagri.helper.Session
-import com.google.firebase.FirebaseException
-import com.google.firebase.FirebaseTooManyRequestsException
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.PhoneAuthCredential
-import com.google.firebase.auth.PhoneAuthOptions
-import com.google.firebase.auth.PhoneAuthProvider
-import com.google.firebase.auth.PhoneAuthProvider.ForceResendingToken
-import com.google.firebase.auth.PhoneAuthProvider.OnVerificationStateChangedCallbacks
+import com.example.weagri.utils.DialogUtils
 import org.json.JSONException
 import org.json.JSONObject
-import java.util.concurrent.TimeUnit
 
 class OtpActivity : AppCompatActivity() {
     lateinit var binding: ActivityOtpBinding
@@ -34,7 +26,8 @@ class OtpActivity : AppCompatActivity() {
 
 
 
-
+    private var countDownTimer: CountDownTimer? = null
+    private val COUNTDOWN_TIME = 45000L // 45 seconds in milliseconds
 
 
 
@@ -52,9 +45,23 @@ class OtpActivity : AppCompatActivity() {
             onBackPressed()
         }
 
+        binding.tvMobile.text = "+91 " + session!!.getData(Constant.MOBILE)
+
 
 
         showOtp()
+
+        startCountdown()
+
+        // Set click listener for the "Resend" button
+        binding.btnResend.setOnClickListener {
+            // Reset the timer
+            resetCountdown()
+            // Start the countdown timer again
+            startCountdown()
+            // Disable the button
+            binding.btnResend.isEnabled = false
+        }
 
 
         setContentView(binding.root)
@@ -90,7 +97,6 @@ class OtpActivity : AppCompatActivity() {
 
 
     private fun login() {
-
         val params: MutableMap<String, String> = HashMap()
         params[Constant.MOBILE] = session!!.getData(Constant.MOBILE)
         params[Constant.DEVICE_ID] =  Constant.getDeviceId(activity)
@@ -101,6 +107,7 @@ class OtpActivity : AppCompatActivity() {
                     Log.d("SIGNUP_RES", response)
                     if (jsonObject.getBoolean(com.example.weagri.helper.Constant.SUCCESS)) {
                         val jsonArray = jsonObject.getJSONArray(com.example.weagri.helper.Constant.DATA)
+                        //Toast.makeText(activity, jsonObject.getString(com.example.weagri.helper.Constant.MESSAGE), Toast.LENGTH_SHORT).show()
                         session!!.setBoolean("is_logged_in", true)
                         session!!.setData(
                             com.example.weagri.helper.Constant.USER_ID, jsonArray.getJSONObject(0).getString(
@@ -132,19 +139,54 @@ class OtpActivity : AppCompatActivity() {
                         finish()
 
                     } else {
+                        val message = jsonObject.getString(Constant.MESSAGE)
 
-                        startActivity(Intent(this, com.example.weagri.Acitivity.ProfiledetailsActivity::class.java))
-                        finish()
+                        if (message.equals("Your Mobile Number is not Registered")) {
+                            val intent = Intent(this, ProfiledetailsActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                        else {
+                            DialogUtils.showCustomDialog(this, ""+jsonObject.getString(com.example.weagri.helper.Constant.MESSAGE))
+                        }
+
                     }
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
             } else {
-                Toast.makeText(this, java.lang.String.valueOf(response) + java.lang.String.valueOf(result), Toast.LENGTH_SHORT).show()
+               // Toast.makeText(this, , Toast.LENGTH_SHORT).show()
+                DialogUtils.showCustomDialog(this, ""+java.lang.String.valueOf(response) + java.lang.String.valueOf(result))
+
             }
         }, this, com.example.weagri.helper.Constant.LOGIN, params, true)
 
 
+    }
+
+    private fun startCountdown() {
+        countDownTimer = object : CountDownTimer(COUNTDOWN_TIME, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                val secondsLeft = millisUntilFinished / 1000
+                // Update UI to show remaining seconds
+                binding.btnResend.text = "Resend in $secondsLeft seconds"
+            }
+
+            override fun onFinish() {
+                // Enable the button when countdown finishes
+                binding.btnResend.isEnabled = true
+                binding.btnResend.text = "Don’t  receive any code  ? Resent"
+            }
+        }.start()
+    }
+
+    private fun resetCountdown() {
+        countDownTimer?.cancel()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        resetCountdown()
     }
 
 }

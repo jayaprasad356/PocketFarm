@@ -20,6 +20,7 @@ import com.example.weagri.R
 import com.example.weagri.databinding.ActivityHomeBinding
 import com.example.weagri.databinding.ActivityWithdrawalBinding
 import com.example.weagri.helper.Constant
+import com.example.weagri.utils.DialogUtils
 import com.google.gson.Gson
 import org.json.JSONException
 import org.json.JSONObject
@@ -144,7 +145,7 @@ class WithdrawalActivity : AppCompatActivity() {
 
                     } else {
                         swipeRefreshLayout.isRefreshing = false
-                        Toast.makeText(activity, "" + jsonObject.getString(com.example.weagri.helper.Constant.MESSAGE), Toast.LENGTH_SHORT).show()
+                        DialogUtils.showCustomDialog(this, ""+jsonObject.getString(Constant.MESSAGE))
                     }
                 } catch (e: JSONException) {
                     e.printStackTrace()
@@ -205,7 +206,7 @@ class WithdrawalActivity : AppCompatActivity() {
     }
 
     private fun moveToHomeActivity() {
-        startActivity(Intent(this, WithdrawalActivity::class.java))
+        startActivity(Intent(this, WithdrawalStatusActivity::class.java))
         finish()
     }
 

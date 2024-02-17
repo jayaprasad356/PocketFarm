@@ -40,13 +40,17 @@ class MoreFragment : Fragment() {
         activity = getActivity() as Activity
         session = com.example.weagri.helper.Session(activity)
 
-        (activity as HomeActivity).binding.rlToolbar.visibility = View.VISIBLE
-        binding.tvRecharge.text =  "₹" + session.getData(com.example.weagri.helper.Constant.RECHARGE_BALANCE)
-        binding.tvTotalEarnings.text = "₹" + session.getData(com.example.weagri.helper.Constant.TOTAL_EARNINGS)
+        (activity as HomeActivity).binding.rlToolbar.visibility = View.GONE
+//        binding.tvRecharge.text =  "₹" + session.getData(com.example.weagri.helper.Constant.RECHARGE_BALANCE)
+//        binding.tvTotalEarnings.text = "₹" + session.getData(com.example.weagri.helper.Constant.TOTAL_EARNINGS)
 
 
-        binding.rlwithdraw.setOnClickListener {
+        binding.cvWithdraw.setOnClickListener {
             startActivity(Intent(activity, WithdrawalActivity::class.java))
+        }
+
+        binding.cvRecharge.setOnClickListener {
+            startActivity(Intent(activity, com.example.weagri.Acitivity.PaymentActivity::class.java))
         }
 
         binding.rlhistory.setOnClickListener {
@@ -57,6 +61,9 @@ class MoreFragment : Fragment() {
             startActivity(Intent(activity, UpdateProfileActivity::class.java))
         }
 
+        binding.rlwithdrawhistory.setOnClickListener{
+            startActivity(Intent(activity, com.example.weagri.Acitivity.WithdrawalStatusActivity::class.java))
+        }
 
         binding.rlCutomerSupport.setOnClickListener{
 

@@ -16,6 +16,8 @@ import com.example.weagri.Adapter.ActivateplansAdapter
 import com.example.weagri.Adapter.MyplansAdapter
 import com.example.weagri.Model.MyPlan
 import com.example.weagri.databinding.FragmentPlanBinding
+import com.example.weagri.helper.Constant
+import com.example.weagri.utils.DialogUtils
 import com.google.gson.Gson
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import com.smarteist.autoimageslider.SliderAnimations
@@ -131,9 +133,8 @@ class PlanFragment : Fragment() {
                         }
                         adapter!!.renewItems(slides)
                     } else {
+                        DialogUtils.showCustomDialog(activity, ""+jsonObject.getString(Constant.MESSAGE))
 
-                        Toast.makeText(activity, "" + jsonObject.getString(com.example.weagri.helper.Constant.MESSAGE).toString(), Toast.LENGTH_SHORT
-                        ).show()
                     }
                 } catch (e: JSONException) {
                     e.printStackTrace()
@@ -175,6 +176,8 @@ class PlanFragment : Fragment() {
                         swipeRefreshLayout.isRefreshing = false
 
                     } else {
+                        DialogUtils.showCustomDialog(activity, ""+jsonObject.getString(Constant.MESSAGE))
+
                         binding.rvplan.visibility = View.GONE
                         binding.animationView.visibility = View.VISIBLE
                         swipeRefreshLayout.isRefreshing = false

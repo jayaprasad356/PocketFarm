@@ -341,6 +341,7 @@
 
 
     <RelativeLayout
+        android:layout_margin="@dimen/_14sdp"
         android:padding="@dimen/_14sdp"
         android:layout_below="@+id/rlMyTeam"
         android:background="@drawable/bg_listmyteam"

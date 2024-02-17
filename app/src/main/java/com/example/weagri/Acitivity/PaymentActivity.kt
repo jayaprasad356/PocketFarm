@@ -20,6 +20,7 @@ import com.example.weagri.databinding.ActivityPaymentBinding
 import com.example.weagri.helper.ApiConfig
 import com.example.weagri.helper.Constant
 import com.example.weagri.helper.Session
+import com.example.weagri.utils.DialogUtils
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.File
@@ -84,7 +85,7 @@ class PaymentActivity : AppCompatActivity() {
 
                     } else {
 
-                        Toast.makeText(this, "" + jsonObject.getString(com.example.weagri.helper.Constant.MESSAGE), Toast.LENGTH_SHORT).show()
+                        DialogUtils.showCustomDialog(this, ""+jsonObject.getString(Constant.MESSAGE))
                     }
                 } catch (e: JSONException) {
                     e.printStackTrace()

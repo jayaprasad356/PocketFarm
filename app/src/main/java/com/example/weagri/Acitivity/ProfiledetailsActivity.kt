@@ -1,6 +1,7 @@
 package com.example.weagri.Acitivity
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -59,6 +60,9 @@ class ProfiledetailsActivity : AppCompatActivity() {
         binding.btnSave.setOnClickListener {
             if (binding.etName.text.toString().isEmpty()) {
                 binding.etName.error = "Enter Name"
+                return@setOnClickListener
+            } else if(binding.etName.text.toString().length <4){
+                binding.etName.error = "Name should be atleast 4 characters"
                 return@setOnClickListener
             } else if (binding.etEmail.text.toString().isEmpty()) {
                 binding.etEmail.error = "Enter Email"
@@ -152,6 +156,26 @@ class ProfiledetailsActivity : AppCompatActivity() {
 
 
     }
+
+    override fun onBackPressed() {
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialogBuilder.setTitle("Exit")
+        alertDialogBuilder.setMessage("Are you sure you want to exit?")
+        alertDialogBuilder.setCancelable(false)
+        alertDialogBuilder.setPositiveButton("Yes") { dialog, which ->
+            finishAffinity() // Close the app
+        }
+        alertDialogBuilder.setNegativeButton("No") { dialog, which -> dialog.dismiss() }
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
+
+        // Set text color for positive button
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)?.setTextColor(resources.getColor(R.color.primary_color))
+        // Set text color for negative button
+        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextColor(resources.getColor(R.color.primary_color))
+    }
+
+
 
 
 }

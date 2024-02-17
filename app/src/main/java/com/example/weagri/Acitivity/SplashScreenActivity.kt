@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.weagri.R
 import com.example.weagri.helper.Constant
 import com.example.weagri.helper.ProgressDisplay
+import com.example.weagri.utils.DialogUtils
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -45,7 +46,7 @@ class SplashScreenActivity : AppCompatActivity() {
             if (session!!.getBoolean("is_logged_in")) {
                 userdetails() // This should return the Intent after fetching user details
             } else {
-                val intent = Intent(activity, LoginActivity::class.java)
+                val intent = Intent(activity, WelcomeActivity::class.java)
                 startActivity(intent)
                 finish()
             }
@@ -146,7 +147,8 @@ class SplashScreenActivity : AppCompatActivity() {
 
 
                     } else {
-                        Toast.makeText(activity, jsonObject.getString(com.example.weagri.helper.Constant.MESSAGE), Toast.LENGTH_SHORT).show()
+                        DialogUtils.showCustomDialog(this, ""+jsonObject.getString(Constant.MESSAGE))
+
                     }
                 } catch (e: JSONException) {
                     e.printStackTrace()

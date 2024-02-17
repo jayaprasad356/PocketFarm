@@ -13,6 +13,7 @@ import com.example.weagri.databinding.ActivityUpdateProfileBinding
 import com.example.weagri.helper.ApiConfig
 import com.example.weagri.helper.Constant
 import com.example.weagri.helper.Session
+import com.example.weagri.utils.DialogUtils
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -133,7 +134,7 @@ class UpdateProfileActivity : AppCompatActivity() {
 
                     } else {
 
-                        Toast.makeText(this, "" + jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show()
+                        DialogUtils.showCustomDialog(this, ""+jsonObject.getString(Constant.MESSAGE))
                     }
                 } catch (e: JSONException) {
                     e.printStackTrace()

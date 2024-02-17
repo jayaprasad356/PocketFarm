@@ -18,6 +18,7 @@ import com.example.weagri.databinding.FragmentMyteamBinding
 import com.example.weagri.helper.ApiConfig
 import com.example.weagri.helper.Constant
 import com.example.weagri.helper.Session
+import com.example.weagri.utils.DialogUtils
 import com.google.gson.Gson
 import org.json.JSONArray
 import org.json.JSONException
@@ -147,7 +148,9 @@ class MyteamFragment : Fragment() {
                         binding.rvMyTeam.adapter = adapter
                         binding.animationView.visibility = View.GONE
 
+
                     } else {
+                        DialogUtils.showCustomDialog(activity, ""+jsonObject.getString(Constant.MESSAGE))
                         binding.animationView.visibility = View.VISIBLE
                     }
                 } catch (e: JSONException) {

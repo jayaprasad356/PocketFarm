@@ -53,13 +53,18 @@ class HomeActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
 
 
 
-        bottomNavigationView = findViewById(R.id.bottom_navigation)
+        bottomNavigationView = findViewById(R.id.bottomNavigationView)
         bottomNavigationView!!.setOnItemSelectedListener(this)
 
         fm.beginTransaction().replace(R.id.fragment_container, homeFragment).commit()
         bottomNavigationView!!.selectedItemId = R.id.navHome
 
 
+        binding.fab.setOnClickListener {
+            fm.beginTransaction().replace(R.id.fragment_container, exploreFragment).commit()
+            bottomNavigationView!!.selectedItemId = R.id.placeholder
+
+        }
 
 
 
@@ -89,9 +94,9 @@ class HomeActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
                 transaction.replace(R.id.fragment_container, planFragment)
             }
 
-            R.id.navExplore -> {
-                transaction.replace(R.id.fragment_container, exploreFragment)
-            }
+//            R.id.navExplore -> {
+//                transaction.replace(R.id.fragment_container, exploreFragment)
+//            }
 
             R.id.navMyteam ->{
                 transaction.replace(R.id.fragment_container,myteamFragment)

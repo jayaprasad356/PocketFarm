@@ -253,7 +253,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Total Income"
+                            android:text="Today Income"
                             android:textColor="@color/white"
                             android:fontFamily="@font/poppins_medium"
                             android:textSize="@dimen/_10sdp"

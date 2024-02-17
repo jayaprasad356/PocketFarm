@@ -61,7 +61,18 @@
             android:background="@drawable/verify_bg" />
 
         <TextView
+            android:id="@+id/tvMobile"
             android:layout_marginTop="@dimen/_40sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="@dimen/_14sdp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_medium"
+            />
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="we have just sent a 6 digit code to your
@@ -89,6 +100,7 @@ enter number . Enter the code below"
 
 
         <TextView
+            android:id="@+id/btnResend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Don’t  receive any code  ? Resent"

@@ -14,6 +14,7 @@
         android:padding="@dimen/_12sdp">
 
         <ImageButton
+            android:visibility="gone"
             android:id="@+id/ibBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -119,7 +120,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
-            android:hint="City (Mumbai , Pune , kolkata ) "
+            android:hint="City (Chennai,Coimbatore,Trichy) "
             app:hintTextColor="@color/primary_color"
             android:textColorHint="@color/grey_light"
             app:boxStrokeColor="@color/primary_color"
@@ -131,7 +132,6 @@
                 android:id="@+id/etCity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                
                 android:textColor="@color/black"
                 android:fontFamily="@font/poppins_medium"
                />

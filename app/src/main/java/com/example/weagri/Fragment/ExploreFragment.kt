@@ -15,6 +15,7 @@ import com.example.weagri.databinding.FragmentExploreBinding
 import com.example.weagri.helper.ApiConfig
 import com.example.weagri.helper.Constant
 import com.example.weagri.helper.Session
+import com.example.weagri.utils.DialogUtils
 import com.google.gson.Gson
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import com.smarteist.autoimageslider.SliderAnimations
@@ -89,11 +90,9 @@ class ExploreFragment : Fragment() {
                         }
                         adapter!!.renewItems(slides)
                     } else {
-                        Toast.makeText(
-                            activity,
-                            "" + jsonObject.getString(com.example.weagri.helper.Constant.MESSAGE).toString(),
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        DialogUtils.showCustomDialog(activity, ""+jsonObject.getString(Constant.MESSAGE))
+
+
                     }
                 } catch (e: JSONException) {
                     e.printStackTrace()
