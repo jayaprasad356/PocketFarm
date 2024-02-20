@@ -13,6 +13,7 @@ import com.example.weagri.R
 import com.example.weagri.helper.Constant
 import com.example.weagri.helper.ProgressDisplay
 import com.example.weagri.utils.DialogUtils
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -38,9 +39,40 @@ class SplashScreenActivity : AppCompatActivity() {
 
         textView.text = Html.fromHtml(tvTitle)
 
-        GotoActivity()
+        checkForUpdates()
 
     }
+
+    private fun checkForUpdates() {
+        val latestVersionCode = 2 // This would come from your server
+        val currentVersionCode = packageManager.getPackageInfo(packageName, 0).versionCode
+
+        if (currentVersionCode < latestVersionCode) {
+            // Show bottom dialog prompting user to update the app
+            showUpdateDialog()
+        } else {
+            // No update needed, proceed with normal flow
+            GotoActivity()
+        }
+    }
+
+    private fun showUpdateDialog() {
+        val bottomSheetDialog = BottomSheetDialog(this)
+        val view = layoutInflater.inflate(R.layout.bottom_dialog_update, null)
+        bottomSheetDialog.setContentView(view)
+
+        val btnUpdate = view.findViewById<View>(R.id.btnUpdate)
+
+        btnUpdate.setOnClickListener(View.OnClickListener {
+            GotoActivity()
+        })
+
+        // Customize your bottom dialog here
+        // For example, you can set text, buttons, etc.
+
+        bottomSheetDialog.show()
+    }
+
     private fun GotoActivity() {
         handler?.postDelayed({
             if (session!!.getBoolean("is_logged_in")) {
@@ -51,7 +83,7 @@ class SplashScreenActivity : AppCompatActivity() {
                 finish()
             }
 
-        }, 2000)
+        }, 100)
     }
 
 

@@ -30,7 +30,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:visibility="gone"
         android:id="@+id/ellipse1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,21 +47,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <ImageView
+    <Button
         android:id="@+id/backbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background=""
+        android:background="#00000000"
         android:text="Back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
+    <Button
         android:id="@+id/nextbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/baseline_arrow_right_alt_24"
-        android:backgroundTint="@color/white"
+        android:background="#00000000"
         android:text="Next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/ellipse2" />

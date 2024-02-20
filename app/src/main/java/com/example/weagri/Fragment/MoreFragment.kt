@@ -45,12 +45,26 @@ class MoreFragment : Fragment() {
 //        binding.tvTotalEarnings.text = "₹" + session.getData(com.example.weagri.helper.Constant.TOTAL_EARNINGS)
 
 
+        binding.llInvite.setOnClickListener {
+            val shareBody = "Hey, I am using WeAgri App. It's a great app to earn money. Use my refer code " + session.getData(
+                com.example.weagri.helper.Constant.REFER_CODE) + " to get 100 coins on signup. Download the app from the link below.\n" + ""
+            val sharingIntent = android.content.Intent(android.content.Intent.ACTION_SEND)
+            sharingIntent.type = "text/plain"
+            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "WeAgri")
+            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody)
+            startActivity(android.content.Intent.createChooser(sharingIntent, "Share using"))
+        }
+
+
+        binding.tvMobile.text = session.getData(com.example.weagri.helper.Constant.MOBILE)
+        binding.tvReferralCode.text = session.getData(com.example.weagri.helper.Constant.REFER_CODE)
+
         binding.cvWithdraw.setOnClickListener {
             startActivity(Intent(activity, WithdrawalActivity::class.java))
         }
 
         binding.cvRecharge.setOnClickListener {
-            startActivity(Intent(activity, com.example.weagri.Acitivity.PaymentActivity::class.java))
+            startActivity(Intent(activity, com.example.weagri.Acitivity.RechargeActivity::class.java))
         }
 
         binding.rlhistory.setOnClickListener {

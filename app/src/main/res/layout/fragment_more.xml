@@ -79,7 +79,7 @@
                             android:id="@+id/tvMobile"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="632088746"
+                            android:text=""
                             android:textColor="@color/white"
                             android:textSize="@dimen/_12sdp"
                             android:fontFamily="@font/poppins_medium"
@@ -437,6 +437,7 @@
 
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/llInvite"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
