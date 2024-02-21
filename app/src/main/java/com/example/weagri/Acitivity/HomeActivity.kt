@@ -114,4 +114,13 @@ class HomeActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         return true
     }
 
+    // onBackPress method is not present in SplashScreen Activity.kt
+    override fun onBackPressed() {
+        if (fm.backStackEntryCount > 0) {
+            fm.popBackStack()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
 }

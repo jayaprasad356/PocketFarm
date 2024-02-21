@@ -1,7 +1,9 @@
 package com.example.weagri.Fragment
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -46,16 +48,9 @@ class HomeFragment : Fragment() {
         activity = getActivity() as Activity
         session = com.example.weagri.helper.Session(activity)
 
+        userdetails()
+
         (activity as HomeActivity).binding.rlToolbar.visibility = View.VISIBLE
-        binding.tvRecharge.text =  "Recharge Rs." + session.getData(Constant.RECHARGE_BALANCE)
-        binding.tvTotalEarning.text = "₹" + session.getData(Constant.TOTAL_EARNINGS)
-        binding.tvLast7DaysEarning.text = "₹" + session.getData(Constant.SEVEN_DAYS_EARN)
-        binding.tvTotalIncome.text = "₹" + session.getData(Constant.TOTAL_INCOME)
-        binding.tvRemainingBalance.text = "₹" + session.getData(Constant.BALANCE)
-
-
-        binding.tvName.text = "Hi " + session.getData(com.example.weagri.helper.Constant.NAME)
-        binding.tvReferralCode.text =  session.getData(com.example.weagri.helper.Constant.REFER_CODE)
 
         binding.rlRecharge.setOnClickListener {
             startActivity(activity.intent.setClassName(activity, PaymentActivity::class.java.name))
@@ -112,6 +107,112 @@ class HomeFragment : Fragment() {
             }
         }, activity, com.example.weagri.helper.Constant.TRANSACTIONS_LIST, params, true)
 
+
+    }
+
+
+    private fun userdetails() {
+        val params: MutableMap<String, String> = HashMap()
+        params[Constant.USER_ID] = session!!.getData(Constant.USER_ID)
+        ApiConfig.RequestToVolley({ result, response ->
+            if (result) {
+                try {
+                    val jsonObject = JSONObject(response)
+                    if (jsonObject.getBoolean(Constant.SUCCESS)) {
+                        val jsonArray: JSONArray =
+                            jsonObject.getJSONArray(Constant.DATA)
+
+
+
+                        session!!.setData(
+                            Constant.ACCOUNT_NUM,
+                            jsonArray.getJSONObject(0).getString(Constant.ACCOUNT_NUM)
+                        )
+                        session!!.setData(
+                            Constant.HOLDER_NAME,
+                            jsonArray.getJSONObject(0).getString(Constant.HOLDER_NAME)
+                        )
+                        session!!.setData(
+                            Constant.BANK,
+                            jsonArray.getJSONObject(0).getString(Constant.BANK)
+                        )
+                        session!!.setData(
+                            Constant.BRANCH,
+                            jsonArray.getJSONObject(0).getString(Constant.BRANCH)
+                        )
+                        session!!.setData(
+                            Constant.IFSC,
+                            jsonArray.getJSONObject(0).getString(Constant.IFSC)
+                        )
+                        session!!.setData(
+                            Constant.AGE,
+                            jsonArray.getJSONObject(0).getString(Constant.AGE)
+                        )
+                        session!!.setData(
+                            Constant.CITY,
+                            jsonArray.getJSONObject(0).getString(Constant.CITY)
+                        )
+                        session!!.setData(
+                            Constant.STATE,
+                            jsonArray.getJSONObject(0).getString(Constant.STATE)
+                        )
+                        session!!.setData(
+                            Constant.DEVICE_ID,
+                            jsonArray.getJSONObject(0).getString(Constant.DEVICE_ID)
+                        )
+                        session!!.setData(
+                            Constant.RECHARGE_BALANCE,
+                            jsonArray.getJSONObject(0).getString(Constant.RECHARGE_BALANCE)
+                        )
+                        session!!.setData(
+                            Constant.TOTAL_EARNINGS,
+                            jsonArray.getJSONObject(0).getString(Constant.TOTAL_EARNINGS)
+                        )
+                        session!!.setData(
+                            Constant.TOTAL_INCOME,
+                            jsonArray.getJSONObject(0).getString(Constant.TOTAL_INCOME)
+                        )
+                        session!!.setData(
+                            Constant.BALANCE,
+                            jsonArray.getJSONObject(0).getString(Constant.BALANCE)
+                        )
+                        session!!.setData(
+                            Constant.SEVEN_DAYS_EARNINGS,
+                            jsonArray.getJSONObject(0).getString(Constant.SEVEN_DAYS_EARNINGS)
+                        )
+                        session!!.setData(
+                            Constant.WITHDRAWAL_STATUS,
+                            jsonArray.getJSONObject(0).getString(Constant.WITHDRAWAL_STATUS)
+                        )
+                        session!!.setData(
+                            Constant.SEVEN_DAYS_EARN,
+                            jsonArray.getJSONObject(0).getString(Constant.SEVEN_DAYS_EARN)
+                        )
+
+
+                        binding.tvRecharge.text =  "Recharge Rs." + session.getData(Constant.RECHARGE_BALANCE)
+                        binding.tvTotalEarning.text = "₹" + session.getData(Constant.TOTAL_EARNINGS)
+                        binding.tvLast7DaysEarning.text = "₹" + session.getData(Constant.SEVEN_DAYS_EARN)
+                        binding.tvTotalIncome.text = "₹" + session.getData(Constant.TOTAL_INCOME)
+                        binding.tvRemainingBalance.text = "₹" + session.getData(Constant.BALANCE)
+
+
+                        binding.tvName.text = "Hi " + session.getData(com.example.weagri.helper.Constant.NAME)
+                        binding.tvReferralCode.text =  session.getData(com.example.weagri.helper.Constant.REFER_CODE)
+
+
+                    } else {
+                        DialogUtils.showCustomDialog(activity, ""+jsonObject.getString(Constant.MESSAGE))
+
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                    Toast.makeText(activity, e.toString(), Toast.LENGTH_SHORT).show()
+                }
+            }
+        }, activity, Constant.USER_DETAILS, params, true)
+
+        // Return a dummy intent, as the actual navigation is handled inside the callback
 
     }
 

@@ -32,6 +32,8 @@ public class Constant {
     public static final String ACTIVATE_PLAN = BaseUrl + "activate_plan.php";
     public static final String RECHARGE_HISTORY = BaseUrl + "recharge_history.php";
 
+    public static final String APPUPDATE= BaseUrl + "appupdate.php";
+
 
 
 
@@ -95,6 +97,7 @@ public class Constant {
     public static final String BOOKID = "book_id";
     public static final String CART_ID = "cart_id";
     public static final String APPUPDATE_ID = "app_update_id";
+
 
 
     @Nullable

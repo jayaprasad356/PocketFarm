@@ -135,7 +135,8 @@ class OtpActivity : AppCompatActivity() {
                                 com.example.weagri.helper.Constant.REFER_CODE))
 
 
-                        startActivity(Intent(this, com.example.weagri.Acitivity.SplashScreenActivity::class.java))
+                        val intent = Intent(this, HomeActivity::class.java)
+                        startActivity(intent)
                         finish()
 
                     } else {

@@ -18,14 +18,14 @@
         <RelativeLayout
             android:id="@+id/rlHeader"
             android:layout_width="match_parent"
-            android:layout_height="320dp">
+            android:layout_height="wrap_content">
 
 
 
         <RelativeLayout
             android:paddingHorizontal="@dimen/_14sdp"
             android:background="@color/primary_color"
-            android:paddingBottom="@dimen/_40sdp"
+            android:paddingBottom="@dimen/_14sdp"
             android:id="@+id/rlMyTeam"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -44,6 +44,7 @@
 
 
             <LinearLayout
+                android:id="@+id/llProfile"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_below="@+id/tvTitle"
                 android:orientation="vertical"
@@ -225,6 +226,7 @@
 
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/llWithdraw"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:weightSum="3"
                     android:orientation="horizontal"
@@ -353,8 +355,27 @@
 
         </RelativeLayout>
 
-            <LinearLayout
+            
+
+        </RelativeLayout>
+
+
+        
+        <RelativeLayout
+            android:orientation="vertical"
+            android:background="@color/primary_color"
+            android:id="@+id/rlmore"
+            android:layout_below="@+id/rlHeader"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_80sdp">
+            <RelativeLayout
                 android:layout_alignParentBottom="true"
+                android:background="@color/bg_color"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+
+            <LinearLayout
                 android:layout_marginHorizontal="@dimen/_14sdp"
                 android:background="@color/white"
                 android:padding="@dimen/_10sdp"
@@ -513,14 +534,16 @@
 
             </LinearLayout>
 
+
+            
         </RelativeLayout>
 
-
+       
 
         <LinearLayout
             android:layout_margin="@dimen/_14sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:layout_below="@+id/rlHeader"
+            android:layout_below="@+id/rlmore"
             android:weightSum="2"
             android:orientation="horizontal"
             android:layout_width="match_parent"

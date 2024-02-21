@@ -224,6 +224,7 @@ class PlanFragment : Fragment() {
                         binding.animationView.visibility = View.GONE
                         swipeRefreshLayout.isRefreshing = false
 
+
                     } else {
                         binding.rvplan.visibility = View.GONE
                         binding.animationView.visibility = View.VISIBLE
