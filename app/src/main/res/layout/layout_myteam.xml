@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
+    android:id="@+id/rlMain"
     android:layout_marginBottom="@dimen/_5sdp"
     android:background="@drawable/rounded_corner"
     android:backgroundTint="@color/white"

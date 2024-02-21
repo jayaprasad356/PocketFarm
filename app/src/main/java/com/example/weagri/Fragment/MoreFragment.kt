@@ -88,7 +88,18 @@ class MoreFragment : Fragment() {
             session.logoutUser(activity)
         }
 
+        binding.tvTotalIncome.text = "₹ " + session.getData(com.example.weagri.helper.Constant.TOTAL_EARNINGS)
+        binding.tvTotalRecharge.text = "₹ " + session.getData(com.example.weagri.helper.Constant.RECHARGE)
+        binding.tvTodayIncome.text = "₹ " + session.getData(com.example.weagri.helper.Constant.TODAY_INCOME)
+        binding.tvTotalAssests.text = "₹ " + session.getData(com.example.weagri.helper.Constant.TOTAL_ASSETS)
+        binding.tvTotalWithdrawal.text = "₹ " + session.getData(com.example.weagri.helper.Constant.TOTAL_WITHDRAWAL)
+        binding.tvTeamIncome.text = "₹ " + session.getData(com.example.weagri.helper.Constant.TEAM_INCOME)
+
+
         return binding.root
     }
+
+
+
 
 }

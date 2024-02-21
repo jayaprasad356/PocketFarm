@@ -155,40 +155,22 @@ class HomeFragment : Fragment() {
                             Constant.DEVICE_ID,
                             jsonArray.getJSONObject(0).getString(Constant.DEVICE_ID)
                         )
-                        session!!.setData(
-                            Constant.RECHARGE,
-                            jsonArray.getJSONObject(0).getString(Constant.RECHARGE)
-                        )
-                        session!!.setData(
-                            Constant.TOTAL_EARNINGS,
-                            jsonArray.getJSONObject(0).getString(Constant.TOTAL_EARNINGS)
-                        )
-                        session!!.setData(
-                            Constant.TOTAL_INCOME,
-                            jsonArray.getJSONObject(0).getString(Constant.TOTAL_INCOME)
-                        )
-                        session!!.setData(
-                            Constant.BALANCE,
-                            jsonArray.getJSONObject(0).getString(Constant.BALANCE)
-                        )
-                        session!!.setData(
-                            Constant.SEVEN_DAYS_EARNINGS,
-                            jsonArray.getJSONObject(0).getString(Constant.SEVEN_DAYS_EARNINGS)
-                        )
-                        session!!.setData(
-                            Constant.WITHDRAWAL_STATUS,
-                            jsonArray.getJSONObject(0).getString(Constant.WITHDRAWAL_STATUS)
-                        )
-                        session!!.setData(
-                            Constant.SEVEN_DAYS_EARN,
-                            jsonArray.getJSONObject(0).getString(Constant.SEVEN_DAYS_EARN)
-                        )
+                        session!!.setData(Constant.RECHARGE, jsonArray.getJSONObject(0).getString(Constant.RECHARGE))
+                        session!!.setData(Constant.TODAY_INCOME, jsonArray.getJSONObject(0).getString(Constant.TODAY_INCOME))
+                        session!!.setData(Constant.TOTAL_INCOME, jsonArray.getJSONObject(0).getString(Constant.TOTAL_INCOME))
+                        session!!.setData(Constant.BALANCE, jsonArray.getJSONObject(0).getString(Constant.BALANCE))
+                        session!!.setData(Constant.WITHDRAWAL_STATUS, jsonArray.getJSONObject(0).getString(Constant.WITHDRAWAL_STATUS))
+                        session!!.setData(Constant.TEAM_SIZE, jsonArray.getJSONObject(0).getString(Constant.TEAM_SIZE))
+                        session!!.setData(Constant.VALID_TEAM, jsonArray.getJSONObject(0).getString(Constant.VALID_TEAM))
+                        session!!.setData(Constant.TOTAL_WITHDRAWAL, jsonArray.getJSONObject(0).getString(Constant.TOTAL_WITHDRAWAL))
+                        session!!.setData(Constant.TEAM_INCOME, jsonArray.getJSONObject(0).getString(Constant.TEAM_INCOME))
+                        session!!.setData(Constant.TOTAL_ASSETS, jsonArray.getJSONObject(0).getString(Constant.TOTAL_ASSETS))
 
 
                         binding.tvRecharge.text =  "Recharge Rs." + session.getData(Constant.RECHARGE)
-                        binding.tvTotalEarning.text = "₹" + session.getData(Constant.TOTAL_EARNINGS)
-                        binding.tvLast7DaysEarning.text = "₹" + session.getData(Constant.SEVEN_DAYS_EARN)
                         binding.tvTotalIncome.text = "₹" + session.getData(Constant.TOTAL_INCOME)
+                        binding.tvTodayIncome.text = "₹" + session.getData(Constant.TODAY_INCOME)
+                        binding.tvRechargeBalance.text = "₹" + session.getData(Constant.RECHARGE)
                         binding.tvRemainingBalance.text = "₹" + session.getData(Constant.BALANCE)
 
 

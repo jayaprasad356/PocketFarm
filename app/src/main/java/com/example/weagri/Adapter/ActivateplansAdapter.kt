@@ -4,10 +4,12 @@ import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 
 import com.bumptech.glide.Glide
@@ -45,6 +47,7 @@ class ActivateplansAdapter(
     override fun onBindViewHolder(holderParent: RecyclerView.ViewHolder, position: Int) {
         val holder: ItemHolder = holderParent as ItemHolder
         val report: MyPlan = myplan[position]
+        holder.cardView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.context, R.anim.recycler_anim1))
 
 
 
@@ -112,6 +115,7 @@ class ActivateplansAdapter(
         val tvValidity : TextView
         val  ivImage : ImageView
         val  btnActivate : Button
+        val cardView : CardView
 
 
         init {
@@ -122,6 +126,8 @@ class ActivateplansAdapter(
             tvValidity = itemView.findViewById(R.id.tvValidity)
             ivImage = itemView.findViewById(R.id.ivImage)
             btnActivate = itemView.findViewById(R.id.btnActivate)
+            cardView = itemView.findViewById(R.id.cardView)
+
         }
     }
 }

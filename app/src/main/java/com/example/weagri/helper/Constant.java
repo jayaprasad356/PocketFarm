@@ -22,6 +22,7 @@ public class Constant {
     public static final String TRANSACTIONS_LIST = BaseUrl + "transactions_list.php";
     public static final String USER_DETAILS = BaseUrl + "user_details.php";
     public static final String MY_TEAM = BaseUrl + "my_team.php";
+    public static final String TEAM_LIST = BaseUrl + "team_list.php";
     public static final String UPDATE_PROFILE = BaseUrl + "update_profile.php";
 
     public static final String PLAN_SLIDE_LIST = BaseUrl + "plan_slide_list.php";
@@ -48,11 +49,15 @@ public class Constant {
     public static final String VERSION = "version";
     public static final String LINK = "link";
     public static final String RECHARGE = "recharge";
+    public static final String TEAM_SIZE = "team_size";
+    public static final String VALID_TEAM = "valid_team";
+
 
     public static final String MOBILE = "mobile";
     public static final String DEVICE_ID = "device_id";
     public static final String ID = "id";
     public static final String USER_ID = "user_id";
+    public static final String LEVEL = "level";
     public static final String LOG_STATUS = "log_status";
     public static final String AGE = "age";
     public static final String CITY = "city";
@@ -69,6 +74,10 @@ public class Constant {
     public static final String IFSC = "ifsc";
     public static final String TOTAL_EARNINGS = "total_earnings";
     public static final String TOTAL_INCOME = "total_income";
+    public static final String TODAY_INCOME = "today_income";
+    public static final String TOTAL_ASSETS = "total_assets";
+    public static final String TOTAL_WITHDRAWAL = "total_withdrawal";
+    public static final String TEAM_INCOME = "team_income";
     public static final String BALANCE = "balance";
     public static final String SEVEN_DAYS_EARNINGS = "7days_earnings";
     public static final String WITHDRAWAL_STATUS = "withdrawal_status";

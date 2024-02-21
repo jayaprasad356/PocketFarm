@@ -6,10 +6,12 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 
@@ -50,6 +52,7 @@ class MyplansAdapter(
         val holder: ItemHolder = holderParent as ItemHolder
         val report: MyPlan = myplan[position]
 
+        holder.cardView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.context, R.anim.recycler_anim1))
 
 
         holder.btnActivate.setOnClickListener {
@@ -114,6 +117,7 @@ class MyplansAdapter(
         val tvValidity : TextView
         val  ivImage : ImageView
         val  btnActivate : Button
+        val cardView : CardView
 
 
         init {
@@ -124,6 +128,7 @@ class MyplansAdapter(
             tvValidity = itemView.findViewById(R.id.tvValidity)
             ivImage = itemView.findViewById(R.id.ivImage)
             btnActivate = itemView.findViewById(R.id.btnActivate)
+            cardView = itemView.findViewById(R.id.cardView)
         }
     }
 

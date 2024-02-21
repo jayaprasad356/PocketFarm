@@ -55,6 +55,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:visibility="gone"
         android:id="@+id/rlRecharge"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
@@ -121,7 +122,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Total Earning"
+                            android:text="Today Income"
                             android:textColor="@color/white"
                             android:fontFamily="@font/poppins_medium"
                             android:textSize="@dimen/_10sdp"
@@ -129,7 +130,7 @@
 
 
                         <TextView
-                            android:id="@+id/tvTotalEarning"
+                            android:id="@+id/tvTodayIncome"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="₹0"
@@ -183,7 +184,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Last 7 days earnings"
+                            android:text="Total Income"
                             android:textColor="@color/white"
                             android:fontFamily="@font/poppins_medium"
                             android:textSize="@dimen/_10sdp"
@@ -191,7 +192,7 @@
 
 
                         <TextView
-                            android:id="@+id/tvLast7DaysEarning"
+                            android:id="@+id/tvTotalIncome"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="₹0"
@@ -253,7 +254,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Today Income"
+                            android:text="Recharge balance"
                             android:textColor="@color/white"
                             android:fontFamily="@font/poppins_medium"
                             android:textSize="@dimen/_10sdp"
@@ -261,7 +262,7 @@
 
 
                         <TextView
-                            android:id="@+id/tvTotalIncome"
+                            android:id="@+id/tvRechargeBalance"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="₹0"

@@ -41,7 +41,7 @@ public class ProgressDisplay {
     }
 
     public void hideProgress() {
-        new Handler().postDelayed(() -> mCustomDialogBox.setVisibility(View.GONE), 2000); // 2000 milliseconds = 2 seconds
+        new Handler().postDelayed(() -> mCustomDialogBox.setVisibility(View.GONE), 500); // 2000 milliseconds = 2 seconds
     }
 
 }

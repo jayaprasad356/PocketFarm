@@ -21,6 +21,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Acitivity.MyProductionActivity"
+            android:exported="false" />
+        <activity
             android:name=".Acitivity.RechargeActivity"
             android:exported="false" />
         <activity

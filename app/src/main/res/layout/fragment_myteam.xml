@@ -178,9 +178,10 @@
                         android:layout_height="wrap_content">
 
                         <TextView
+                            android:id="@+id/tvTeamsize"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="55"
+                            android:text=""
                             android:textSize="@dimen/_12sdp"
                             android:gravity="center"
                             android:textColor="@color/white"
@@ -216,9 +217,10 @@
                         android:layout_height="wrap_content">
 
                         <TextView
+                            android:id="@+id/tvValidTeam"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="55"
+                            android:text=""
                             android:textSize="@dimen/_12sdp"
                             android:gravity="center"
                             android:textColor="@color/white"
@@ -243,6 +245,7 @@
 
             </LinearLayout>
             <LinearLayout
+                android:visibility="gone"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:weightSum="2"
                 android:orientation="horizontal"
@@ -442,7 +445,25 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_below="@+id/rlBonus"
-            android:id="@+id/rvMyTeam"
+            android:id="@+id/rvMyTeamB"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_below="@+id/rlBonus"
+            android:id="@+id/rvMyTeamC"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_below="@+id/rlBonus"
+            android:id="@+id/rvMyTeamD"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical"

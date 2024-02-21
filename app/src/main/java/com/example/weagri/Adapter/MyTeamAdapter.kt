@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
@@ -40,6 +41,7 @@ class MyTeamAdapter(
         val report: MyTeam = myTeam[position]
 
 
+        holder.rlMain.startAnimation(AnimationUtils.loadAnimation(holder.itemView.context, R.anim.recycler_anim1))
 
 
 //        holder.tvName.text = report.name
@@ -56,12 +58,15 @@ class MyTeamAdapter(
     internal class ItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 //        val tvName: TextView
         val tvMobile: TextView
+        val rlMain: RelativeLayout
 
 
 
         init {
 //            tvName = itemView.findViewById(R.id.tvName)
             tvMobile = itemView.findViewById(R.id.tvMobile)
+            rlMain = itemView.findViewById(R.id.rlMain)
+
 
         }
     }
