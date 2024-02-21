@@ -153,7 +153,7 @@ class PaymentActivity : AppCompatActivity() {
                     e.printStackTrace()
                 }
             }
-        }, activity, com.example.weagri.helper.Constant.RECHARGE, params, FileParams)
+        }, activity, com.example.weagri.helper.Constant.RECHARGE_URL, params, FileParams)
     }
 
 

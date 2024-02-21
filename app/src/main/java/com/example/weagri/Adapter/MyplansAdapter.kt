@@ -79,7 +79,7 @@ class MyplansAdapter(
             if (result) {
                 try {
                     val jsonObject = JSONObject(response)
-                    if (jsonObject.getBoolean(com.example.weagri.helper.Constant.SUCCESS)) {
+                    if (jsonObject.getBoolean(Constant.SUCCESS)) {
                         val `object` = JSONObject(response)
 
                         showCustomDialog("Plan Activated Successfully")
@@ -87,11 +87,7 @@ class MyplansAdapter(
 
                     } else {
                         val msg = jsonObject.getString(Constant.MESSAGE).toString()
-                        if (msg.equals("You have already applied this Plan")) {
-                            showCustomDialog("You have already applied this Plan")
-                        } else if (msg.equals("Insufficient balance to apply for this plan")) {
-                            showCustomDialog("Insufficient balance to apply for this plan")
-                        }
+                        showCustomDialog(msg)
 
                     }
                 } catch (e: JSONException) {

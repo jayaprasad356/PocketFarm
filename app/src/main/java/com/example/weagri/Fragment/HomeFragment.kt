@@ -1,9 +1,7 @@
 package com.example.weagri.Fragment
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,12 +12,9 @@ import com.example.weagri.Acitivity.HomeActivity
 import com.example.weagri.Acitivity.PaymentActivity
 import com.example.weagri.Adapter.TransactionAdapter
 import com.example.weagri.Model.Transaction
-import com.example.weagri.R
 import com.example.weagri.databinding.FragmentHomeBinding
-import com.example.weagri.databinding.FragmentMoreBinding
 import com.example.weagri.helper.ApiConfig
 import com.example.weagri.helper.Constant
-import com.example.weagri.helper.Session
 import com.example.weagri.utils.DialogUtils
 import com.google.gson.Gson
 import org.json.JSONArray
@@ -161,8 +156,8 @@ class HomeFragment : Fragment() {
                             jsonArray.getJSONObject(0).getString(Constant.DEVICE_ID)
                         )
                         session!!.setData(
-                            Constant.RECHARGE_BALANCE,
-                            jsonArray.getJSONObject(0).getString(Constant.RECHARGE_BALANCE)
+                            Constant.RECHARGE,
+                            jsonArray.getJSONObject(0).getString(Constant.RECHARGE)
                         )
                         session!!.setData(
                             Constant.TOTAL_EARNINGS,
@@ -190,7 +185,7 @@ class HomeFragment : Fragment() {
                         )
 
 
-                        binding.tvRecharge.text =  "Recharge Rs." + session.getData(Constant.RECHARGE_BALANCE)
+                        binding.tvRecharge.text =  "Recharge Rs." + session.getData(Constant.RECHARGE)
                         binding.tvTotalEarning.text = "₹" + session.getData(Constant.TOTAL_EARNINGS)
                         binding.tvLast7DaysEarning.text = "₹" + session.getData(Constant.SEVEN_DAYS_EARN)
                         binding.tvTotalIncome.text = "₹" + session.getData(Constant.TOTAL_INCOME)

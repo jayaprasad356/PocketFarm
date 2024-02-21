@@ -25,7 +25,8 @@ public class Constant {
     public static final String UPDATE_PROFILE = BaseUrl + "update_profile.php";
 
     public static final String PLAN_SLIDE_LIST = BaseUrl + "plan_slide_list.php";
-    public static final String RECHARGE = BaseUrl + "recharge.php";
+    public static final String RECHARGE_URL = BaseUrl + "recharge.php";
+
     public static final String EXPLORE_LIST = BaseUrl + "explore_list.php";
     public static final String WITHDRAWALS = BaseUrl + "withdrawals.php";
     public static final String WITHDRAWAL_LIST = BaseUrl + "withdrawals_list.php";
@@ -46,6 +47,7 @@ public class Constant {
 
     public static final String VERSION = "version";
     public static final String LINK = "link";
+    public static final String RECHARGE = "recharge";
 
     public static final String MOBILE = "mobile";
     public static final String DEVICE_ID = "device_id";
@@ -65,7 +67,6 @@ public class Constant {
     public static final String BANK = "bank";
     public static final String BRANCH = "branch";
     public static final String IFSC = "ifsc";
-    public static final String RECHARGE_BALANCE = "recharge_balance";
     public static final String TOTAL_EARNINGS = "total_earnings";
     public static final String TOTAL_INCOME = "total_income";
     public static final String BALANCE = "balance";
