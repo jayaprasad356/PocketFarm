@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weagri.Acitivity.HomeActivity
 import com.example.weagri.Acitivity.PaymentActivity
 import com.example.weagri.Adapter.TransactionAdapter
+import com.example.weagri.Adapter.WithdrawalAdapter
 import com.example.weagri.Model.Transaction
+import com.example.weagri.Model.Withdrawal
 import com.example.weagri.databinding.FragmentHomeBinding
 import com.example.weagri.helper.ApiConfig
 import com.example.weagri.helper.Constant
@@ -73,25 +75,27 @@ class HomeFragment : Fragment() {
                         val `object` = JSONObject(response)
                         val jsonArray: JSONArray = `object`.getJSONArray(com.example.weagri.helper.Constant.DATA)
                         val g = Gson()
-                        val transaction: java.util.ArrayList<Transaction> =
-                            java.util.ArrayList<Transaction>()
-                        for (i in 0 until jsonArray.length()) {
+                        val withdrawal: java.util.ArrayList<Withdrawal> =
+                            java.util.ArrayList<Withdrawal>()
+                        // Limiting to the first five items
+                        val limit = minOf(jsonArray.length(), 5)
+                        for (i in 0 until limit) {
                             val jsonObject1 = jsonArray.getJSONObject(i)
                             if (jsonObject1 != null) {
-                                val group: Transaction = g.fromJson(jsonObject1.toString(), Transaction::class.java)
-                                transaction.add(group)
+                                val group: Withdrawal = g.fromJson(jsonObject1.toString(), Withdrawal::class.java)
+                                withdrawal.add(group)
                             } else {
                                 break
                             }
                         }
                         binding.animationView.visibility = View.GONE
 
-                        val adapter = TransactionAdapter(activity, transaction)
+                        val adapter = WithdrawalAdapter(activity, withdrawal)
                         binding.rvtransactionitem.adapter = adapter
 
                     } else {
 
-                      //  DialogUtils.showCustomDialog(activity, ""+jsonObject.getString(Constant.MESSAGE))
+                        //  DialogUtils.showCustomDialog(activity, ""+jsonObject.getString(Constant.MESSAGE))
 
                         binding.animationView.visibility = View.VISIBLE
                     }
@@ -100,9 +104,7 @@ class HomeFragment : Fragment() {
                     Toast.makeText(activity, e.toString(), Toast.LENGTH_SHORT).show()
                 }
             }
-        }, activity, com.example.weagri.helper.Constant.TRANSACTIONS_LIST, params, true)
-
-
+        }, activity, com.example.weagri.helper.Constant.WITHDRAWAL_LIST, params, true)
     }
 
 

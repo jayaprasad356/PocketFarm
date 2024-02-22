@@ -392,6 +392,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/llMyProduction"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:layout_width="match_parent"

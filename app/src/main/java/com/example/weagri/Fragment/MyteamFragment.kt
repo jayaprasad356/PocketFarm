@@ -45,6 +45,8 @@ class MyteamFragment : Fragment() {
         (activity as HomeActivity).binding.rlToolbar.visibility = View.GONE
 
 
+        binding.tvMobile.text = session.getData(Constant.MOBILE)
+
 
         binding.rlBonus1.setOnClickListener {
             binding.rlBonus1.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#02B153"))
@@ -162,6 +164,8 @@ class MyteamFragment : Fragment() {
                                 break
                             }
                         }
+                        val count = jsonArray.length()
+                        binding.tvMember.text = "Team - " + count.toString()
                    //  Toast.makeText(getActivity(), "1" + jsonObject.getString(Constant.MESSAGE).toString(), Toast.LENGTH_SHORT).show()
                         //important
                         val adapter = MyTeamAdapter(activity, myteam)

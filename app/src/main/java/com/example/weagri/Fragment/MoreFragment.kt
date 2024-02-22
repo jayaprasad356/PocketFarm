@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.example.weagri.Acitivity.HomeActivity
+import com.example.weagri.Acitivity.MyProductionActivity
 import com.example.weagri.Acitivity.TransactionActivity
 import com.example.weagri.Acitivity.UpdateProfileActivity
 import com.example.weagri.Acitivity.WithdrawalActivity
@@ -61,6 +62,10 @@ class MoreFragment : Fragment() {
 
         binding.cvWithdraw.setOnClickListener {
             startActivity(Intent(activity, WithdrawalActivity::class.java))
+        }
+
+        binding.llMyProduction.setOnClickListener{
+            startActivity(Intent(activity,MyProductionActivity::class.java))
         }
 
         binding.cvRecharge.setOnClickListener {

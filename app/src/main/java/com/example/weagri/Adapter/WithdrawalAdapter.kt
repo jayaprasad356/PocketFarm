@@ -49,7 +49,7 @@ class WithdrawalAdapter(
         val status = report.status
 
         if (status == "0") {
-            holder.tvStatus.setTextColor(activitys.resources.getColor(R.color.orage_color))
+            holder.tvStatus.setTextColor(activitys.resources.getColor(R.color.red))
             holder.tvStatus.text = "Pending"
         }
         else if (status == "1") {

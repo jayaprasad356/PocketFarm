@@ -46,6 +46,9 @@ class MyTeamAdapter(
 
 //        holder.tvName.text = report.name
         holder.tvMobile.text = report.mobile
+        holder.tvJoinTime.text = report.registered_datetime
+        holder.tvReferrer.text = report.team_size
+        holder.tvAssets.text = report.total_assets
 
 
     }
@@ -59,6 +62,9 @@ class MyTeamAdapter(
 //        val tvName: TextView
         val tvMobile: TextView
         val rlMain: RelativeLayout
+        val tvJoinTime: TextView
+        val tvReferrer: TextView
+        val tvAssets: TextView
 
 
 
@@ -66,6 +72,9 @@ class MyTeamAdapter(
 //            tvName = itemView.findViewById(R.id.tvName)
             tvMobile = itemView.findViewById(R.id.tvMobile)
             rlMain = itemView.findViewById(R.id.rlMain)
+            tvJoinTime = itemView.findViewById(R.id.tvJoinTime)
+            tvReferrer = itemView.findViewById(R.id.tvReferrer)
+            tvAssets = itemView.findViewById(R.id.tvAssets)
 
 
         }

@@ -21,6 +21,8 @@
     <color name="blue_light_color">#0291B1</color>
     <color name="yellow_color">#FFE600</color>
 
+    <color name="red">#d32f2f</color>
+
 
     //onboarding colors
     <color name="background">#F0F4F3</color>

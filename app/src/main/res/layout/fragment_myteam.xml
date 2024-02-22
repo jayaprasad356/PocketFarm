@@ -133,19 +133,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <ImageView
+                    android:id="@+id/ivProfile"
+                    android:layout_width="@dimen/_24sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    android:background="@drawable/profile"
+                    />
+
+
                 <TextView
-                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/_4sdp"
                     android:layout_weight="1"
                     android:id="@+id/tvMobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="632088746"
+                    android:text=""
+                    android:layout_gravity="center"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_12sdp"
                     android:fontFamily="@font/poppins_medium"
                     />
 
                 <TextView
+                    android:visibility="gone"
                     android:gravity="center"
                     android:layout_weight="1"
                     android:id="@+id/tvWeekInvite"
@@ -380,7 +390,7 @@
                         android:id="@+id/tvBonus1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="10% Bonus"
+                        android:text="B-10% Bonus"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_10sdp"
                         android:fontFamily="@font/poppins_semibold"
@@ -401,7 +411,7 @@
                         android:id="@+id/tvBonus2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="5% Bonus"
+                        android:text="C-5% Bonus"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_10sdp"
                         android:fontFamily="@font/poppins_semibold"
@@ -423,7 +433,7 @@
                         android:id="@+id/tvBonus3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="2% Bonus"
+                        android:text="D-2% Bonus"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_10sdp"
                         android:fontFamily="@font/poppins_semibold"
@@ -442,9 +452,21 @@
 
         </RelativeLayout>
 
+        <TextView
+            android:padding="@dimen/_4sdp"
+            android:layout_below="@+id/rlBonus"
+            android:id="@+id/tvMember"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="@dimen/_12sdp"
+            />
+
         <androidx.recyclerview.widget.RecyclerView
             android:layout_marginTop="@dimen/_10sdp"
-            android:layout_below="@+id/rlBonus"
+            android:layout_below="@+id/tvMember"
             android:id="@+id/rvMyTeamB"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -453,7 +475,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:visibility="gone"
             android:layout_marginTop="@dimen/_10sdp"
-            android:layout_below="@+id/rlBonus"
+            android:layout_below="@+id/tvMember"
             android:id="@+id/rvMyTeamC"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -462,7 +484,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:visibility="gone"
             android:layout_marginTop="@dimen/_10sdp"
-            android:layout_below="@+id/rlBonus"
+            android:layout_below="@+id/tvMember"
             android:id="@+id/rvMyTeamD"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
