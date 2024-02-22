@@ -213,6 +213,8 @@ class MyteamFragment : Fragment() {
                                 break
                             }
                         }
+                        val count = jsonArray.length()
+                        binding.tvMember.text = "Team - " + count.toString()
                    //  Toast.makeText(getActivity(), "1" + jsonObject.getString(Constant.MESSAGE).toString(), Toast.LENGTH_SHORT).show()
                         //important
                         val adapter = MyTeamAdapter(activity, myteam)
@@ -260,6 +262,8 @@ class MyteamFragment : Fragment() {
                                 break
                             }
                         }
+                        val count = jsonArray.length()
+                        binding.tvMember.text = "Team - " + count.toString()
                         //  Toast.makeText(getActivity(), "1" + jsonObject.getString(Constant.MESSAGE).toString(), Toast.LENGTH_SHORT).show()
                         //important
                         val adapter = MyTeamAdapter(activity, myteam)

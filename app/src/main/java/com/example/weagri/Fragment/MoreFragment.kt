@@ -68,6 +68,11 @@ class MoreFragment : Fragment() {
             startActivity(Intent(activity,MyProductionActivity::class.java))
         }
 
+        binding.llServices.setOnClickListener{
+            startActivity(Intent(activity, com.example.weagri.Acitivity.ChatActivity::class.java))
+
+        }
+
         binding.cvRecharge.setOnClickListener {
             startActivity(Intent(activity, com.example.weagri.Acitivity.RechargeActivity::class.java))
         }
@@ -85,6 +90,7 @@ class MoreFragment : Fragment() {
         }
 
         binding.rlCutomerSupport.setOnClickListener{
+            startActivity(Intent(activity, com.example.weagri.Acitivity.ChatActivity::class.java))
 
         }
 

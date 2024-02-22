@@ -99,4 +99,6 @@ dependencies {
 
     implementation 'com.github.CanHub:Android-Image-Cropper:3.1.2'
 
+    implementation 'com.zoho.salesiq:mobilisten:7.0.0'
+
 }

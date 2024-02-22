@@ -60,11 +60,13 @@ class MyplansAdapter(
 
         }
 
-        holder.tvplan.text = report.crop
-        holder.tvDailyIncome.text = "Rs." + report.daily_income
-        holder.tvTotalIncome.text = "Rs." + report.total_income
-        holder.tvInvitebonus.text = "Rs." + report.invite_bonus
-        holder.tvValidity.text = report.validity + " days"
+            holder.tvplanName.text = report.products
+
+        holder.tvplan.text = "₹ " + report.price
+        holder.tvDailyIncome.text = "₹ " + report.daily_income
+        holder.tvTotalIncome.text = "₹ " + report.monthly_income
+        holder.tvInvitebonus.text = "₹ " + report.invite_bonus
+       // holder.tvValidity.text = report.validity + " days"
         Glide.with(activity).load(report.image).placeholder(R.drawable.sample_agri).into(holder.ivImage)
 
 
@@ -114,10 +116,11 @@ class MyplansAdapter(
         val tvDailyIncome : TextView
         val tvTotalIncome : TextView
         val tvInvitebonus : TextView
-        val tvValidity : TextView
+      //  val tvValidity : TextView
         val  ivImage : ImageView
         val  btnActivate : Button
         val cardView : CardView
+        val tvplanName : TextView
 
 
         init {
@@ -125,10 +128,11 @@ class MyplansAdapter(
             tvDailyIncome = itemView.findViewById(R.id.tvDailyIncome)
             tvTotalIncome = itemView.findViewById(R.id.tvTotalIncome)
             tvInvitebonus = itemView.findViewById(R.id.tvInvitebonus)
-            tvValidity = itemView.findViewById(R.id.tvValidity)
+            //tvValidity = itemView.findViewById(R.id.tvValidity)
             ivImage = itemView.findViewById(R.id.ivImage)
             btnActivate = itemView.findViewById(R.id.btnActivate)
             cardView = itemView.findViewById(R.id.cardView)
+            tvplanName = itemView.findViewById(R.id.tvplanName)
         }
     }
 
