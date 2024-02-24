@@ -129,6 +129,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
+                android:visibility="gone"
                 android:layout_marginTop="@dimen/_20sdp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
@@ -172,7 +173,6 @@
 
 
     </androidx.core.widget.NestedScrollView>
-
 
 
 

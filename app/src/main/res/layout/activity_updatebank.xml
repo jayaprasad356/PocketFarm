@@ -157,4 +157,18 @@
     </LinearLayout>
 
 
+
+    <TextView
+        android:layout_alignParentBottom="true"
+        android:padding="@dimen/_4sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/bank_instraction"
+        android:textAlignment="textStart"
+        android:textColor="@color/gold_color"
+        android:textSize="@dimen/_10sdp"
+        />
+
+
 </RelativeLayout>

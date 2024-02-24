@@ -46,7 +46,7 @@ class WithdrawalActivity : AppCompatActivity() {
             onBackPressed()
         }
 
-        binding.tvTotalEarnings.text = "₹" +session.getData(Constant.BALANCE)
+        binding.tvTotalEarnings.text = "₹ " +session.getData(Constant.BALANCE)
 
 
         binding.etAmount.addTextChangedListener(object : TextWatcher {

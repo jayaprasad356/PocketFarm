@@ -117,7 +117,7 @@
                     android:textSize="@dimen/_30sdp"
                     android:textAlignment="center"
                     android:textColor="@color/white"
-                    android:fontFamily="@font/inter_bold"
+                    android:fontFamily="@font/inter_semibold"
                     />
                 <TextView
                     android:layout_width="match_parent"
@@ -303,6 +303,7 @@
         android:fontFamily="@font/poppins_medium"
         android:text="@string/withdrwal_instraction"
         android:textAlignment="textStart"
+        android:textColor="@color/gold_color"
         android:textSize="@dimen/_10sdp"
          />
 

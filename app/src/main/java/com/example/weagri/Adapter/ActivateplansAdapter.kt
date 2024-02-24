@@ -51,7 +51,6 @@ class ActivateplansAdapter(
 
 
 
-        holder.btnActivate.visibility = View.GONE
 
 //        holder.btnActivate.setOnClickListener {
 //            activatePlan(report.id)

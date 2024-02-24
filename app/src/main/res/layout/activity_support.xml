@@ -70,7 +70,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="The first contact, the account manager will provide you with professional and fast service"
+                    android:text="Join our whatsapp group to get instant offers and updates"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_10sdp" />
 
@@ -111,7 +111,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="If you don't have WHATSAPP, you can contact your account manager via Telegram, which will do for you"
+                    android:text="Join our telegram channel to get instant offers and updates"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_10sdp" />
 

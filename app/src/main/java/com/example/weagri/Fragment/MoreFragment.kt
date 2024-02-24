@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.example.weagri.Acitivity.HomeActivity
+import com.example.weagri.Acitivity.InviteActivity
 import com.example.weagri.Acitivity.MyProductionActivity
 import com.example.weagri.Acitivity.TransactionActivity
 import com.example.weagri.Acitivity.UpdateProfileActivity
@@ -47,13 +48,19 @@ class MoreFragment : Fragment() {
 
 
         binding.llInvite.setOnClickListener {
-            val shareBody = "Hey, I am using WeAgri App. It's a great app to earn money. Use my refer code " + session.getData(
-                com.example.weagri.helper.Constant.REFER_CODE) + " to get 100 coins on signup. Download the app from the link below.\n" + ""
-            val sharingIntent = android.content.Intent(android.content.Intent.ACTION_SEND)
-            sharingIntent.type = "text/plain"
-            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "WeAgri")
-            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody)
-            startActivity(android.content.Intent.createChooser(sharingIntent, "Share using"))
+//            val shareBody = "Hey, I am using WeAgri App. It's a great app to earn money. Use my refer code " + session.getData(
+//                com.example.weagri.helper.Constant.REFER_CODE) + " to get 100 coins on signup. Download the app from the link below.\n" + ""
+//            val sharingIntent = android.content.Intent(android.content.Intent.ACTION_SEND)
+//            sharingIntent.type = "text/plain"
+//            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "WeAgri")
+//            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody)
+//            startActivity(android.content.Intent.createChooser(sharingIntent, "Share using"))
+
+            startActivity(Intent(activity, InviteActivity::class.java))
+        }
+
+        binding.llScartchCard.setOnClickListener {
+            startActivity(Intent(activity, com.example.weagri.Acitivity.ScartchcardActivity::class.java))
         }
 
 
@@ -62,6 +69,10 @@ class MoreFragment : Fragment() {
 
         binding.cvWithdraw.setOnClickListener {
             startActivity(Intent(activity, WithdrawalActivity::class.java))
+        }
+
+        binding.rlmyBank.setOnClickListener {
+            startActivity(Intent(activity, com.example.weagri.Acitivity.UpdatebankActivity::class.java))
         }
 
         binding.llMyProduction.setOnClickListener{

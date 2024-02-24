@@ -151,8 +151,8 @@ class MyplansAdapter(
 
         if (status.equals("Plan Activated Successfully")) {
             ivSuccess.setImageResource(R.drawable.success)
-            tvStatus.text = "Plan Activated Successfully"
-            tvMessage.text = "Your plan has been activated successfully. You can now start earning from your plan."
+            tvStatus.text = "Production Started Successfully"
+            tvMessage.text = "Start sell from tomorrow."
             btnOk.text = "Done"
             avRecharge.visibility = View.GONE
             btnOk.setOnClickListener {
@@ -161,8 +161,8 @@ class MyplansAdapter(
             }
         } else if (status.equals("You have already applied this Plan")) {
             ivSuccess.setImageResource(R.drawable.warning)
-            tvStatus.text = "Unable to apply this Plan"
-            tvMessage.text = "You have already applied this Plan . You can apply only one plan at a time."
+            tvStatus.text = "Unable to start this production"
+            tvMessage.text = "You have already started this production."
             btnOk.text = "Done"
             avRecharge.visibility = View.GONE
             btnOk.setOnClickListener {

@@ -13,7 +13,7 @@
     <RelativeLayout
         android:padding="@dimen/_4sdp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         >
 
         <ImageView
@@ -22,14 +22,14 @@
             android:layout_marginRight="@dimen/_10sdp"
             android:id="@+id/ivImage"
             android:layout_width="@dimen/_100sdp"
-            android:layout_height="match_parent"/>
+            android:layout_height="@dimen/_120sdp"/>
 
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_toRightOf="@+id/ivImage"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -179,7 +179,7 @@
                 app:cornerRadius="@dimen/_10sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Activate"
+                android:text="Sell to market"
                 android:textAllCaps="false"
                 android:textColor="#353535"
                 android:backgroundTint="#8ADDB7"
