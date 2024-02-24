@@ -66,6 +66,7 @@ class MyplansAdapter(
         holder.tvDailyIncome.text = "₹ " + report.daily_income
         holder.tvTotalIncome.text = "₹ " + report.monthly_income
         holder.tvInvitebonus.text = "₹ " + report.invite_bonus
+        holder.tvQuantity.text = report.unit
        // holder.tvValidity.text = report.validity + " days"
         Glide.with(activity).load(report.image).placeholder(R.drawable.sample_agri).into(holder.ivImage)
 
@@ -121,6 +122,7 @@ class MyplansAdapter(
         val  btnActivate : Button
         val cardView : CardView
         val tvplanName : TextView
+        val tvQuantity : TextView
 
 
         init {
@@ -133,6 +135,7 @@ class MyplansAdapter(
             btnActivate = itemView.findViewById(R.id.btnActivate)
             cardView = itemView.findViewById(R.id.cardView)
             tvplanName = itemView.findViewById(R.id.tvplanName)
+            tvQuantity = itemView.findViewById(R.id.tvQuantity)
         }
     }
 

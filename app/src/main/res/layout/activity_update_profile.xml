@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:fontFamily="@font/poppins_regular"
-            android:text="Update Profile"
+            android:text="My Profile"
             android:textColor="@color/black"
             android:textSize="@dimen/_14sdp" />
 
@@ -161,7 +161,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/primary_color"
-                android:text="Save"
+                android:text="Update"
                 android:textAllCaps="false"
                 android:fontFamily="@font/poppins_medium"
                 />

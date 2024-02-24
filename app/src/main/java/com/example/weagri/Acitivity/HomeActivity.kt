@@ -99,6 +99,8 @@ class HomeActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
             R.id.navHome -> {
 
 
+
+
 //                transaction.setCustomAnimations(
 //                    R.anim.slide_in_top_right,
 //                    R.anim.slide_out_bottom_left

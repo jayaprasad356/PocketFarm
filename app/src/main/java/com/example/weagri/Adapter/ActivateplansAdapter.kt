@@ -10,6 +10,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
+import androidx.compose.ui.graphics.Color
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 
 import com.bumptech.glide.Glide
@@ -50,18 +52,25 @@ class ActivateplansAdapter(
         holder.cardView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.context, R.anim.recycler_anim1))
 
 
+        val context = holder.itemView.context
+        if (report.claim.equals("1")) {
+            // Set background color to primary_color
+            holder.btnActivate.setBackgroundColor(ContextCompat.getColor(context, R.color.primary_color))
+        } else {
+            // Set background color to grey_extra_light
+            holder.btnActivate.setBackgroundColor(ContextCompat.getColor(context, R.color.grey_extra_light))
+        }
 
 
-//        holder.btnActivate.setOnClickListener {
-//            activatePlan(report.id)
-//
-//        }
 
-        holder.tvplan.text = report.products
-        holder.tvDailyIncome.text = "Rs." + report.daily_income
-        holder.tvTotalIncome.text = "Rs." + report.monthly_income
-        holder.tvInvitebonus.text = "Rs." + report.invite_bonus
-        //holder.tvValidity.text = report.validity + " days"
+
+        holder.tvplanName.text = report.products
+
+        holder.tvplan.text = "₹ " + report.income
+
+        holder.tvstartedate.text =report.joined_date
+        holder.tvprice.text = "₹ " + report.price
+
         Glide.with(activity).load(report.image).placeholder(R.drawable.sample_agri).into(holder.ivImage)
 
 
@@ -108,24 +117,23 @@ class ActivateplansAdapter(
 
     internal class ItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvplan: TextView
-        val tvDailyIncome : TextView
-        val tvTotalIncome : TextView
-        val tvInvitebonus : TextView
     //    val tvValidity : TextView
         val  ivImage : ImageView
         val  btnActivate : Button
         val cardView : CardView
+        var tvplanName : TextView
+        var tvstartedate : TextView
+        var tvprice : TextView
 
 
         init {
             tvplan = itemView.findViewById(R.id.tvplan)
-            tvDailyIncome = itemView.findViewById(R.id.tvDailyIncome)
-            tvTotalIncome = itemView.findViewById(R.id.tvTotalIncome)
-            tvInvitebonus = itemView.findViewById(R.id.tvInvitebonus)
-           // tvValidity = itemView.findViewById(R.id.tvValidity)
             ivImage = itemView.findViewById(R.id.ivImage)
             btnActivate = itemView.findViewById(R.id.btnActivate)
             cardView = itemView.findViewById(R.id.cardView)
+            tvplanName = itemView.findViewById(R.id.tvplanName)
+            tvstartedate = itemView.findViewById(R.id.tvstartedate)
+            tvprice = itemView.findViewById(R.id.tvprice)
 
         }
     }

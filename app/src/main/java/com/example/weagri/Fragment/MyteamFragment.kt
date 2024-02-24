@@ -174,7 +174,7 @@ class MyteamFragment : Fragment() {
 
 
                     } else {
-                        DialogUtils.showCustomDialog(activity, ""+jsonObject.getString(Constant.MESSAGE))
+                      //  DialogUtils.showCustomDialog(activity, ""+jsonObject.getString(Constant.MESSAGE))
                         binding.animationView.visibility = View.VISIBLE
                     }
                 } catch (e: JSONException) {

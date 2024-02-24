@@ -9,6 +9,15 @@ class MyPlan {
     var invite_bonus: String? = null
     var validity: String? = null
     var image: String? = null
+    var unit: String? = null
+
+
+
+
+    var income : String? = null
+    var joined_date : String? = null
+    var claim : String? = null
+
 
 
     constructor(
@@ -19,7 +28,11 @@ class MyPlan {
         monthly_income: String?,
         invite_bonus: String?,
         validity: String?,
-        image: String?
+        image: String?,
+        unit: String?,
+        income : String?,
+        joined_date : String?,
+        claim : String?
 
     ) {
         this.id = id
@@ -30,6 +43,11 @@ class MyPlan {
         this.invite_bonus = invite_bonus
         this.validity = validity
         this.image = image
+        this.unit = unit
+        this.income = income
+        this.joined_date = joined_date
+        this.claim = claim
+
     }
 
 

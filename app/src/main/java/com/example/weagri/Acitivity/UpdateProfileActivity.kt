@@ -36,8 +36,8 @@ class UpdateProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
     binding = ActivityUpdateProfileBinding.inflate(layoutInflater)
     activity = this
-    session = Session(activity)
 
+        session = Session(activity)
 
 
 
@@ -70,10 +70,6 @@ class UpdateProfileActivity : AppCompatActivity() {
             } else if (binding.etCity.text.toString().isEmpty()) {
                 binding.etCity.error = "Enter City"
                 return@setOnClickListener
-            } else if (!indianStates.contains(binding.autoCompleteTextView.text.toString())) {
-                // Check if the entered state is not in the list of Indian states
-                binding.autoCompleteTextView.error = "Select a valid state"
-                return@setOnClickListener
             } else {
                 update()
             }
@@ -85,11 +81,13 @@ class UpdateProfileActivity : AppCompatActivity() {
     }
 
     private fun update() {
+        Toast.makeText(activity, "Save", Toast.LENGTH_SHORT).show()
+
         val name = binding.etName.text.toString()
         val email = binding.etEmail.text.toString()
         val age = binding.etAge.text.toString()
         val city = binding.etCity.text.toString()
-        val state = binding.autoCompleteTextView.text.toString()
+        val state = session.getData(Constant.STATE)
 
         val params: MutableMap<String, String> = HashMap()
         params[Constant.USER_ID] = session.getData(Constant.USER_ID)
