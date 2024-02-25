@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingHorizontal="@dimen/_14sdp"
-    tools:context="com.example.weagri.Acitivity.LoginActivity">
+    tools:context="com.app.pocketfarm.activity.LoginActivity">
 
 
 

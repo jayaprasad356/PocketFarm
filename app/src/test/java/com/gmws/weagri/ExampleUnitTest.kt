@@ -1,4 +1,4 @@
-package com.example.weagri
+package com.app.pocketfarm
 
 import org.junit.Test
 

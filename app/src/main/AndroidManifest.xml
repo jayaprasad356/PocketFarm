@@ -21,37 +21,31 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".Acitivity.ScartchcardActivity"
+            android:name=".activity.ScartchcardActivity"
             android:exported="false" />
         <activity
-            android:name=".Acitivity.InviteActivity"
+            android:name=".activity.SupportActivity"
             android:exported="false" />
         <activity
-            android:name=".Acitivity.ChatActivity"
+            android:name=".activity.MyProductionActivity"
             android:exported="false" />
         <activity
-            android:name=".Acitivity.SupportActivity"
+            android:name=".activity.RechargeActivity"
             android:exported="false" />
         <activity
-            android:name=".Acitivity.MyProductionActivity"
+            android:name=".activity.WelcomeActivity"
             android:exported="false" />
         <activity
-            android:name=".Acitivity.RechargeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Acitivity.WelcomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Acitivity.WithdrawalStatusActivity"
+            android:name=".activity.WithdrawalStatusActivity"
             android:exported="false" />
         <activity
             android:name="com.canhub.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
         <activity
-            android:name=".Acitivity.TransactionActivity"
+            android:name=".activity.TransactionActivity"
             android:exported="false" />
         <activity
-            android:name=".Acitivity.SplashScreenActivity"
+            android:name=".activity.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -60,30 +54,30 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Acitivity.PaymentActivity"
+            android:name=".activity.PaymentActivity"
             android:exported="false" />
         <activity
-            android:name=".Acitivity.ProfiledetailsActivity"
+            android:name=".activity.ProfiledetailsActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".Acitivity.UpdateProfileActivity"
+            android:name=".activity.UpdateProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".Acitivity.UpdatebankActivity"
+            android:name=".activity.UpdatebankActivity"
             android:exported="false" />
         <activity
-            android:name=".Acitivity.WithdrawalActivity"
+            android:name=".activity.WithdrawalActivity"
             android:exported="false" />
         <activity
-            android:name=".Acitivity.HomeActivity"
+            android:name=".activity.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".Acitivity.OtpActivity"
+            android:name=".activity.OtpActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".Acitivity.LoginActivity"
+            android:name=".activity.LoginActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize" />
     </application>

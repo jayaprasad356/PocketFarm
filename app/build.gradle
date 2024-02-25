@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.weagri'
+    namespace 'com.app.pocketfarm'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.example.weagri"
+        applicationId "com.app.pocketfarm"
         minSdk 24
         targetSdk 34
         versionCode 1
