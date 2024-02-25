@@ -10,15 +10,10 @@ class MyPlan {
     var validity: String? = null
     var image: String? = null
     var unit: String? = null
-
-
-
-
+    var daily_quantity: String? = null
     var income : String? = null
     var joined_date : String? = null
     var claim : String? = null
-
-
 
     constructor(
         id: String?,
@@ -30,10 +25,10 @@ class MyPlan {
         validity: String?,
         image: String?,
         unit: String?,
-        income : String?,
-        joined_date : String?,
-        claim : String?
-
+        daily_quantity: String?,
+        income: String?,
+        joined_date: String?,
+        claim: String?
     ) {
         this.id = id
         this.products = products
@@ -44,11 +39,9 @@ class MyPlan {
         this.validity = validity
         this.image = image
         this.unit = unit
+        this.daily_quantity = daily_quantity
         this.income = income
         this.joined_date = joined_date
         this.claim = claim
-
     }
-
-
 }

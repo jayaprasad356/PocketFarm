@@ -41,7 +41,8 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_140sdp"
-                    android:background="@drawable/pocter_farm"
+                    android:src="@drawable/pocter_farm"
+                    android:scaleType="fitCenter"
                     />
 
 
@@ -135,7 +136,8 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_80sdp"
-                android:background="@drawable/explore_img"
+                android:scaleType="fitCenter"
+                android:src="@drawable/explore_img"
                 />
             <Space
                 android:layout_width="match_parent"
@@ -262,7 +264,8 @@ and sell in market they will earn money"
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_100sdp"
-                android:background="@drawable/step_ic"
+                android:src="@drawable/step_ic"
+                android:scaleType="fitCenter"
                 />
             <Space
                 android:layout_width="match_parent"
@@ -292,26 +295,7 @@ and sell in market they will earn money"
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_2sdp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Terms and Condition"
-                android:textSize="@dimen/_14sdp"
-                android:textColor="@color/primary_color"
-                android:fontFamily="@font/poppins_medium"
-                />
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_2sdp"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Click the link below for more"
-                android:textSize="@dimen/_12sdp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/poppins_regular"
-                />
         </LinearLayout>
 
     </RelativeLayout>

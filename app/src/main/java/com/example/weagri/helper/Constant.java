@@ -72,7 +72,6 @@ public class Constant {
     public static final String BANK = "bank";
     public static final String BRANCH = "branch";
     public static final String IFSC = "ifsc";
-    public static final String TOTAL_EARNINGS = "total_earnings";
     public static final String TOTAL_INCOME = "total_income";
     public static final String TODAY_INCOME = "today_income";
     public static final String TOTAL_ASSETS = "total_assets";

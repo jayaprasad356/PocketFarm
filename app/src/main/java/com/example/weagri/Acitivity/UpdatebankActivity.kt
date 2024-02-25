@@ -24,16 +24,16 @@ class UpdatebankActivity : AppCompatActivity() {
         }
 
         binding.btnBankDetails.setOnClickListener {
-            if (binding.etAccountNumber.text.toString().isEmpty()) {
+            if (binding.etHolderName.text.toString().isEmpty()) {
+                binding.etHolderName.error = "Please enter account holder name"
+                binding.etHolderName.requestFocus()
+            }
+            else if (binding.etAccountNumber.text.toString().isEmpty()) {
                 binding.etAccountNumber.error = "Please enter account number"
                 binding.etAccountNumber.requestFocus()
             } else if (binding.etIFSCCode.text.toString().isEmpty()) {
                 binding.etIFSCCode.error = "Please enter IFSC code"
                 binding.etIFSCCode.requestFocus()
-            }
-            else if (binding.etHolderName.text.toString().isEmpty()) {
-                binding.etHolderName.error = "Please enter account holder name"
-                binding.etHolderName.requestFocus()
             }
             else if (binding.etBankName.text.toString().isEmpty()) {
                 binding.etBankName.error = "Please enter bank name"

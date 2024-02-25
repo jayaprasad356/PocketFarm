@@ -58,6 +58,9 @@ class UpdateProfileActivity : AppCompatActivity() {
             if (binding.etName.text.toString().isEmpty()) {
                 binding.etName.error = "Enter Name"
                 return@setOnClickListener
+            } else if(binding.etName.text.toString().length <4){
+                binding.etName.error = "Name should be atleast 4 characters"
+                return@setOnClickListener
             } else if (binding.etEmail.text.toString().isEmpty()) {
                 binding.etEmail.error = "Enter Email"
                 return@setOnClickListener
@@ -81,8 +84,6 @@ class UpdateProfileActivity : AppCompatActivity() {
     }
 
     private fun update() {
-        Toast.makeText(activity, "Save", Toast.LENGTH_SHORT).show()
-
         val name = binding.etName.text.toString()
         val email = binding.etEmail.text.toString()
         val age = binding.etAge.text.toString()

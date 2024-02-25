@@ -17,6 +17,7 @@ import com.airbnb.lottie.LottieAnimationView
 
 import com.bumptech.glide.Glide
 import com.example.weagri.Acitivity.PaymentActivity
+import com.example.weagri.Acitivity.RechargeActivity
 import com.example.weagri.Model.MyPlan
 import com.example.weagri.Model.MyTeam
 import com.example.weagri.Model.Transaction
@@ -66,7 +67,7 @@ class MyplansAdapter(
         holder.tvDailyIncome.text = "₹ " + report.daily_income
         holder.tvTotalIncome.text = "₹ " + report.monthly_income
         holder.tvInvitebonus.text = "₹ " + report.invite_bonus
-        holder.tvQuantity.text = report.unit
+        holder.tvQuantity.text = report.daily_quantity +" " +report.unit
        // holder.tvValidity.text = report.validity + " days"
         Glide.with(activity).load(report.image).placeholder(R.drawable.sample_agri).into(holder.ivImage)
 
@@ -85,14 +86,15 @@ class MyplansAdapter(
             if (result) {
                 try {
                     val jsonObject = JSONObject(response)
+                    val msg = jsonObject.getString(Constant.MESSAGE).toString()
                     if (jsonObject.getBoolean(Constant.SUCCESS)) {
                         val `object` = JSONObject(response)
 
-                        showCustomDialog("Plan Activated Successfully")
+                        showCustomDialog(msg)
 
 
                     } else {
-                        val msg = jsonObject.getString(Constant.MESSAGE).toString()
+
                         showCustomDialog(msg)
 
                     }
@@ -152,7 +154,7 @@ class MyplansAdapter(
         val avRecharge = dialogView.findViewById<LottieAnimationView>(R.id.avRecharge)
 
 
-        if (status.equals("Plan Activated Successfully")) {
+        if (status.equals("Production Started Successfully")) {
             ivSuccess.setImageResource(R.drawable.success)
             tvStatus.text = "Production Started Successfully"
             tvMessage.text = "Start sell from tomorrow."
@@ -162,10 +164,10 @@ class MyplansAdapter(
                 dialog.dismiss()
 
             }
-        } else if (status.equals("You have already applied this Plan")) {
+        } else if (status.equals("You have already started this production")) {
             ivSuccess.setImageResource(R.drawable.warning)
             tvStatus.text = "Unable to start this production"
-            tvMessage.text = "You have already started this production."
+            tvMessage.text = status
             btnOk.text = "Done"
             avRecharge.visibility = View.GONE
             btnOk.setOnClickListener {
@@ -173,16 +175,16 @@ class MyplansAdapter(
 
             }
 
-        } else if (status.equals("Insufficient balance to apply for this plan")) {
+        } else if (status.equals("Insufficient balance to start this production")) {
             ivSuccess.setImageResource(R.drawable.warning)
-            tvStatus.text = "Unable to apply this Plan"
-            tvMessage.text = "Insufficient balance to apply for this plan"
+            tvStatus.text = "Unable to start this Production"
+            tvMessage.text = "Insufficient recharge to start this production"
             btnOk.text = "Recharge Now"
             avRecharge.visibility = View.VISIBLE
             ivSuccess.visibility = View.GONE
             btnOk.setOnClickListener {
                 dialog.dismiss()
-                val intent = Intent(activity, PaymentActivity::class.java)
+                val intent = Intent(activity, RechargeActivity::class.java)
                 activity.startActivity(intent)
             }
         }

@@ -58,7 +58,7 @@ class MyteamFragment : Fragment() {
             binding.tvBonus3.setTextColor(Color.parseColor("#000000"))
             binding.rvMyTeamC.visibility = View.GONE
             binding.rvMyTeamD.visibility = View.GONE
-            referlistB("b")
+            referlist("b")
 
         }
 
@@ -72,7 +72,7 @@ class MyteamFragment : Fragment() {
             binding.tvBonus3.setTextColor(Color.parseColor("#000000"))
             binding.rvMyTeamB.visibility = View.GONE
             binding.rvMyTeamD.visibility = View.GONE
-            referlistC("c")
+            referlist("c")
         }
 
         binding.rlBonus3.setOnClickListener {
@@ -85,7 +85,7 @@ class MyteamFragment : Fragment() {
             binding.tvBonus3.setTextColor(Color.parseColor("#ffffff"))
             binding.rvMyTeamC.visibility = View.GONE
             binding.rvMyTeamB.visibility = View.GONE
-            referlistD("d")
+            referlist("d")
         }
 
 
@@ -131,7 +131,7 @@ class MyteamFragment : Fragment() {
 
 
 
-        referlistB("b")
+        referlist("b")
 
 
         return binding.root
@@ -140,7 +140,7 @@ class MyteamFragment : Fragment() {
 
     }
 
-    private fun referlistB(level: String) {
+    private fun referlist(level: String) {
         binding.rvMyTeamB.visibility = View.VISIBLE
         val params: MutableMap<String, String> = HashMap()
         params[com.example.weagri.helper.Constant.USER_ID] = session.getData(com.example.weagri.helper.Constant.USER_ID)
@@ -175,104 +175,6 @@ class MyteamFragment : Fragment() {
 
                     } else {
                       //  DialogUtils.showCustomDialog(activity, ""+jsonObject.getString(Constant.MESSAGE))
-                        binding.animationView.visibility = View.VISIBLE
-                    }
-                } catch (e: JSONException) {
-                    e.printStackTrace()
-                    Toast.makeText(getActivity(), "1"+e.toString(), Toast.LENGTH_SHORT).show()
-                }
-            }
-        }, activity, com.example.weagri.helper.Constant.TEAM_LIST, params, true)
-
-
-
-
-    }
-
-    private fun referlistC(level: String) {
-        binding.rvMyTeamC.visibility = View.VISIBLE
-        val params: MutableMap<String, String> = HashMap()
-        params[com.example.weagri.helper.Constant.USER_ID] = session.getData(com.example.weagri.helper.Constant.USER_ID)
-        params[com.example.weagri.helper.Constant.LEVEL] = level
-        com.example.weagri.helper.ApiConfig.RequestToVolley({ result, response ->
-            if (result) {
-                try {
-                    val jsonObject = JSONObject(response)
-                    if (jsonObject.getBoolean(com.example.weagri.helper.Constant.SUCCESS)) {
-                        val `object` = JSONObject(response)
-                        val jsonArray: JSONArray = `object`.getJSONArray(com.example.weagri.helper.Constant.DATA)
-                        val g = Gson()
-                        val myteam: java.util.ArrayList<MyTeam> =
-                            java.util.ArrayList<MyTeam>()
-                        for (i in 0 until jsonArray.length()) {
-                            val jsonObject1 = jsonArray.getJSONObject(i)
-                            if (jsonObject1 != null) {
-                                val group: MyTeam = g.fromJson(jsonObject1.toString(), MyTeam::class.java)
-                                myteam.add(group)
-                            } else {
-                                break
-                            }
-                        }
-                        val count = jsonArray.length()
-                        binding.tvMember.text = "Team - " + count.toString()
-                   //  Toast.makeText(getActivity(), "1" + jsonObject.getString(Constant.MESSAGE).toString(), Toast.LENGTH_SHORT).show()
-                        //important
-                        val adapter = MyTeamAdapter(activity, myteam)
-                        binding.rvMyTeamC.adapter = adapter
-                        binding.animationView.visibility = View.GONE
-
-
-                    } else {
-                        DialogUtils.showCustomDialog(activity, ""+jsonObject.getString(Constant.MESSAGE))
-                        binding.animationView.visibility = View.VISIBLE
-                    }
-                } catch (e: JSONException) {
-                    e.printStackTrace()
-                    Toast.makeText(getActivity(), "1"+e.toString(), Toast.LENGTH_SHORT).show()
-                }
-            }
-        }, activity, com.example.weagri.helper.Constant.TEAM_LIST, params, true)
-
-
-
-
-    }
-
-    private fun referlistD(level: String) {
-        binding.rvMyTeamD.visibility = View.VISIBLE
-        val params: MutableMap<String, String> = HashMap()
-        params[com.example.weagri.helper.Constant.USER_ID] = session.getData(com.example.weagri.helper.Constant.USER_ID)
-        params[com.example.weagri.helper.Constant.LEVEL] = level
-        com.example.weagri.helper.ApiConfig.RequestToVolley({ result, response ->
-            if (result) {
-                try {
-                    val jsonObject = JSONObject(response)
-                    if (jsonObject.getBoolean(com.example.weagri.helper.Constant.SUCCESS)) {
-                        val `object` = JSONObject(response)
-                        val jsonArray: JSONArray = `object`.getJSONArray(com.example.weagri.helper.Constant.DATA)
-                        val g = Gson()
-                        val myteam: java.util.ArrayList<MyTeam> =
-                            java.util.ArrayList<MyTeam>()
-                        for (i in 0 until jsonArray.length()) {
-                            val jsonObject1 = jsonArray.getJSONObject(i)
-                            if (jsonObject1 != null) {
-                                val group: MyTeam = g.fromJson(jsonObject1.toString(), MyTeam::class.java)
-                                myteam.add(group)
-                            } else {
-                                break
-                            }
-                        }
-                        val count = jsonArray.length()
-                        binding.tvMember.text = "Team - " + count.toString()
-                        //  Toast.makeText(getActivity(), "1" + jsonObject.getString(Constant.MESSAGE).toString(), Toast.LENGTH_SHORT).show()
-                        //important
-                        val adapter = MyTeamAdapter(activity, myteam)
-                        binding.rvMyTeamD.adapter = adapter
-                        binding.animationView.visibility = View.GONE
-
-
-                    } else {
-                        DialogUtils.showCustomDialog(activity, ""+jsonObject.getString(Constant.MESSAGE))
                         binding.animationView.visibility = View.VISIBLE
                     }
                 } catch (e: JSONException) {
