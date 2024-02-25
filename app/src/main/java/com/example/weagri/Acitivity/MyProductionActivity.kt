@@ -34,7 +34,10 @@ class MyProductionActivity : AppCompatActivity() {
         activity = this
         session = Session(activity)
 
-        activateplan()
+        val swipeRefreshLayout: SwipeRefreshLayout = binding.swipeRefreshLayout
+        activateplan(swipeRefreshLayout)
+
+        swipeRefreshLayout.setOnRefreshListener { activateplan(swipeRefreshLayout) }
 
         binding.ibBack.setOnClickListener{
             onBackPressed()
@@ -49,7 +52,7 @@ class MyProductionActivity : AppCompatActivity() {
     }
 
 
-    private fun activateplan() {
+    private fun activateplan(swipeRefreshLayout:SwipeRefreshLayout) {
         val params: MutableMap<String, String> = HashMap()
         params[com.example.weagri.helper.Constant.USER_ID]= session.getData(com.example.weagri.helper.Constant.USER_ID)
         com.example.weagri.helper.ApiConfig.RequestToVolley({ result, response ->
@@ -77,11 +80,13 @@ class MyProductionActivity : AppCompatActivity() {
                         binding.rvplan.adapter = adapter
                         binding.rvplan.visibility = View.VISIBLE
                         binding.animationView.visibility = View.GONE
+                        swipeRefreshLayout.isRefreshing = false
 
 
                     } else {
                         binding.rvplan.visibility = View.GONE
                         binding.animationView.visibility = View.VISIBLE
+                        swipeRefreshLayout.isRefreshing = false
                     }
                 } catch (e: JSONException) {
                     e.printStackTrace()

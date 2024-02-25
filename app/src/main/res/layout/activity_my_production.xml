@@ -32,7 +32,7 @@
     </RelativeLayout>
 
 
-    <RelativeLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_below="@+id/rlHeader"
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
@@ -43,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-    </RelativeLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
     <com.airbnb.lottie.LottieAnimationView

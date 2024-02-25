@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    android:background="@drawable/bg_scartch"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,7 +18,9 @@
             android:id="@+id/ibBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/arrow_left" />
+            android:background="@drawable/arrow_left"
+            android:backgroundTint="@color/black"
+            />
 
 
         <TextView
@@ -30,6 +34,11 @@
 
     </RelativeLayout>
 
+
+
+
+
+
     <RelativeLayout
         android:layout_centerInParent="true"
         android:id="@+id/rlInvite"
@@ -40,9 +49,9 @@
 
         <com.google.android.material.card.MaterialCardView
             android:layout_centerHorizontal="true"
-            android:layout_width="@dimen/_300sdp"
-            android:layout_height="@dimen/_300sdp"
-            android:background="@color/grey"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_200sdp"
+            android:background="@color/white"
             app:cardCornerRadius="10dp"
             app:cardElevation="0dp"
             android:elevation="0dp"
@@ -51,7 +60,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/grey"
+                android:background="@color/white"
                 android:contentDescription="@string/app_name"
                 android:gravity="center"
                 android:orientation="vertical"
@@ -61,9 +70,10 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:contentDescription="@string/app_name"
-                    android:src="@drawable/logo" />
+                    android:src="@drawable/surprise" />
 
                 <TextView
+                    android:id="@+id/tvAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -78,12 +88,42 @@
                 android:id="@+id/scratchView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:overlay_height="@dimen/_300sdp"
-                app:overlay_image="@drawable/overlay"
-                app:overlay_width="@dimen/_300sdp" />
+                app:overlay_height="@dimen/_200sdp"
+                app:overlay_image="@drawable/greenoverlay"
+                app:overlay_width="@dimen/_200sdp" />
         </com.google.android.material.card.MaterialCardView>
 
+
+
+
     </RelativeLayout>
+    <TextView
+        android:gravity="center"
+        android:layout_below="@+id/rlInvite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="3 Chance Left"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/black"
+        />
+
+
+
+    <ImageView
+       android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_150sdp"
+        android:background="@drawable/flower"
+        />
+
+    <ImageView
+        android:layout_margin="@dimen/_12sdp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/rlHeader"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_80sdp"
+        android:background="@drawable/weather"
+        />
 
 
 </RelativeLayout>
