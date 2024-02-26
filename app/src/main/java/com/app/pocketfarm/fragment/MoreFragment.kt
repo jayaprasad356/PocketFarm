@@ -101,7 +101,7 @@ class MoreFragment : Fragment() {
         }
 
         binding.cvRecharge.setOnClickListener {
-            startActivity(Intent(activity, com.app.pocketfarm.activity.RechargeActivity::class.java))
+            startActivity(Intent(activity, com.app.pocketfarm.activity.PaymentActivity::class.java))
         }
 
         binding.rlhistory.setOnClickListener {

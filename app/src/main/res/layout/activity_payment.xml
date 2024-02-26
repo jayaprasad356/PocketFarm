@@ -52,7 +52,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="@dimen/_100sdp"
-            android:background="@drawable/qr"
+            android:background="@drawable/qr_bharath"
             android:layout_gravity="center"
             />
 

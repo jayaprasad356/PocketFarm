@@ -16,6 +16,7 @@ public class Constant {
 
     public static final String LOGIN = BaseUrl + "login.php";
     public static final String REGISTER = BaseUrl + "register.php";
+    public static final String OTP = BaseUrl + "otp.php";
 
     public static final  String getOTPUrl(String key,String mobile,String otp) {
 

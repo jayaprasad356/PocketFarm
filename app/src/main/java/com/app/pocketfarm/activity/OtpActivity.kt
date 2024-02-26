@@ -49,8 +49,8 @@ class OtpActivity : AppCompatActivity() {
         binding.tvMobile.text = "+91 " + session!!.getData(Constant.MOBILE)
 
 
-
-        showOtp()
+        otp()
+//        showOtp()
 
         startCountdown()
 
@@ -60,36 +60,38 @@ class OtpActivity : AppCompatActivity() {
             resetCountdown()
             // Start the countdown timer again
             startCountdown()
+            otp()
             // Disable the button
             binding.btnResend.isEnabled = false
         }
 
-
-        setContentView(binding.root)
-    }
-
-
-    private fun showOtp() {
-        sendotp();
         binding.btnVerify.setOnClickListener(View.OnClickListener {
 
 
-            if (binding.otpView.toString().isEmpty()) {
+            if (binding.otpView.otp.toString().isEmpty()) {
 
                 Toast.makeText(this, "Please enter OTP", Toast.LENGTH_SHORT).show()
             }
-            else if (binding.otpView.toString().length == 6) {
-                Toast.makeText(this, "Invalid OTP", Toast.LENGTH_SHORT).show()
-            }
+
             else {
                 verifyOtp()
             }
 
         })
 
+        setContentView(binding.root)
     }
 
-    private fun sendotp() {
+
+    private fun showOtp() {
+//        sendotp();
+
+
+    }
+
+
+
+    private fun sendotp(otp : String) {
         val params: MutableMap<String, String> = HashMap()
         ApiConfig.RequestToVolley({ result, response ->
             if (result) {
@@ -99,8 +101,52 @@ class OtpActivity : AppCompatActivity() {
                 Toast.makeText(this,"OTP Failed", Toast.LENGTH_SHORT).show()
 
             }
-        }, this, Constant.getOTPUrl("b45c58db6d261f2a",session!!.getData(Constant.MOBILE),"12345"), params, true)
+        }, this, Constant.getOTPUrl("b45c58db6d261f2a",session!!.getData(Constant.MOBILE),otp), params, true)
 
+    }
+    private fun otp() {
+        val params = HashMap<String, String>()
+        params[Constant.MOBILE] = session!!.getData(Constant.MOBILE)
+
+        ApiConfig.RequestToVolley({ result, response ->
+            if (result) {
+                try {
+                    val jsonObject = JSONObject(response)
+                    Log.d("SIGNUP_RES", response)
+                    if (jsonObject.getBoolean(Constant.SUCCESS)) {
+                        val jsonArray =
+                            jsonObject.getJSONArray(Constant.DATA)
+
+//                        session.setBoolean("is_logged_in", true)
+//                        session.setData(Constant.USER_ID, jsonArray.getJSONObject(0).getString(Constant.ID))
+//
+                 val  otp = jsonArray.getJSONObject(0).getString("otp")
+//
+                      //  Toast.makeText(this, otp, Toast.LENGTH_SHORT).show()
+                       // Toast.makeText(this, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show()
+
+                      sendotp(otp);
+
+
+                    } else {
+
+                        Toast.makeText(
+                            this,
+                            "" + jsonObject.getString(Constant.MESSAGE),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            } else {
+                Toast.makeText(
+                    this,
+                    java.lang.String.valueOf(response) + java.lang.String.valueOf(result),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }, this, Constant.OTP, params, true)
     }
 
     private fun verifyOtp() {
@@ -116,6 +162,8 @@ class OtpActivity : AppCompatActivity() {
         val params: MutableMap<String, String> = HashMap()
         params[Constant.MOBILE] = session!!.getData(Constant.MOBILE)
         params[Constant.DEVICE_ID] =  Constant.getDeviceId(activity)
+        params["otp"] = binding.otpView.otp.toString()
+        Toast.makeText(this, binding.otpView.otp.toString(), Toast.LENGTH_SHORT).show()
         ApiConfig.RequestToVolley({ result, response ->
             if (result) {
                 try {
