@@ -73,7 +73,7 @@ class HomeActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         val initConfig = InitConfig()
         // Set your font configurations
 
-        ZohoSalesIQ.init(application, "q%2FetVzn%2B7suBUISHrv%2B4MAcJ28PTqq9c8NCG12tbTKEPyGbNr2VZjxcURpltcVF97toxu8fzIm4%3D_in", "VXYedrQX8SnJI7EFCpu01dOAbrxweRFJ9LoYwisslnQwtg7o2gI5TDmhdHf%2BpskotIQR5eZeZIfAQHqtrJtg%2Fvrhon6CEgZuOhnVA8woxXjqz2ZMOkOvsw%3D%3D", initConfig, object : InitListener {
+        ZohoSalesIQ.init(application, "q%2FetVzn%2B7suBUISHrv%2B4MM5zHsAL4a1dOKYB2tz2WDqUDLMIygjwdSQOZJfKPQMJw0ZesvJqzxqA2OElz%2BHICEfHeNgKxY89MmM70uYQKySEia9eZjTmcA%3D%3D_in", "4%2Fd2z2OovwNUlhzjsAI%2Bk0DfMTZp4hGY%2Fn85U%2Fsq6yplNfH7TtW0rfJXO4V%2BSXjczU5Sqinj5cqzbGKBH2c3KJFrmHUQGflGlc49MR79%2BSFxjRQ8BNLjz86l1rMZtYOW1fJLMC8Kl6DtM%2BJfTJFfroseSg%2BjoxQU", initConfig, object : InitListener {
             override fun onInitSuccess() {
                 // fit place to show the chat launcher
                 ZohoSalesIQ.Launcher.show(ZohoSalesIQ.Launcher.VisibilityMode.ALWAYS)
