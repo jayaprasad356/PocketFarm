@@ -48,12 +48,10 @@ class MyteamFragment : Fragment() {
             binding.rlBonus1.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#02B153"))
             binding.rlBonus2.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#BFF8DE"))
             binding.rlBonus3.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#BFF8DE"))
-
+            binding.rvMyTeamB.visibility = View.GONE
             binding.tvBonus1.setTextColor(Color.parseColor("#ffffff"))
             binding.tvBonus2.setTextColor(Color.parseColor("#000000"))
             binding.tvBonus3.setTextColor(Color.parseColor("#000000"))
-            binding.rvMyTeamC.visibility = View.GONE
-            binding.rvMyTeamD.visibility = View.GONE
             referlist("b")
 
         }
@@ -62,12 +60,11 @@ class MyteamFragment : Fragment() {
             binding.rlBonus1.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#BFF8DE"))
             binding.rlBonus2.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#02B153"))
             binding.rlBonus3.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#BFF8DE"))
+            binding.rvMyTeamB.visibility = View.GONE
 
             binding.tvBonus1.setTextColor(Color.parseColor("#000000"))
             binding.tvBonus2.setTextColor(Color.parseColor("#ffffff"))
             binding.tvBonus3.setTextColor(Color.parseColor("#000000"))
-            binding.rvMyTeamB.visibility = View.GONE
-            binding.rvMyTeamD.visibility = View.GONE
             referlist("c")
         }
 
@@ -75,12 +72,11 @@ class MyteamFragment : Fragment() {
             binding.rlBonus1.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#BFF8DE"))
             binding.rlBonus2.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#BFF8DE"))
             binding.rlBonus3.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#02B153"))
+            binding.rvMyTeamB.visibility = View.GONE
 
             binding.tvBonus1.setTextColor(Color.parseColor("#000000"))
             binding.tvBonus2.setTextColor(Color.parseColor("#000000"))
             binding.tvBonus3.setTextColor(Color.parseColor("#ffffff"))
-            binding.rvMyTeamC.visibility = View.GONE
-            binding.rvMyTeamB.visibility = View.GONE
             referlist("d")
         }
 
@@ -117,11 +113,6 @@ class MyteamFragment : Fragment() {
         val linearLayoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         binding.rvMyTeamB.layoutManager = linearLayoutManager
 
-        val linearLayoutManager1 = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        binding.rvMyTeamC.layoutManager = linearLayoutManager1
-
-        val linearLayoutManager2 = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        binding.rvMyTeamD.layoutManager = linearLayoutManager2
 
 
 
@@ -137,7 +128,7 @@ class MyteamFragment : Fragment() {
     }
 
     private fun referlist(level: String) {
-        binding.rvMyTeamB.visibility = View.VISIBLE
+        binding.rvMyTeamB.visibility = View.GONE
         val params: MutableMap<String, String> = HashMap()
         params[com.app.pocketfarm.helper.Constant.USER_ID] = session.getData(com.app.pocketfarm.helper.Constant.USER_ID)
         params[com.app.pocketfarm.helper.Constant.LEVEL] = level
@@ -165,6 +156,7 @@ class MyteamFragment : Fragment() {
                    //  Toast.makeText(getActivity(), "1" + jsonObject.getString(Constant.MESSAGE).toString(), Toast.LENGTH_SHORT).show()
                         //important
                         val adapter = MyTeamAdapter(activity, myteam)
+                        binding.rvMyTeamB.visibility = View.VISIBLE
                         binding.rvMyTeamB.adapter = adapter
                         binding.animationView.visibility = View.GONE
 
@@ -172,6 +164,7 @@ class MyteamFragment : Fragment() {
                     } else {
                       //  DialogUtils.showCustomDialog(activity, ""+jsonObject.getString(Constant.MESSAGE))
                         binding.animationView.visibility = View.VISIBLE
+                        binding.rvMyTeamB.visibility = View.GONE
                     }
                 } catch (e: JSONException) {
                     e.printStackTrace()

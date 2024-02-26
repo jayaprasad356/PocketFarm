@@ -41,8 +41,8 @@ class MyTeamAdapter(
 
 //        holder.tvName.text = report.name
         holder.tvMobile.text = report.mobile
-        holder.tvJoinTime.text = report.registered_datetime
-        holder.tvReferrer.text = report.team_size
+        holder.tvJoinTime.text = report.registered_date
+        holder.tvReferrer.text = report.valid_team
         holder.tvAssets.text = report.total_assets
 
 

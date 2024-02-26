@@ -34,6 +34,7 @@ public class Constant {
     public static final String WITHDRAWALS = BaseUrl + "withdrawals.php";
     public static final String WITHDRAWAL_LIST = BaseUrl + "withdrawals_list.php";
     public static final String ACTIVATE_PLAN = BaseUrl + "activate_plan.php";
+    public static final String CLAIM = BaseUrl + "claim.php";
     public static final String RECHARGE_HISTORY = BaseUrl + "recharge_history.php";
 
     public static final String APPUPDATE= BaseUrl + "appupdate.php";

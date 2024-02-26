@@ -53,11 +53,20 @@ class ActivateplansAdapter(
         if (report.claim.equals("1")) {
             // Set background color to primary_color
             holder.btnActivate.setBackgroundColor(ContextCompat.getColor(context, R.color.primary_color))
+         //   apicall(report.id)
         } else {
             // Set background color to grey_extra_light
             holder.btnActivate.setBackgroundColor(ContextCompat.getColor(context, R.color.grey_extra_light))
         }
 
+
+        holder.btnActivate.setOnClickListener {
+            if (report.claim.equals("1")) {
+                apicall(report.plan_id)
+            } else {
+
+            }
+        }
 
 
 
@@ -74,11 +83,11 @@ class ActivateplansAdapter(
 
     }
 
-    private fun activatePlan(id: String?) {
+    private fun apicall(id: String?) {
         val session = Session(activity)
 
         val params: MutableMap<String, String> = HashMap()
-        params["user_id"] = "1"
+        params["user_id"] = session.getData(Constant.USER_ID)!!
         params["plan_id"] = id!!
         ApiConfig.RequestToVolley({ result, response ->
 
@@ -102,7 +111,7 @@ class ActivateplansAdapter(
                 }
             }
 
-        }, activity, Constant.ACTIVATE_PLAN, params, true)
+        }, activity, Constant.CLAIM, params, true)
 
 
     }

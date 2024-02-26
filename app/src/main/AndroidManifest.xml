@@ -58,8 +58,23 @@
             android:exported="false" />
         <activity
             android:name=".activity.ProfiledetailsActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http"/>
+                <data android:host="https://play.google.com/store/apps/details?id=com.app.pocketfarm"/>
+                <data
+                    android:host="https://play.google.com/store/apps/details?id=com.app.pocketfarm"
+                    android:scheme="https" />
+
+            </intent-filter>
+
+        </activity>
+
         <activity
             android:name=".activity.UpdateProfileActivity"
             android:exported="false" />

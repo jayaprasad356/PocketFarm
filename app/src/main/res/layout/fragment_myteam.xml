@@ -359,7 +359,7 @@
         android:layout_below="@+id/rlMyTeam"
         android:background="@drawable/bg_listmyteam"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:id="@+id/rlBonus"
@@ -472,24 +472,7 @@
             android:layout_height="match_parent"
             android:scrollbars="vertical"
             />
-        <androidx.recyclerview.widget.RecyclerView
-            android:visibility="gone"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_below="@+id/tvMember"
-            android:id="@+id/rvMyTeamC"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical"
-            />
-        <androidx.recyclerview.widget.RecyclerView
-            android:visibility="gone"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_below="@+id/tvMember"
-            android:id="@+id/rvMyTeamD"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical"
-            />
+
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/animationView"

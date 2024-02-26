@@ -2,6 +2,7 @@ package com.app.pocketfarm.model
 
 class MyPlan {
     var id: String? = null
+    var plan_id: String? = null
     var products: String? = null
     var price: String? = null
     var daily_income: String? = null
@@ -17,6 +18,7 @@ class MyPlan {
 
     constructor(
         id: String?,
+        plan_id: String?,
         products: String?,
         price: String?,
         daily_income: String?,
@@ -43,5 +45,6 @@ class MyPlan {
         this.income = income
         this.joined_date = joined_date
         this.claim = claim
+        this.plan_id = plan_id
     }
 }

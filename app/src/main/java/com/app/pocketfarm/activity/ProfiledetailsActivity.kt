@@ -3,6 +3,7 @@ package com.app.pocketfarm.activity
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
@@ -14,6 +15,8 @@ import com.app.pocketfarm.databinding.ActivityProfiledetailsBinding
 import com.app.pocketfarm.helper.ApiConfig
 import com.app.pocketfarm.helper.Constant
 import com.app.pocketfarm.helper.Session
+import com.google.firebase.dynamiclinks.ktx.dynamicLinks
+import com.google.firebase.ktx.Firebase
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.regex.Pattern
@@ -49,47 +52,70 @@ class ProfiledetailsActivity : AppCompatActivity() {
         activity = this
         session = Session(activity)
 
-        mobilenumber = session.getData(Constant.MOBILE)
+
+        Firebase.dynamicLinks
+            .getDynamicLink(intent)
+            .addOnSuccessListener(this) { pendingDynamicLinkData ->
+                // Get deep link from result (may be null if no link is found)
+                var deepLink: Uri? = null
+                if (pendingDynamicLinkData != null) {
+                    deepLink = pendingDynamicLinkData.link
+                    Log.d("TAG", "==> ${deepLink.toString()}")
+                    if (deepLink?.getBooleanQueryParameter("invitedby", false) == true)
+//                        binding. = deepLink.getQueryParameter("invitedby")
+
+                        Toast.makeText(this, "Invited by: ${deepLink.getQueryParameter("invitedby")}", Toast.LENGTH_SHORT).show()
+
+                        binding.etReferCode.setText(deepLink!!.getQueryParameter("invitedby"))
+
+                }
+                // Handle the deep link. For example, open the linked
+                // content, or apply promotional credit to the user's
+                // account.
+                // ...
+
+                mobilenumber = session.getData(Constant.MOBILE)
 
 
-        val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_item, indianStates)
-        binding.autoCompleteTextView.setAdapter(arrayAdapter)
+                val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_item, indianStates)
+                binding.autoCompleteTextView.setAdapter(arrayAdapter)
 
 
-        binding.btnSave.setOnClickListener {
-            if (binding.etName.text.toString().isEmpty()) {
-                binding.etName.error = "Enter Name"
-                return@setOnClickListener
-            } else if(binding.etName.text.toString().length <4){
-                binding.etName.error = "Name should be atleast 4 characters"
-                return@setOnClickListener
-            } else if (binding.etEmail.text.toString().isEmpty()) {
-                binding.etEmail.error = "Enter Email"
-                return@setOnClickListener
-            } else if (!Patterns.EMAIL_ADDRESS.matcher(binding.etEmail.text).matches()) {
-                binding.etEmail.error = "Enter a valid Email address"
-                return@setOnClickListener
-            } else if (binding.etAge.text.toString().isEmpty()) {
-                binding.etAge.error = "Enter Age"
-                return@setOnClickListener
-            } else if (binding.etCity.text.toString().isEmpty()) {
-                binding.etCity.error = "Enter City"
-                return@setOnClickListener
-            } else if (!indianStates.contains(binding.autoCompleteTextView.text.toString())) {
-                // Check if the entered state is not in the list of Indian states
-                binding.autoCompleteTextView.error = "Select a valid state"
-                return@setOnClickListener
-            } else if (binding.etReferCode.text.toString().isEmpty()) {
-                binding.etReferCode.error = "Enter Referral Code"
-                return@setOnClickListener
-            } else {
-                register()
+                binding.btnSave.setOnClickListener {
+                    if (binding.etName.text.toString().isEmpty()) {
+                        binding.etName.error = "Enter Name"
+                        return@setOnClickListener
+                    } else if (binding.etName.text.toString().length < 4) {
+                        binding.etName.error = "Name should be atleast 4 characters"
+                        return@setOnClickListener
+                    } else if (binding.etEmail.text.toString().isEmpty()) {
+                        binding.etEmail.error = "Enter Email"
+                        return@setOnClickListener
+                    } else if (!Patterns.EMAIL_ADDRESS.matcher(binding.etEmail.text).matches()) {
+                        binding.etEmail.error = "Enter a valid Email address"
+                        return@setOnClickListener
+                    } else if (binding.etAge.text.toString().isEmpty()) {
+                        binding.etAge.error = "Enter Age"
+                        return@setOnClickListener
+                    } else if (binding.etCity.text.toString().isEmpty()) {
+                        binding.etCity.error = "Enter City"
+                        return@setOnClickListener
+                    } else if (!indianStates.contains(binding.autoCompleteTextView.text.toString())) {
+                        // Check if the entered state is not in the list of Indian states
+                        binding.autoCompleteTextView.error = "Select a valid state"
+                        return@setOnClickListener
+                    } else if (binding.etReferCode.text.toString().isEmpty()) {
+                        binding.etReferCode.error = "Enter Referral Code"
+                        return@setOnClickListener
+                    } else {
+                        register()
+                    }
+                }
+
+                setContentView(binding.root)
+
+
             }
-        }
-
-        setContentView(binding.root)
-
-
     }
 
     private fun isValidEmail(email: String): Boolean {
