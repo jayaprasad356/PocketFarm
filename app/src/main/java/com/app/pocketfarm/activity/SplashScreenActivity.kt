@@ -3,18 +3,24 @@ package com.app.pocketfarm.activity
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.text.Html
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.app.pocketfarm.R
 import com.app.pocketfarm.helper.ApiConfig
+import com.app.pocketfarm.helper.ApiConfig.TAG
 import com.app.pocketfarm.helper.Constant
 import com.app.pocketfarm.helper.Session
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.firebase.Firebase
+import com.google.firebase.dynamiclinks.PendingDynamicLinkData
+import com.google.firebase.dynamiclinks.dynamicLinks
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -45,8 +51,8 @@ class SplashScreenActivity : AppCompatActivity() {
         setupViews()
 
 
-
     }
+
 
     private fun setupViews() {
         try {

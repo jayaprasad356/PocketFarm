@@ -15,6 +15,8 @@ import com.app.pocketfarm.databinding.ActivityProfiledetailsBinding
 import com.app.pocketfarm.helper.ApiConfig
 import com.app.pocketfarm.helper.Constant
 import com.app.pocketfarm.helper.Session
+import com.google.firebase.dynamiclinks.PendingDynamicLinkData
+import com.google.firebase.dynamiclinks.dynamicLinks
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 import com.google.firebase.ktx.Firebase
 import org.json.JSONException
@@ -53,28 +55,33 @@ class ProfiledetailsActivity : AppCompatActivity() {
         session = Session(activity)
 
 
-        Firebase.dynamicLinks
+        com.google.firebase.Firebase.dynamicLinks
             .getDynamicLink(intent)
-            .addOnSuccessListener(this) { pendingDynamicLinkData ->
+            .addOnSuccessListener(this) { pendingDynamicLinkData: PendingDynamicLinkData? ->
                 // Get deep link from result (may be null if no link is found)
                 var deepLink: Uri? = null
                 if (pendingDynamicLinkData != null) {
                     deepLink = pendingDynamicLinkData.link
-                    Log.d("TAG", "==> ${deepLink.toString()}")
-                    if (deepLink?.getBooleanQueryParameter("invitedby", false) == true)
-//                        binding. = deepLink.getQueryParameter("invitedby")
 
-                        Toast.makeText(this, "Invited by: ${deepLink.getQueryParameter("invitedby")}", Toast.LENGTH_SHORT).show()
+                    val extractedString = extractStringAfterLastSlash(deepLink.toString())
 
-                        binding.etReferCode.setText(deepLink!!.getQueryParameter("invitedby"))
-
+                    binding.etReferCode.setText(extractedString + "")
                 }
+
                 // Handle the deep link. For example, open the linked
                 // content, or apply promotional credit to the user's
                 // account.
                 // ...
+            }
+            .addOnFailureListener(this) { e -> Log.w(ApiConfig.TAG, "getDynamicLink:onFailure", e) }
 
-                mobilenumber = session.getData(Constant.MOBILE)
+
+
+
+
+
+
+        mobilenumber = session.getData(Constant.MOBILE)
 
 
                 val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_item, indianStates)
@@ -115,12 +122,20 @@ class ProfiledetailsActivity : AppCompatActivity() {
                 setContentView(binding.root)
 
 
-            }
+
     }
 
     private fun isValidEmail(email: String): Boolean {
         val pattern: Pattern = Patterns.EMAIL_ADDRESS
         return pattern.matcher(email).matches()
+    }
+    fun extractStringAfterLastSlash(url: String): String {
+        val lastSlashIndex = url.lastIndexOf('/')
+        return if (lastSlashIndex != -1 && lastSlashIndex < url.length - 1) {
+            url.substring(lastSlashIndex + 1)
+        } else {
+            "No characters found after the last slash."
+        }
     }
 
 
@@ -183,6 +198,7 @@ class ProfiledetailsActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+        super.onBackPressed()
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle("Exit")
         alertDialogBuilder.setMessage("Are you sure you want to exit?")

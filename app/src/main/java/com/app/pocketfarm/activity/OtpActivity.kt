@@ -140,11 +140,7 @@ class OtpActivity : AppCompatActivity() {
                     e.printStackTrace()
                 }
             } else {
-                Toast.makeText(
-                    this,
-                    java.lang.String.valueOf(response) + java.lang.String.valueOf(result),
-                    Toast.LENGTH_SHORT
-                ).show()
+
             }
         }, this, Constant.OTP, params, true)
     }
@@ -163,7 +159,6 @@ class OtpActivity : AppCompatActivity() {
         params[Constant.MOBILE] = session!!.getData(Constant.MOBILE)
         params[Constant.DEVICE_ID] =  Constant.getDeviceId(activity)
         params["otp"] = binding.otpView.otp.toString()
-        Toast.makeText(this, binding.otpView.otp.toString(), Toast.LENGTH_SHORT).show()
         ApiConfig.RequestToVolley({ result, response ->
             if (result) {
                 try {

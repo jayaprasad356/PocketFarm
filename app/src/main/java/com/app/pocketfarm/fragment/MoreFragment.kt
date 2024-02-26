@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,11 +17,14 @@ import com.app.pocketfarm.activity.UpdateProfileActivity
 import com.app.pocketfarm.activity.WithdrawalActivity
 import com.app.pocketfarm.databinding.FragmentMoreBinding
 import com.app.pocketfarm.helper.ApiConfig
+import com.google.firebase.dynamiclinks.ktx.component1
+import com.google.firebase.dynamiclinks.ktx.component2
 import com.app.pocketfarm.helper.Constant
 import com.app.pocketfarm.utils.DialogUtils
 import com.google.firebase.dynamiclinks.ktx.androidParameters
 import com.google.firebase.dynamiclinks.ktx.dynamicLink
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
+import com.google.firebase.dynamiclinks.shortLinkAsync
 import com.google.firebase.ktx.Firebase
 import org.json.JSONArray
 import org.json.JSONException
@@ -59,7 +63,7 @@ class MoreFragment : Fragment() {
 
             val refferalCode = session.getData(com.app.pocketfarm.helper.Constant.REFER_CODE)
             val dynamicLink = Firebase.dynamicLinks.dynamicLink {
-                link = Uri.parse("https://play.google.com/store/apps/details?id=com.app.pocketfarm/" + refferalCode)
+                link = Uri.parse("https://pocketfarm.in/" + refferalCode)
                 domainUriPrefix = "https://pocketfarm.page.link"
                 // Open links with this app on Android
                 androidParameters { }
@@ -68,12 +72,25 @@ class MoreFragment : Fragment() {
 
             val dynamicLinkUri = dynamicLink.uri
 
-            val shareBody = "" + dynamicLinkUri
-            val sharingIntent = android.content.Intent(android.content.Intent.ACTION_SEND)
-            sharingIntent.type = "text/plain"
-            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "WeAgri")
-            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody)
-            startActivity(android.content.Intent.createChooser(sharingIntent, "Share using"))
+            val shortLinkTask = Firebase.dynamicLinks.shortLinkAsync {
+                longLink = dynamicLinkUri
+            }.addOnSuccessListener { (shortLink, flowChartLink) ->
+                // You'll need to import com.google.firebase.dynamiclinks.ktx.component1 and
+                // com.google.firebase.dynamiclinks.ktx.component2
+
+                val shareBody = "" + shortLink
+                val sharingIntent = android.content.Intent(android.content.Intent.ACTION_SEND)
+                sharingIntent.type = "text/plain"
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "WeAgri")
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody)
+                startActivity(android.content.Intent.createChooser(sharingIntent, "Share using"))
+            }.addOnFailureListener {
+                // Error
+                Log.d("Error", it.message.toString())
+                // ...
+            }
+
+
         }
 
         binding.llScartchCard.setOnClickListener {
