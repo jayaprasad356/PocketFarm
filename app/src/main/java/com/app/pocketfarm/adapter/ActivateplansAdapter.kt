@@ -96,8 +96,6 @@ class ActivateplansAdapter(
                     val jsonObject = JSONObject(response)
                     if (jsonObject.getBoolean(com.app.pocketfarm.helper.Constant.SUCCESS)) {
                         val `object` = JSONObject(response)
-                        val jsonArray: JSONArray = `object`.getJSONArray(com.app.pocketfarm.helper.Constant.DATA)
-                        val g = Gson()
 
                         Toast.makeText(activity, "" + jsonObject.getString(com.app.pocketfarm.helper.Constant.MESSAGE).toString(), Toast.LENGTH_SHORT).show()
 

@@ -32,6 +32,8 @@ class SupportActivity : AppCompatActivity() {
             finish()
         }
 
+
+
         apicall()
 
         return setContentView(binding!!.root)
@@ -48,12 +50,21 @@ class SupportActivity : AppCompatActivity() {
                         val jsonArray: JSONArray = jsonObject.getJSONArray(Constant.DATA)
                         val whatsapplink  = jsonArray.getJSONObject(0).getString("whatsapp_group")
                         val Telegram  = jsonArray.getJSONObject(0).getString("telegram_channel")
+
+                        binding.cvTelegram.setOnClickListener {
+                            openTelegram(Telegram)
+
+                        }
+                        binding.cvWhatsapp.setOnClickListener {
+                            openWhatsApp(whatsapplink)
+
+                        }
                     } else {
                         DialogUtils.showCustomDialog(activity, ""+jsonObject.getString(Constant.MESSAGE))
                     }
                 } catch (e: JSONException) {
                     e.printStackTrace()
-                    Toast.makeText(activity, e.toString(), Toast.LENGTH_SHORT).show()
+
                 }
             }
         }, activity, Constant.SETTINGS, params, true)
@@ -63,14 +74,14 @@ class SupportActivity : AppCompatActivity() {
     }
 
     private fun openTelegram(telegram: String) {
-        val url = "https://t.me/$telegram"
+        val url = telegram;
         val i = Intent(Intent.ACTION_VIEW)
         i.data = Uri.parse(url)
         startActivity(i)
     }
 
     private fun openWhatsApp(whatsapplink: String) {
-        val url = "https://api.whatsapp.com/send?phone=$whatsapplink"
+        val url = whatsapplink
         val i = Intent(Intent.ACTION_VIEW)
         i.data = Uri.parse(url)
         startActivity(i)

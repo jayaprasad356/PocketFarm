@@ -94,7 +94,8 @@ class MoreFragment : Fragment() {
         }
 
         binding.llScartchCard.setOnClickListener {
-            startActivity(Intent(activity, com.app.pocketfarm.activity.ScartchcardActivity::class.java))
+            Toast.makeText(activity, "Coming soon", Toast.LENGTH_SHORT).show()
+            //startActivity(Intent(activity, com.app.pocketfarm.activity.ScartchcardActivity::class.java))
         }
 
 
