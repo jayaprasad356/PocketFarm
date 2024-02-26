@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.app.pocketfarm.R
 import com.app.pocketfarm.databinding.ActivityOtpBinding
+import com.app.pocketfarm.helper.ApiConfig
 import com.app.pocketfarm.helper.Constant
 import com.app.pocketfarm.helper.Session
 import com.app.pocketfarm.utils.DialogUtils
@@ -69,6 +70,7 @@ class OtpActivity : AppCompatActivity() {
 
 
     private fun showOtp() {
+        sendotp();
         binding.btnVerify.setOnClickListener(View.OnClickListener {
 
 
@@ -87,6 +89,20 @@ class OtpActivity : AppCompatActivity() {
 
     }
 
+    private fun sendotp() {
+        val params: MutableMap<String, String> = HashMap()
+        ApiConfig.RequestToVolley({ result, response ->
+            if (result) {
+                Toast.makeText(this,"OTP Sent Successfully", Toast.LENGTH_SHORT).show()
+            } else {
+                // Toast.makeText(this, , Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"OTP Failed", Toast.LENGTH_SHORT).show()
+
+            }
+        }, this, Constant.getOTPUrl("b45c58db6d261f2a",session!!.getData(Constant.MOBILE),"12345"), params, true)
+
+    }
+
     private fun verifyOtp() {
         //  binding.otpView =  000000
 
@@ -100,7 +116,7 @@ class OtpActivity : AppCompatActivity() {
         val params: MutableMap<String, String> = HashMap()
         params[Constant.MOBILE] = session!!.getData(Constant.MOBILE)
         params[Constant.DEVICE_ID] =  Constant.getDeviceId(activity)
-        com.app.pocketfarm.helper.ApiConfig.RequestToVolley({ result, response ->
+        ApiConfig.RequestToVolley({ result, response ->
             if (result) {
                 try {
                     val jsonObject = JSONObject(response)

@@ -17,6 +17,12 @@ public class Constant {
     public static final String LOGIN = BaseUrl + "login.php";
     public static final String REGISTER = BaseUrl + "register.php";
 
+    public static final  String getOTPUrl(String key,String mobile,String otp) {
+
+        return "https://api.authkey.io/request?authkey="+key+"&mobile="+mobile+"&country_code=91&sid=9214&otp="+otp+"&company=Pocket Farm";
+    }
+
+
     public static final String PLAN_LIST = BaseUrl + "plan_list.php";
     public static final String USER_PLAN_LIST = BaseUrl + "user_plan_list.php";
     public static final String TRANSACTIONS_LIST = BaseUrl + "transactions_list.php";
