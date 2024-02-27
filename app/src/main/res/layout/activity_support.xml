@@ -76,6 +76,50 @@
                     android:textSize="@dimen/_10sdp" />
 
 
+                <LinearLayout
+                    android:gravity="right"
+                    android:layout_gravity="right"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvSharewhatsapp"
+                        android:paddingHorizontal="@dimen/_18sdp"
+                        android:paddingVertical="@dimen/_5sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Share"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        android:drawablePadding="@dimen/_4sdp"
+                        android:drawableTint="@color/white"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/poppins_medium"
+                        android:layout_gravity="center"
+                        android:background="@drawable/rounded_corner"
+                        android:backgroundTint="@color/primary_color"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvJoinwhatsapp"
+                        android:paddingHorizontal="@dimen/_18sdp"
+                        android:paddingVertical="@dimen/_5sdp"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Join"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textAllCaps="false"
+                        android:background="@drawable/rounded_corner"
+                        android:backgroundTint="@color/secondary_color"
+                        />
+
+
+                </LinearLayout>
+
+
 
             </LinearLayout>
 
@@ -118,6 +162,51 @@
                     android:textSize="@dimen/_10sdp" />
 
 
+                <LinearLayout
+                    android:gravity="right"
+                    android:layout_gravity="right"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvSharetelegram"
+                        android:paddingHorizontal="@dimen/_18sdp"
+                        android:paddingVertical="@dimen/_5sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Share"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        android:drawablePadding="@dimen/_4sdp"
+                        android:drawableTint="@color/white"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/poppins_medium"
+                        android:layout_gravity="center"
+                        android:background="@drawable/rounded_corner"
+                        android:backgroundTint="@color/primary_color"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvJointelegram"
+                        android:paddingHorizontal="@dimen/_18sdp"
+                        android:paddingVertical="@dimen/_5sdp"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Join"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textAllCaps="false"
+                        android:background="@drawable/rounded_corner"
+                        android:backgroundTint="@color/secondary_color"
+                        />
+
+
+                </LinearLayout>
+
+
+
 
             </LinearLayout>
 
@@ -126,6 +215,8 @@
 
 
     </LinearLayout>
+
+
 
 
 </RelativeLayout>

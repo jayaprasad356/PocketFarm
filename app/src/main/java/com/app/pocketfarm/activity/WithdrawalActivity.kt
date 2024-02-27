@@ -16,9 +16,11 @@ import com.app.pocketfarm.adapter.WithdrawalAdapter
 import com.app.pocketfarm.model.Withdrawal
 import com.app.pocketfarm.R
 import com.app.pocketfarm.databinding.ActivityWithdrawalBinding
+import com.app.pocketfarm.helper.ApiConfig
 import com.app.pocketfarm.helper.Constant
 import com.app.pocketfarm.utils.DialogUtils
 import com.google.gson.Gson
+import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import java.lang.StrictMath.round
@@ -105,12 +107,42 @@ class WithdrawalActivity : AppCompatActivity() {
        // swipeRefreshLayout.setOnRefreshListener { history(swipeRefreshLayout) }
 
       //  history(swipeRefreshLayout)
-
+        apicall()
 
         setContentView(binding.root)
 
 
     }
+
+    private fun apicall() {
+        val params: MutableMap<String, String> = HashMap()
+        params[Constant.USER_ID] = session!!.getData(Constant.USER_ID)
+        ApiConfig.RequestToVolley({ result, response ->
+            if (result) {
+                try {
+                    val jsonObject = JSONObject(response)
+                    if (jsonObject.getBoolean(Constant.SUCCESS)) {
+                        val jsonArray: JSONArray = jsonObject.getJSONArray(Constant.DATA)
+
+                        val withdrawal_ins = jsonArray.getJSONObject(0).getString("withdrawal_ins")
+
+                       binding.tvWithdraw.text = withdrawal_ins
+
+
+                    } else {
+                        DialogUtils.showCustomDialog(activity, ""+jsonObject.getString(Constant.MESSAGE))
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+
+                }
+            }
+        }, activity, Constant.SETTINGS, params, true)
+
+        // Return a dummy intent, as the actual navigation is handled inside the callback
+
+    }
+
 
     private fun history(swipeRefreshLayout:SwipeRefreshLayout) {
     val params: MutableMap<String, String> = HashMap()
@@ -170,13 +202,13 @@ class WithdrawalActivity : AppCompatActivity() {
 //                        finish()
 
 
-                        Toast.makeText(this, "" + jsonObject.getString(com.app.pocketfarm.helper.Constant.MESSAGE), Toast.LENGTH_SHORT).show()
+                 //       Toast.makeText(this, "" + jsonObject.getString(com.app.pocketfarm.helper.Constant.MESSAGE), Toast.LENGTH_SHORT).show()
                         showCustomDialog()
                     } else
                     {
 
 
-                        Toast.makeText(this, "" + jsonObject.getString(com.app.pocketfarm.helper.Constant.MESSAGE), Toast.LENGTH_SHORT).show()
+                        DialogUtils.showCustomDialog(activity, ""+jsonObject.getString(Constant.MESSAGE))
                     }
                 } catch (e: JSONException) {
                     e.printStackTrace()

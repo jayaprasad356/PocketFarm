@@ -87,7 +87,10 @@ dependencies {
     implementation 'com.google.android.material:material:1.3.0-alpha03'
     implementation "com.airbnb.android:lottie:3.4.0"
 
+    implementation 'com.github.alexzhirkevich:custom-qr-generator:1.6.2'
 
+    // or new v2.0 alpha
+    implementation 'com.github.alexzhirkevich:custom-qr-generator:2.0.0-alpha01'
 
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'com.github.aabhasr1:OtpView:v1.1.2'

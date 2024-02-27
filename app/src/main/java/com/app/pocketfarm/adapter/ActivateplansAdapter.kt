@@ -1,6 +1,12 @@
 package com.app.pocketfarm.adapter
 
 import android.app.Activity
+import android.app.AlertDialog
+import android.graphics.Color
+import android.text.Html
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,8 +25,6 @@ import com.app.pocketfarm.R
 import com.app.pocketfarm.helper.ApiConfig
 import com.app.pocketfarm.helper.Constant
 import com.app.pocketfarm.helper.Session
-import com.google.gson.Gson
-import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -61,8 +65,9 @@ class ActivateplansAdapter(
 
 
         holder.btnActivate.setOnClickListener {
+
             if (report.claim.equals("1")) {
-                apicall(report.plan_id)
+                showCustomDialog(report.id,report.daily_quantity,report.unit,report.products,report.income)
             } else {
 
             }
@@ -94,14 +99,20 @@ class ActivateplansAdapter(
             if (result) {
                 try {
                     val jsonObject = JSONObject(response)
+                    val msg = jsonObject.getString(Constant.MESSAGE).toString()
                     if (jsonObject.getBoolean(com.app.pocketfarm.helper.Constant.SUCCESS)) {
                         val `object` = JSONObject(response)
 
-                        Toast.makeText(activity, "" + jsonObject.getString(com.app.pocketfarm.helper.Constant.MESSAGE).toString(), Toast.LENGTH_SHORT).show()
+
+
+                     //   showCustomDialog(msg)
+
+                    Toast.makeText(activity, "" + jsonObject.getString(com.app.pocketfarm.helper.Constant.MESSAGE).toString(), Toast.LENGTH_SHORT).show()
 
 
                     } else {
-                        Toast.makeText(activity, "" + jsonObject.getString(com.app.pocketfarm.helper.Constant.MESSAGE).toString(), Toast.LENGTH_SHORT).show()
+
+                   Toast.makeText(activity, "" + jsonObject.getString(com.app.pocketfarm.helper.Constant.MESSAGE).toString(), Toast.LENGTH_SHORT).show()
                     }
                 } catch (e: JSONException) {
                     e.printStackTrace()
@@ -141,4 +152,37 @@ class ActivateplansAdapter(
 
         }
     }
+
+
+    private fun showCustomDialog(
+        id: String?,
+        dailyQuantity: String?,
+        unit: String?,
+        products: String?,
+        income: String?
+    ) {
+        val builder = AlertDialog.Builder(activity)
+        val dialogView: View = activity.layoutInflater.inflate(R.layout.active_plan_dialog, null)
+
+        builder.setView(dialogView)
+        val dialog = builder.create()
+        val tvMessage = dialogView.findViewById<TextView>(R.id.tvMessage)
+        val  btnOk = dialogView.findViewById<Button>(R.id.btnOk)
+
+
+        val formattedIncome = "<font color='#00B251'>Rs.</font> "+" <font color='#00B251'>$income</font>"
+        val message = "$dailyQuantity $unit $products = $formattedIncome"
+        tvMessage.text = Html.fromHtml(message, Html.FROM_HTML_MODE_COMPACT)
+
+
+        btnOk.setOnClickListener {
+            apicall(id)
+            dialog.dismiss()
+        }
+
+
+        dialog.show()
+
+    }
+
 }

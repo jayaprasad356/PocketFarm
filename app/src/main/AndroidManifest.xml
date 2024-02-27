@@ -20,6 +20,11 @@
         android:theme="@style/Theme.Weagri"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+        <activity
+            android:name=".activity.InviteActivity"
+            android:exported="false" />
+
         <activity
             android:name=".activity.ScartchcardActivity"
             android:exported="false" />

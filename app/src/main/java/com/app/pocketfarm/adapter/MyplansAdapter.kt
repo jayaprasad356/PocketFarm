@@ -48,7 +48,12 @@ class MyplansAdapter(
         val holder: ItemHolder = holderParent as ItemHolder
         val report: MyPlan = myplan[position]
 
-        holder.cardView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.context, R.anim.recycler_anim1))
+        holder.cardView.startAnimation(
+            AnimationUtils.loadAnimation(
+                holder.itemView.context,
+                R.anim.recycler_anim1
+            )
+        )
 
 
         holder.btnActivate.setOnClickListener {
@@ -56,16 +61,16 @@ class MyplansAdapter(
 
         }
 
-            holder.tvplanName.text = report.products
+        holder.tvplanName.text = report.products
 
         holder.tvplan.text = "₹ " + report.price
         holder.tvDailyIncome.text = "₹ " + report.daily_income
         holder.tvTotalIncome.text = "₹ " + report.monthly_income
         holder.tvInvitebonus.text = "₹ " + report.invite_bonus
-        holder.tvQuantity.text = report.daily_quantity +" " +report.unit
-       // holder.tvValidity.text = report.validity + " days"
-        Glide.with(activity).load(report.image).placeholder(R.drawable.sample_agri).into(holder.ivImage)
-
+        holder.tvQuantity.text = report.daily_quantity + " " + report.unit
+        // holder.tvValidity.text = report.validity + " days"
+        Glide.with(activity).load(report.image).placeholder(R.drawable.sample_agri)
+            .into(holder.ivImage)
 
 
     }
@@ -111,15 +116,16 @@ class MyplansAdapter(
 
     internal class ItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvplan: TextView
-        val tvDailyIncome : TextView
-        val tvTotalIncome : TextView
-        val tvInvitebonus : TextView
-      //  val tvValidity : TextView
-        val  ivImage : ImageView
-        val  btnActivate : Button
-        val cardView : CardView
-        val tvplanName : TextView
-        val tvQuantity : TextView
+        val tvDailyIncome: TextView
+        val tvTotalIncome: TextView
+        val tvInvitebonus: TextView
+
+        //  val tvValidity : TextView
+        val ivImage: ImageView
+        val btnActivate: Button
+        val cardView: CardView
+        val tvplanName: TextView
+        val tvQuantity: TextView
 
 
         init {
@@ -147,6 +153,7 @@ class MyplansAdapter(
         val tvMessage = dialogView.findViewById<TextView>(R.id.tvMessage)
         val btnOk = dialogView.findViewById<Button>(R.id.btnOk)
         val avRecharge = dialogView.findViewById<LottieAnimationView>(R.id.avRecharge)
+        val avRefer = dialogView.findViewById<LottieAnimationView>(R.id.avRefer)
 
 
         if (status.equals("Production Started Successfully")) {
@@ -167,7 +174,6 @@ class MyplansAdapter(
             avRecharge.visibility = View.GONE
             btnOk.setOnClickListener {
                 dialog.dismiss()
-
             }
 
         } else if (status.equals("Insufficient balance to start this production")) {
@@ -182,9 +188,24 @@ class MyplansAdapter(
                 val intent = Intent(activity, RechargeActivity::class.java)
                 activity.startActivity(intent)
             }
+
+
+        } else {
+            ivSuccess.setImageResource(R.drawable.warning)
+            tvStatus.text = "Your not eligible"
+            tvMessage.text = status
+            btnOk.visibility = View.GONE
+            avRecharge.visibility = View.GONE
+            avRefer.visibility = View.VISIBLE
+            ivSuccess.visibility = View.GONE
+            btnOk.setOnClickListener {
+                dialog.dismiss()
+            }
+
         }
+            dialog.show()
 
-
-        dialog.show()
     }
+
 }
+

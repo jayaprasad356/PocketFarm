@@ -11,34 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:layout_centerHorizontal="true"
-        android:id="@+id/avRecharge"
-        android:layout_width="@dimen/_150sdp"
-        android:layout_height="@dimen/_150sdp"
-        app:lottie_rawRes="@raw/recharge"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        />
-    <com.airbnb.lottie.LottieAnimationView
-        android:visibility="gone"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/avRefer"
-        android:layout_width="@dimen/_150sdp"
-        android:layout_height="@dimen/_150sdp"
-        app:lottie_rawRes="@raw/refer"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        />
-
-    <ImageView
-        android:id="@+id/ivSuccess"
-        android:layout_centerHorizontal="true"
-        android:layout_width="@dimen/_150sdp"
-        android:layout_height="@dimen/_150sdp"
-        />
+        <ImageView
+            android:id="@+id/ivSuccess"
+            android:layout_centerHorizontal="true"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:background="@drawable/market"
+            />
 
     </RelativeLayout>
 
@@ -49,8 +28,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_10sdp"
-        android:text=""
-        android:fontFamily="@font/poppins_semibold"
+        android:text="Current market price"
+        android:fontFamily="@font/poppins_medium"
         android:textColor="@color/black"
         android:textSize="@dimen/_14sdp" />
 
@@ -63,7 +42,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_10sdp"
         android:text=""
-        android:textColor="#273240"
         android:textAlignment="center"
         android:fontFamily="@font/poppins_medium"
         android:textSize="@dimen/_12sdp" />
@@ -76,6 +54,7 @@
         android:layout_below="@+id/tvMessage"
         android:backgroundTint="@color/primary_color"
         android:fontFamily="@font/poppins_medium"
+        android:text="Confirm to sell"
         />
 
 </RelativeLayout>

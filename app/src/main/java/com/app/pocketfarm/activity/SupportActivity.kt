@@ -34,6 +34,7 @@ class SupportActivity : AppCompatActivity() {
 
 
 
+
         apicall()
 
         return setContentView(binding!!.root)
@@ -48,19 +49,39 @@ class SupportActivity : AppCompatActivity() {
                     val jsonObject = JSONObject(response)
                     if (jsonObject.getBoolean(Constant.SUCCESS)) {
                         val jsonArray: JSONArray = jsonObject.getJSONArray(Constant.DATA)
-                        val whatsapplink  = jsonArray.getJSONObject(0).getString("whatsapp_group")
-                        val Telegram  = jsonArray.getJSONObject(0).getString("telegram_channel")
+                        val whatsapplink = jsonArray.getJSONObject(0).getString("whatsapp_group")
+                        val Telegram = jsonArray.getJSONObject(0).getString("telegram_channel")
 
-                        binding.cvTelegram.setOnClickListener {
+                        binding.tvJointelegram.setOnClickListener {
                             openTelegram(Telegram)
 
                         }
-                        binding.cvWhatsapp.setOnClickListener {
+                        binding.tvJoinwhatsapp.setOnClickListener {
                             openWhatsApp(whatsapplink)
 
                         }
+
+                        binding.tvSharetelegram.setOnClickListener {
+                            val sendIntent = Intent()
+                            sendIntent.action = Intent.ACTION_SEND
+                            sendIntent.putExtra(Intent.EXTRA_TEXT, Telegram)
+                            sendIntent.type = "text/plain"
+                            startActivity(sendIntent)
+                        }
+
+                        binding.tvSharewhatsapp.setOnClickListener {
+                            val sendIntent = Intent()
+                            sendIntent.action = Intent.ACTION_SEND
+                            sendIntent.putExtra(Intent.EXTRA_TEXT, whatsapplink)
+                            sendIntent.type = "text/plain"
+                            startActivity(sendIntent)
+                        }
+
                     } else {
-                        DialogUtils.showCustomDialog(activity, ""+jsonObject.getString(Constant.MESSAGE))
+                        DialogUtils.showCustomDialog(
+                            activity,
+                            "" + jsonObject.getString(Constant.MESSAGE)
+                        )
                     }
                 } catch (e: JSONException) {
                     e.printStackTrace()

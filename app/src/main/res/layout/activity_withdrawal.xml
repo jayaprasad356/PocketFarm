@@ -194,13 +194,13 @@
                     android:textAlignment="textStart"
                     android:fontFamily="@font/poppins_semibold"
                     android:textSize="@dimen/_10sdp"
-                    android:layout_gravity="center"
                     android:inputType="number"
                     android:background="@drawable/edit_text_bg"
                     />
 
             </LinearLayout>
             <LinearLayout
+                android:visibility="gone"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:paddingHorizontal="@dimen/_10sdp"
                 android:background="@drawable/edittext"
@@ -237,6 +237,7 @@
 
             </LinearLayout>
             <LinearLayout
+                android:visibility="gone"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:paddingHorizontal="@dimen/_10sdp"
                 android:background="@drawable/edittext"
@@ -297,12 +298,12 @@
 
 
     <TextView
+        android:id="@+id/tvWithdraw"
         android:layout_alignParentBottom="true"
         android:padding="@dimen/_10sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_medium"
-        android:text="@string/withdrwal_instraction"
         android:textAlignment="textStart"
         android:textColor="@color/gold_color"
         android:textSize="@dimen/_10sdp"

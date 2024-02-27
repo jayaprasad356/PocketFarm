@@ -2,14 +2,13 @@ package com.app.pocketfarm.fragment
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.app.pocketfarm.activity.InviteActivity
 import com.app.pocketfarm.activity.HomeActivity
 import com.app.pocketfarm.activity.MyProductionActivity
 import com.app.pocketfarm.activity.TransactionActivity
@@ -17,15 +16,8 @@ import com.app.pocketfarm.activity.UpdateProfileActivity
 import com.app.pocketfarm.activity.WithdrawalActivity
 import com.app.pocketfarm.databinding.FragmentMoreBinding
 import com.app.pocketfarm.helper.ApiConfig
-import com.google.firebase.dynamiclinks.ktx.component1
-import com.google.firebase.dynamiclinks.ktx.component2
 import com.app.pocketfarm.helper.Constant
 import com.app.pocketfarm.utils.DialogUtils
-import com.google.firebase.dynamiclinks.ktx.androidParameters
-import com.google.firebase.dynamiclinks.ktx.dynamicLink
-import com.google.firebase.dynamiclinks.ktx.dynamicLinks
-import com.google.firebase.dynamiclinks.shortLinkAsync
-import com.google.firebase.ktx.Firebase
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -61,7 +53,9 @@ class MoreFragment : Fragment() {
 
         binding.llInvite.setOnClickListener {
 
-            val refferalCode = session.getData(com.app.pocketfarm.helper.Constant.REFER_CODE)
+            startActivity(Intent(activity, InviteActivity::class.java))
+
+            /*val refferalCode = session.getData(com.app.pocketfarm.helper.Constant.REFER_CODE)
             val dynamicLink = Firebase.dynamicLinks.dynamicLink {
                 link = Uri.parse("https://pocketfarm.in/" + refferalCode)
                 domainUriPrefix = "https://pocketfarm.page.link"
@@ -88,7 +82,7 @@ class MoreFragment : Fragment() {
                 // Error
                 Log.d("Error", it.message.toString())
                 // ...
-            }
+            }*/
 
 
         }

@@ -50,11 +50,20 @@
             android:textColor="@color/black"
             />
 
+        <ImageView
+            android:layout_marginTop="@dimen/_50sdp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tvName"
+            android:id="@+id/iv_qrcode"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"/>
+
 
 
         <LinearLayout
             android:layout_marginTop="@dimen/_10sdp"
-            android:layout_below="@+id/tvName"
+            android:layout_below="@+id/iv_qrcode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
