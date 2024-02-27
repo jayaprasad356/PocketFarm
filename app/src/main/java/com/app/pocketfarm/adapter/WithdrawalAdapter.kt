@@ -35,19 +35,23 @@ class WithdrawalAdapter(
 
 
 
-        holder.tvTitle.text = "Withdrawal"
         holder.tvDate.text = report.datetime
         holder.tvAmount.text = "₹" + report.amount
 
         val status = report.status
 
         if (status == "0") {
-            holder.tvStatus.setTextColor(activitys.resources.getColor(R.color.red))
-            holder.tvStatus.text = "Pending"
+            holder.tvStatus.setTextColor(activitys.resources.getColor(R.color.blue_color))
+            holder.tvStatus.text = "Bank Processing"
         }
         else if (status == "1") {
-            holder.tvStatus.setTextColor(activitys.resources.getColor(R.color.primary_color))
-            holder.tvStatus.text = "Approved"
+            holder.tvStatus.setTextColor(activitys.resources.getColor(R.color.green))
+            holder.tvStatus.text = "Paid"
+        }
+        else{
+            holder.tvStatus.setTextColor(activitys.resources.getColor(R.color.red))
+            holder.tvStatus.text = "Cancelled"
+
         }
 
 
@@ -63,7 +67,6 @@ class WithdrawalAdapter(
     }
 
     internal class ItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvTitle: TextView
         val tvDate: TextView
         val  tvAmount: TextView
         val tvStatus: TextView
@@ -72,7 +75,6 @@ class WithdrawalAdapter(
 
 
         init {
-            tvTitle = itemView.findViewById(R.id.tvTitle)
             tvDate = itemView.findViewById(R.id.tvDate)
             tvAmount = itemView.findViewById(R.id.tvAmount)
             tvStatus = itemView.findViewById(R.id.tvStatus)

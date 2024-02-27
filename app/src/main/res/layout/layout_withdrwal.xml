@@ -50,11 +50,12 @@
             android:orientation="vertical"
             >
             <TextView
-                android:id="@+id/tvTitle"
+                android:id="@+id/tvStatus"
+                android:layout_marginTop="@dimen/_2sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Withdraw"
-                android:textColor="@color/black"
+                android:text="pending"
+                android:textColor="@color/red"
                 android:textSize="@dimen/_12sdp"
                 android:fontFamily="@font/poppins_medium"
                 />
@@ -92,16 +93,7 @@
 
                 />
 
-            <TextView
-                android:id="@+id/tvStatus"
-                android:layout_marginTop="@dimen/_2sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="pending"
-                android:textColor="@color/red"
-                android:textSize="@dimen/_12sdp"
-                android:fontFamily="@font/poppins_medium"
-                />
+
 
 
 

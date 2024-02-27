@@ -9,7 +9,8 @@ import android.telephony.TelephonyManager;
 import org.jetbrains.annotations.Nullable;
 
 public class Constant {
-    public static final String MainBaseUrl = "http://weagri.graymatterworks.com/";
+    //public static final String MainBaseUrl = "http://weagri.graymatterworks.com/";
+    public static final String MainBaseUrl = "https://admin.pocketfarm.in/";
 
     public static final String BaseUrl = MainBaseUrl + "api/";
 
@@ -30,6 +31,7 @@ public class Constant {
     public static final String USER_DETAILS = BaseUrl + "user_details.php";
     public static final String SCRATCH_CARD= BaseUrl + "scratch_card.php";
     public static final String SETTINGS= BaseUrl + "settings.php";
+    public static final String UPDATE_BANK= BaseUrl + "update_bank_details.php";
     public static final String MY_TEAM = BaseUrl + "my_team.php";
     public static final String TEAM_LIST = BaseUrl + "team_list.php";
     public static final String UPDATE_PROFILE = BaseUrl + "update_profile.php";

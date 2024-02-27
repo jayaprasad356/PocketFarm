@@ -6,6 +6,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
+import android.text.Html
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
@@ -126,7 +127,8 @@ class WithdrawalActivity : AppCompatActivity() {
 
                         val withdrawal_ins = jsonArray.getJSONObject(0).getString("withdrawal_ins")
 
-                       binding.tvWithdraw.text = withdrawal_ins
+                        val withdrawalHtml = Html.fromHtml(withdrawal_ins, Html.FROM_HTML_MODE_COMPACT)
+                        binding.tvWithdraw.text = withdrawalHtml
 
 
                     } else {
@@ -194,16 +196,16 @@ class WithdrawalActivity : AppCompatActivity() {
             if (result) {
                 try {
                     val jsonObject = JSONObject(response)
-                    Log.d("SIGNUP_RES", response)
                     if (jsonObject.getBoolean(com.app.pocketfarm.helper.Constant.SUCCESS)) {
                         val jsonArray = jsonObject.getJSONArray(com.app.pocketfarm.helper.Constant.DATA)
-
-//                        startActivity(Intent(this, HomeActivity::class.java))
-//                        finish()
-
-
-                 //       Toast.makeText(this, "" + jsonObject.getString(com.app.pocketfarm.helper.Constant.MESSAGE), Toast.LENGTH_SHORT).show()
-                        showCustomDialog()
+                        session.setData(
+                            com.app.pocketfarm.helper.Constant.BALANCE, jsonArray.getJSONObject(0).getString(
+                                com.app.pocketfarm.helper.Constant.BALANCE))
+                        session.setData(
+                            com.app.pocketfarm.helper.Constant.TOTAL_WITHDRAWAL, jsonArray.getJSONObject(0).getString(
+                                com.app.pocketfarm.helper.Constant.TOTAL_WITHDRAWAL))
+                        Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show()
+                        moveToHomeActivity();
                     } else
                     {
 
@@ -235,7 +237,7 @@ class WithdrawalActivity : AppCompatActivity() {
     }
 
     private fun moveToHomeActivity() {
-        startActivity(Intent(this, WithdrawalStatusActivity::class.java))
+        startActivity(Intent(this, HomeActivity::class.java))
         finish()
     }
 

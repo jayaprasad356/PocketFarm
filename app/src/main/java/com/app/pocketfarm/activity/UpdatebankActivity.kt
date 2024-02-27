@@ -83,10 +83,9 @@ class UpdatebankActivity : AppCompatActivity() {
                 try {
                     val jsonObject = JSONObject(response)
                     if (jsonObject.getBoolean(Constant.SUCCESS)) {
-                        val jsonArray: JSONArray = jsonObject.getJSONArray(Constant.DATA)
 
 
-                        Toast.makeText(activity, "Bank details updated successfully", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show()
                         session.setData(Constant.BANK, binding.etBankName.text.toString())
                         session.setData(Constant.BRANCH, binding.etBranchName.text.toString())
                         session.setData(Constant.HOLDER_NAME, binding.etHolderName.text.toString())
@@ -104,7 +103,7 @@ class UpdatebankActivity : AppCompatActivity() {
 
                 }
             }
-        }, activity, Constant.SETTINGS, params, true)
+        }, activity, Constant.UPDATE_BANK, params, true)
 
         // Return a dummy intent, as the actual navigation is handled inside the callback
 

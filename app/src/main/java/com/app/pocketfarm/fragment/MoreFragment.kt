@@ -94,7 +94,7 @@ class MoreFragment : Fragment() {
 
 
         binding.tvMobile.text = session.getData(com.app.pocketfarm.helper.Constant.MOBILE)
-        binding.tvReferralCode.text = session.getData(com.app.pocketfarm.helper.Constant.REFER_CODE)
+        binding.tvName.text = session.getData(com.app.pocketfarm.helper.Constant.NAME)
 
         binding.cvWithdraw.setOnClickListener {
             startActivity(Intent(activity, WithdrawalActivity::class.java))

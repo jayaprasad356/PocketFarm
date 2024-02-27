@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Acitivity.InviteActivity">
+    tools:context=".activity.InviteActivity">
 
 
     <RelativeLayout
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:fontFamily="@font/poppins_regular"
-            android:text="Invite"
+            android:text="Refer friends"
             android:textColor="@color/black"
             android:textSize="@dimen/_14sdp" />
 
@@ -42,11 +42,12 @@
 
         <TextView
             android:id="@+id/tvName"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Invite  your friends get  bonus"
+            android:text="Scan QR code to join"
             android:fontFamily="@font/poppins_regular"
             android:textSize="@dimen/_14sdp"
+            android:layout_centerHorizontal="true"
             android:textColor="@color/black"
             />
 
