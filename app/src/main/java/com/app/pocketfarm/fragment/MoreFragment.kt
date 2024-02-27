@@ -229,6 +229,18 @@ class MoreFragment : Fragment() {
                         session!!.setData(
                             Constant.TOTAL_ASSETS, jsonArray.getJSONObject(0).getString(
                                 Constant.TOTAL_ASSETS))
+                        session!!.setData(
+                            Constant.BANK, jsonArray.getJSONObject(0).getString(
+                                Constant.BANK))
+                        session!!.setData(
+                            Constant.BRANCH, jsonArray.getJSONObject(0).getString(
+                                Constant.BRANCH))
+                        session!!.setData(Constant.IFSC, jsonArray.getJSONObject(0).getString(
+                                Constant.IFSC))
+                           session!!.setData(Constant.ACCOUNT_NUM, jsonArray.getJSONObject(0).getString(
+                                Constant.ACCOUNT_NUM))
+                        session!!.setData(Constant.HOLDER_NAME, jsonArray.getJSONObject(0).getString(
+                                Constant.HOLDER_NAME))
 
 
 
@@ -238,6 +250,7 @@ class MoreFragment : Fragment() {
                         binding.tvTotalAssests.text = "₹ " + session.getData(com.app.pocketfarm.helper.Constant.TOTAL_ASSETS)
                         binding.tvTotalWithdrawal.text = "₹ " + session.getData(com.app.pocketfarm.helper.Constant.TOTAL_WITHDRAWAL)
                         binding.tvTeamIncome.text = "₹ " + session.getData(com.app.pocketfarm.helper.Constant.TEAM_INCOME)
+
 
 
 

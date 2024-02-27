@@ -53,8 +53,7 @@ class TransactionActivity : AppCompatActivity() {
                         val `object` = JSONObject(response)
                         val jsonArray: JSONArray = `object`.getJSONArray(com.app.pocketfarm.helper.Constant.DATA)
                         val g = Gson()
-                        val transaction: java.util.ArrayList<Transaction> =
-                            java.util.ArrayList<Transaction>()
+                        val transaction: java.util.ArrayList<Transaction> = java.util.ArrayList<Transaction>()
                         for (i in 0 until jsonArray.length()) {
                             val jsonObject1 = jsonArray.getJSONObject(i)
                             if (jsonObject1 != null) {

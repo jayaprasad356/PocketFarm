@@ -1,10 +1,19 @@
 package com.app.pocketfarm.activity
 
 import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.app.pocketfarm.databinding.ActivityUpdatebankBinding
+import com.app.pocketfarm.helper.ApiConfig
+import com.app.pocketfarm.helper.Constant
 import com.app.pocketfarm.helper.Session
+import com.app.pocketfarm.utils.DialogUtils
+import org.json.JSONArray
+import org.json.JSONException
+import org.json.JSONObject
 
 class UpdatebankActivity : AppCompatActivity() {
 
@@ -22,9 +31,19 @@ class UpdatebankActivity : AppCompatActivity() {
             onBackPressed()
         }
 
+        binding.etBankName.setText(session.getData(Constant.BANK))
+        binding.etBranchName.setText(session.getData(Constant.BRANCH))
+        binding.etHolderName.setText(session.getData(Constant.HOLDER_NAME))
+        binding.etIFSCCode.setText(session.getData(Constant.IFSC))
+        binding.etAccountNumber.setText(session.getData(Constant.ACCOUNT_NUM))
+
         binding.btnBankDetails.setOnClickListener {
             if (binding.etHolderName.text.toString().isEmpty()) {
                 binding.etHolderName.error = "Please enter account holder name"
+                binding.etHolderName.requestFocus()
+            }
+            else if (binding.etHolderName.text.toString().length < 5){
+                binding.etHolderName.error = "please enter 5 characters"
                 binding.etHolderName.requestFocus()
             }
             else if (binding.etAccountNumber.text.toString().isEmpty()) {
@@ -44,10 +63,51 @@ class UpdatebankActivity : AppCompatActivity() {
             }
 
             else {
-                //                updateBankDetails()
+                              updateBankDetails()
             }
         }
         setContentView(binding.root)
 
     }
+
+    private fun updateBankDetails() {
+        val params: MutableMap<String, String> = HashMap()
+        params[Constant.USER_ID] = session!!.getData(Constant.USER_ID)
+        params[Constant.HOLDER_NAME] = binding.etHolderName.text.toString()
+        params[Constant.ACCOUNT_NUM] = binding.etAccountNumber.text.toString()
+        params[Constant.IFSC] = binding.etIFSCCode.text.toString()
+        params[Constant.BANK] = binding.etBankName.text.toString()
+        params[Constant.BRANCH] = binding.etBranchName.text.toString()
+        ApiConfig.RequestToVolley({ result, response ->
+            if (result) {
+                try {
+                    val jsonObject = JSONObject(response)
+                    if (jsonObject.getBoolean(Constant.SUCCESS)) {
+                        val jsonArray: JSONArray = jsonObject.getJSONArray(Constant.DATA)
+
+
+                        Toast.makeText(activity, "Bank details updated successfully", Toast.LENGTH_SHORT).show()
+                        session.setData(Constant.BANK, binding.etBankName.text.toString())
+                        session.setData(Constant.BRANCH, binding.etBranchName.text.toString())
+                        session.setData(Constant.HOLDER_NAME, binding.etHolderName.text.toString())
+                        session.setData(Constant.IFSC, binding.etIFSCCode.text.toString())
+                        session.setData(Constant.ACCOUNT_NUM, binding.etAccountNumber.text.toString())
+                        onBackPressed()
+
+
+
+                    } else {
+                        DialogUtils.showCustomDialog(activity, ""+jsonObject.getString(Constant.MESSAGE))
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+
+                }
+            }
+        }, activity, Constant.SETTINGS, params, true)
+
+        // Return a dummy intent, as the actual navigation is handled inside the callback
+
+    }
+
 }

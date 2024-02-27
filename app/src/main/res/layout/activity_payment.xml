@@ -48,13 +48,32 @@
 
 
 
+
+
+
+
         <ImageView
+            android:id="@+id/ivQr"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="@dimen/_100sdp"
             android:background="@drawable/qr_bharath"
             android:layout_gravity="center"
             />
+
+            <TextView
+                android:id="@+id/tvOpen"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Open"
+                android:textSize="@dimen/_20sdp"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/blue_color"
+                />
+
+
+
 
 
         <TextView
@@ -77,6 +96,7 @@
 
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDemoVideo"
             app:cornerRadius="@dimen/_10sdp"
             android:paddingVertical="@dimen/_10sdp"
             android:layout_width="match_parent"
@@ -139,9 +159,25 @@
         </com.google.android.material.card.MaterialCardView>
 
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnUpload"
+            android:enabled="false"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:cornerRadius="@dimen/_10sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/primary_color"
+            android:text="Upload"
+            android:textAllCaps="false"
+            android:fontFamily="@font/poppins_medium"
+            />
+
+
 
 
         <RelativeLayout
+            android:id="@+id/rlHistory"
             android:layout_marginTop="@dimen/_20sdp"
             android:background="@drawable/history_payment"
             android:layout_width="match_parent"
@@ -156,63 +192,14 @@
                 android:weightSum="2"
                 >
 
-
-                <LinearLayout
-                    android:layout_weight="0.7"
-                    android:orientation="vertical"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvHistory"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Last Recharge"
-                        android:fontFamily="@font/poppins_medium"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_12sdp"
-                        />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="22- 01- 2023  11:30 am"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_10sdp"
-                        />
+                    android:layout_height="wrap_content"/>
 
 
 
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_weight="1.3"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
-                    <TextView
-                        android:gravity="right"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="₹2500"
-                        android:fontFamily="@font/inter_semibold"
-                        android:textColor="@color/primary_color"
-                        android:textSize="@dimen/_22sdp"
-                        />
-
-                    <TextView
-                        android:gravity="right"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Pending"
-                        android:fontFamily="@font/poppins_medium"
-                        android:textColor="@color/red"
-                        android:textSize="@dimen/_14sdp"
-                        />
-
-
-
-                </LinearLayout>
 
 
 
@@ -224,19 +211,7 @@
 
 
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnUpload"
-            android:enabled="false"
-            android:layout_marginTop="@dimen/_10sdp"
-            app:cornerRadius="@dimen/_10sdp"
-            android:paddingVertical="@dimen/_10sdp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/primary_color"
-            android:text="Upload"
-            android:textAllCaps="false"
-            android:fontFamily="@font/poppins_medium"
-            />
+
 
     </LinearLayout>
 

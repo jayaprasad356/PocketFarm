@@ -12,11 +12,19 @@ import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.canhub.cropper.CropImage
 import com.app.pocketfarm.R
+import com.app.pocketfarm.adapter.RechargeHistoryAdapter
+import com.app.pocketfarm.adapter.TransactionAdapter
 import com.app.pocketfarm.databinding.ActivityPaymentBinding
+import com.app.pocketfarm.helper.ApiConfig
 import com.app.pocketfarm.helper.Constant
+import com.app.pocketfarm.model.Recharge
+import com.app.pocketfarm.model.Transaction
 import com.app.pocketfarm.utils.DialogUtils
+import com.google.gson.Gson
+import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.File
@@ -56,13 +64,28 @@ class PaymentActivity : AppCompatActivity() {
             }
         }
 
+
+        binding.tvOpen.setOnClickListener {
+            // open QrActivity
+            val intent = Intent(activity, QrActivity::class.java)
+            startActivity(intent)
+
+        }
+
         transaction()
 
+        apicall()
 
+        val linearLayoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        binding.rvHistory.layoutManager = linearLayoutManager
 
         setContentView(binding.root)
 
     }
+
+
+
+
 
     private fun transaction() {
         val params: MutableMap<String, String> = HashMap()
@@ -73,15 +96,27 @@ class PaymentActivity : AppCompatActivity() {
                     val jsonObject = JSONObject(response)
                     Log.d("SIGNUP_RES", response)
                     if (jsonObject.getBoolean(com.app.pocketfarm.helper.Constant.SUCCESS)) {
-                        val jsonArray = jsonObject.getJSONArray(com.app.pocketfarm.helper.Constant.DATA)
+                        val `object` = JSONObject(response)
+                        val jsonArray: JSONArray = `object`.getJSONArray(com.app.pocketfarm.helper.Constant.DATA)
+                        val g = Gson()
+                        val recharge: java.util.ArrayList<Recharge> = java.util.ArrayList<Recharge>()
+                        for (i in 0 until jsonArray.length()) {
+                            val jsonObject1 = jsonArray.getJSONObject(i)
+                            if (jsonObject1 != null) {
+                                val group: Recharge = g.fromJson(jsonObject1.toString(), Recharge::class.java)
+                                recharge.add(group)
+                            } else {
+                                break
+                            }
+                        }
 
-
-
+                        val adapter = RechargeHistoryAdapter(activity, recharge)
+                        binding.rvHistory.adapter = adapter
 
 
                     } else {
 
-                        DialogUtils.showCustomDialog(this, ""+jsonObject.getString(Constant.MESSAGE))
+                       binding.rlHistory.visibility = View.GONE
                     }
                 } catch (e: JSONException) {
                     e.printStackTrace()
@@ -172,5 +207,37 @@ class PaymentActivity : AppCompatActivity() {
         finish() // Optional: finish the current activity if you don't want to keep it in the stack
     }
 
+
+    private fun apicall() {
+        val params: MutableMap<String, String> = HashMap()
+        params[Constant.USER_ID] = session!!.getData(Constant.USER_ID)
+        ApiConfig.RequestToVolley({ result, response ->
+            if (result) {
+                try {
+                    val jsonObject = JSONObject(response)
+                    if (jsonObject.getBoolean(Constant.SUCCESS)) {
+                        val jsonArray: JSONArray = jsonObject.getJSONArray(Constant.DATA)
+
+                        val pay_video = jsonArray.getJSONObject(0).getString("pay_video")
+
+                        binding.btnDemoVideo.setOnClickListener {
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(pay_video))
+                            startActivity(intent)
+                        }
+
+
+                    } else {
+                        DialogUtils.showCustomDialog(activity, ""+jsonObject.getString(Constant.MESSAGE))
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+
+                }
+            }
+        }, activity, Constant.SETTINGS, params, true)
+
+        // Return a dummy intent, as the actual navigation is handled inside the callback
+
+    }
 
 }
