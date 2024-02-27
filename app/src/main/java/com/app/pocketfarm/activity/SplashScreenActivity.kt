@@ -7,20 +7,15 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.text.Html
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.app.pocketfarm.R
 import com.app.pocketfarm.helper.ApiConfig
-import com.app.pocketfarm.helper.ApiConfig.TAG
 import com.app.pocketfarm.helper.Constant
 import com.app.pocketfarm.helper.Session
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.firebase.Firebase
-import com.google.firebase.dynamiclinks.PendingDynamicLinkData
-import com.google.firebase.dynamiclinks.dynamicLinks
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -78,15 +73,21 @@ class SplashScreenActivity : AppCompatActivity() {
 //        }
 //    }
 
-    private fun showUpdateDialog(link: String) {
+    private fun showUpdateDialog(link: String, description: String) {
         val bottomSheetDialog = BottomSheetDialog(this)
         val view = layoutInflater.inflate(R.layout.bottom_dialog_update, null)
         bottomSheetDialog.setContentView(view)
 
         val btnUpdate = view.findViewById<View>(R.id.btnUpdate)
+        val dialogMessage = view.findViewById<TextView>(R.id.dialog_message)
+        dialogMessage.text = description
+
 
         btnUpdate.setOnClickListener(View.OnClickListener {
-            GotoActivity()
+            val url = link;
+            val i = Intent(Intent.ACTION_VIEW)
+            i.data = Uri.parse(url)
+            startActivity(i)
         })
 
         // Customize your bottom dialog here
@@ -124,10 +125,11 @@ class SplashScreenActivity : AppCompatActivity() {
 
                         val latestVersion = jsonArray.getJSONObject(0).getString(Constant.VERSION)
                         val link = jsonArray.getJSONObject(0).getString(Constant.LINK)
+                        val description = jsonArray.getJSONObject(0).getString("description")
                         if (currentVersion.toInt() >= latestVersion.toInt()) {
                             GotoActivity()
                         } else {
-                            showUpdateDialog(link)
+                            showUpdateDialog(link,description)
                         }
 
                     } else {
@@ -136,10 +138,11 @@ class SplashScreenActivity : AppCompatActivity() {
 
                         val latestVersion = jsonArray.getJSONObject(0).getString(Constant.VERSION)
                         val link = jsonArray.getJSONObject(0).getString(Constant.LINK)
+                        val description = jsonArray.getJSONObject(0).getString("description")
                         if (currentVersion.toInt() >= latestVersion.toInt()) {
                             GotoActivity()
                         } else {
-                            showUpdateDialog(link)
+                            showUpdateDialog(link, description)
                         }
 
 

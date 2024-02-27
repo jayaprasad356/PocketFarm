@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_10sdp"
-        android:text="Payment  details Uploaded our Staff verify in few hours"
+        android:text="Your amount will be recharge within 15 mins"
         android:textColor="#273240"
         android:textAlignment="center"
         android:fontFamily="@font/poppins_medium"

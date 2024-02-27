@@ -79,7 +79,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Scan and  Recharge  your wallet and sent the screenshot  upload below"
+            android:text="Scan and pay then wait 15 mins to recharge your wallet"
             android:textSize="@dimen/_12sdp"
             android:fontFamily="@font/poppins_medium"
             android:textColor="@color/black"

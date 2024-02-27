@@ -77,7 +77,6 @@ class MyplansAdapter(
 
     private fun activatePlan(id: String?) {
         val session = Session(activity)
-
         val params: MutableMap<String, String> = HashMap()
         params[Constant.USER_ID] = session.getData(Constant.USER_ID)!!
         params["plan_id"] = id!!
@@ -88,11 +87,7 @@ class MyplansAdapter(
                     val jsonObject = JSONObject(response)
                     val msg = jsonObject.getString(Constant.MESSAGE).toString()
                     if (jsonObject.getBoolean(Constant.SUCCESS)) {
-                        val `object` = JSONObject(response)
-
                         showCustomDialog(msg)
-
-
                     } else {
 
                         showCustomDialog(msg)
@@ -156,7 +151,7 @@ class MyplansAdapter(
         val avRefer = dialogView.findViewById<LottieAnimationView>(R.id.avRefer)
 
 
-        if (status.equals("Production Started Successfully")) {
+        if (status.equals("Production started successfully")) {
             ivSuccess.setImageResource(R.drawable.success)
             tvStatus.text = "Production Started Successfully"
             tvMessage.text = "Start sell from tomorrow."
@@ -192,7 +187,7 @@ class MyplansAdapter(
 
         } else {
             ivSuccess.setImageResource(R.drawable.warning)
-            tvStatus.text = "Your not eligible"
+            tvStatus.text = "You are not eligible"
             tvMessage.text = status
             btnOk.visibility = View.GONE
             avRecharge.visibility = View.GONE

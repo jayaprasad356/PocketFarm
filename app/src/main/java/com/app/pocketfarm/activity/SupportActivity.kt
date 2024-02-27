@@ -10,6 +10,9 @@ import com.app.pocketfarm.databinding.ActivitySupportBinding
 import com.app.pocketfarm.helper.ApiConfig
 import com.app.pocketfarm.helper.Constant
 import com.app.pocketfarm.utils.DialogUtils
+import com.zoho.commons.InitConfig
+import com.zoho.livechat.android.listeners.InitListener
+import com.zoho.salesiqembed.ZohoSalesIQ
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -31,6 +34,23 @@ class SupportActivity : AppCompatActivity() {
             onBackPressed()
             finish()
         }
+
+        val initConfig = InitConfig()
+        // Set your font configurations
+
+        ZohoSalesIQ.init(application, "q%2FetVzn%2B7suBUISHrv%2B4MM5zHsAL4a1dOKYB2tz2WDqUDLMIygjwdSQOZJfKPQMJw0ZesvJqzxqA2OElz%2BHICEfHeNgKxY89MmM70uYQKySEia9eZjTmcA%3D%3D_in", "4%2Fd2z2OovwNUlhzjsAI%2Bk0DfMTZp4hGY%2Fn85U%2Fsq6yplNfH7TtW0rfJXO4V%2BSXjczU5Sqinj5cqzbGKBH2c3KJFrmHUQGflGlc49MR79%2BSFxjRQ8BNLjz86l1rMZtYOW1fJLMC8Kl6DtM%2BJfTJFfroseSg%2BjoxQU", initConfig, object :
+            InitListener {
+            override fun onInitSuccess() {
+                // fit place to show the chat launcher
+                ZohoSalesIQ.Launcher.show(ZohoSalesIQ.Launcher.VisibilityMode.WHEN_ACTIVE_CHAT)
+
+            }
+
+            override fun onInitError(errorCode: Int, errorMessage: String) {
+                // Handle initialization errors
+            }
+        })
+
 
 
 

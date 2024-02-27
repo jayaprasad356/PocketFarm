@@ -40,10 +40,13 @@ class RechargeHistoryAdapter(
         holder.tvDate.text = report.datetime
         if (report.status.equals("0")) {
             holder.tvStatus.text = "Pending"
-            holder.tvStatus.setTextColor(activity.resources.getColor(R.color.red))
+            holder.tvStatus.setTextColor(activity.resources.getColor(R.color.blue_color))
         } else if (report.status.equals("1")) {
-            holder.tvStatus.text = "Approved"
-            holder.tvStatus.setTextColor(activity.resources.getColor(R.color.primary_color))
+            holder.tvStatus.text = "Verified"
+            holder.tvStatus.setTextColor(activity.resources.getColor(R.color.green))
+        }else if (report.status.equals("2")) {
+            holder.tvStatus.text = "Cancelled"
+            holder.tvStatus.setTextColor(activity.resources.getColor(R.color.red))
         }
 
         if (report.recharge_amount == "0") {

@@ -2,6 +2,7 @@ package com.app.pocketfarm.adapter
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Intent
 import android.graphics.Color
 import android.text.Html
 import android.text.Spannable
@@ -22,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.app.pocketfarm.model.MyPlan
 import com.app.pocketfarm.R
+import com.app.pocketfarm.activity.HomeActivity
 import com.app.pocketfarm.helper.ApiConfig
 import com.app.pocketfarm.helper.Constant
 import com.app.pocketfarm.helper.Session
@@ -109,6 +111,7 @@ class ActivateplansAdapter(
 
                     Toast.makeText(activity, "" + jsonObject.getString(com.app.pocketfarm.helper.Constant.MESSAGE).toString(), Toast.LENGTH_SHORT).show()
 
+                        moveToHomeActivity()
 
                     } else {
 
@@ -124,6 +127,12 @@ class ActivateplansAdapter(
 
 
     }
+    private fun moveToHomeActivity() {
+        val intent = Intent(activity, HomeActivity::class.java)
+        activity.startActivity(intent)
+        activity.finish() // Optional: finish the current activity if you don't want to keep it in the stack
+    }
+
 
 
     override fun getItemCount(): Int {

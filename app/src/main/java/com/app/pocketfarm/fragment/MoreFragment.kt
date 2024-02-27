@@ -46,43 +46,11 @@ class MoreFragment : Fragment() {
 
 
         (activity as HomeActivity).binding.rlToolbar.visibility = View.GONE
-//        binding.tvRecharge.text =  "₹" + session.getData(com.app.pocketfarm.helper.Constant.RECHARGE_BALANCE)
-//        binding.tvTotalEarnings.text = "₹" + session.getData(com.app.pocketfarm.helper.Constant.TOTAL_EARNINGS)
-
         userdetails()
 
         binding.llInvite.setOnClickListener {
 
             startActivity(Intent(activity, InviteActivity::class.java))
-
-            /*val refferalCode = session.getData(com.app.pocketfarm.helper.Constant.REFER_CODE)
-            val dynamicLink = Firebase.dynamicLinks.dynamicLink {
-                link = Uri.parse("https://pocketfarm.in/" + refferalCode)
-                domainUriPrefix = "https://pocketfarm.page.link"
-                // Open links with this app on Android
-                androidParameters { }
-                // Open links with com.example.ios on iOS
-            }
-
-            val dynamicLinkUri = dynamicLink.uri
-
-            val shortLinkTask = Firebase.dynamicLinks.shortLinkAsync {
-                longLink = dynamicLinkUri
-            }.addOnSuccessListener { (shortLink, flowChartLink) ->
-                // You'll need to import com.google.firebase.dynamiclinks.ktx.component1 and
-                // com.google.firebase.dynamiclinks.ktx.component2
-
-                val shareBody = "" + shortLink
-                val sharingIntent = android.content.Intent(android.content.Intent.ACTION_SEND)
-                sharingIntent.type = "text/plain"
-                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "WeAgri")
-                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody)
-                startActivity(android.content.Intent.createChooser(sharingIntent, "Share using"))
-            }.addOnFailureListener {
-                // Error
-                Log.d("Error", it.message.toString())
-                // ...
-            }*/
 
 
         }
