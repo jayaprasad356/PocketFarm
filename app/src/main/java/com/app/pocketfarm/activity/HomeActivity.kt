@@ -74,6 +74,13 @@ class HomeActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
 
 
 
+
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        ZohoSalesIQ.Launcher.show(ZohoSalesIQ.Launcher.VisibilityMode.NEVER)
     }
 
 

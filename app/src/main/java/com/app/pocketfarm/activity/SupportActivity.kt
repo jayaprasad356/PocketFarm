@@ -42,7 +42,7 @@ class SupportActivity : AppCompatActivity() {
             InitListener {
             override fun onInitSuccess() {
                 // fit place to show the chat launcher
-                ZohoSalesIQ.Launcher.show(ZohoSalesIQ.Launcher.VisibilityMode.WHEN_ACTIVE_CHAT)
+                ZohoSalesIQ.Launcher.show(ZohoSalesIQ.Launcher.VisibilityMode.ALWAYS)
 
             }
 
@@ -58,6 +58,11 @@ class SupportActivity : AppCompatActivity() {
         apicall()
 
         return setContentView(binding!!.root)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        ZohoSalesIQ.Launcher.show(ZohoSalesIQ.Launcher.VisibilityMode.ALWAYS)
     }
 
     private fun apicall() {

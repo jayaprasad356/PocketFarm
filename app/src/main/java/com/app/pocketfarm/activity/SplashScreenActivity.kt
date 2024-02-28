@@ -26,7 +26,7 @@ class SplashScreenActivity : AppCompatActivity() {
     private var session: Session? = null
     private var activity: Activity? = null
 
-    private var currentVersion = ""
+    private var currentVersion: String? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +48,10 @@ class SplashScreenActivity : AppCompatActivity() {
 
     }
 
+    override fun onResume() {
+        setupViews()
+        super.onResume()
+    }
 
     private fun setupViews() {
         try {
@@ -77,6 +81,7 @@ class SplashScreenActivity : AppCompatActivity() {
         val bottomSheetDialog = BottomSheetDialog(this)
         val view = layoutInflater.inflate(R.layout.bottom_dialog_update, null)
         bottomSheetDialog.setContentView(view)
+        bottomSheetDialog.setCancelable(false);
 
         val btnUpdate = view.findViewById<View>(R.id.btnUpdate)
         val dialogMessage = view.findViewById<TextView>(R.id.dialog_message)
@@ -89,6 +94,7 @@ class SplashScreenActivity : AppCompatActivity() {
             i.data = Uri.parse(url)
             startActivity(i)
         })
+
 
         // Customize your bottom dialog here
         // For example, you can set text, buttons, etc.
@@ -125,25 +131,27 @@ class SplashScreenActivity : AppCompatActivity() {
 
                         val latestVersion = jsonArray.getJSONObject(0).getString(Constant.VERSION)
                         val link = jsonArray.getJSONObject(0).getString(Constant.LINK)
+                     //   Toast.makeText(activity,latestVersion + currentVersion!!.toInt() , Toast.LENGTH_SHORT).show()
                         val description = jsonArray.getJSONObject(0).getString("description")
-                        if (currentVersion.toInt() >= latestVersion.toInt()) {
+                        if (currentVersion!!.toInt() == latestVersion.toInt()) {
                             GotoActivity()
                         } else {
                             showUpdateDialog(link,description)
+
                         }
 
                     } else {
-                        val jsonArray: JSONArray = jsonObject.getJSONArray(Constant.DATA)
-
-
-                        val latestVersion = jsonArray.getJSONObject(0).getString(Constant.VERSION)
-                        val link = jsonArray.getJSONObject(0).getString(Constant.LINK)
-                        val description = jsonArray.getJSONObject(0).getString("description")
-                        if (currentVersion.toInt() >= latestVersion.toInt()) {
-                            GotoActivity()
-                        } else {
-                            showUpdateDialog(link, description)
-                        }
+//                        val jsonArray: JSONArray = jsonObject.getJSONArray(Constant.DATA)
+//
+//
+//                        val latestVersion = jsonArray.getJSONObject(0).getString(Constant.VERSION)
+//                        val link = jsonArray.getJSONObject(0).getString(Constant.LINK)
+//                        val description = jsonArray.getJSONObject(0).getString("description")
+//                        if (currentVersion!!.toInt() == latestVersion.toInt()) {
+//                            GotoActivity()
+//                        } else {
+//                            showUpdateDialog(link, description)
+//                        }
 
 
                     }
