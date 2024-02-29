@@ -79,10 +79,21 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Scan and pay then wait 15 mins to recharge your wallet"
+            android:text="Scan and pay for your purchase, then wait for up to 15 minutes for your wallet to recharge, or it may be completed within a day."
             android:textSize="@dimen/_12sdp"
             android:fontFamily="@font/poppins_medium"
             android:textColor="@color/black"
+            />
+
+        <TextView
+            android:id="@+id/tvtiming"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PAYMENT APPROVED TIME 9.00 AM TO 9.00 PM"
+            android:textSize="@dimen/_12sdp"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/orage_color"
             />
 
 

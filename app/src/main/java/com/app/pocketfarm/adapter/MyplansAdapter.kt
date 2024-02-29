@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide
 import com.app.pocketfarm.activity.RechargeActivity
 import com.app.pocketfarm.model.MyPlan
 import com.app.pocketfarm.R
+import com.app.pocketfarm.activity.PaymentActivity
 import com.app.pocketfarm.helper.ApiConfig
 import com.app.pocketfarm.helper.Constant
 import com.app.pocketfarm.helper.Session
@@ -180,7 +181,7 @@ class MyplansAdapter(
             ivSuccess.visibility = View.GONE
             btnOk.setOnClickListener {
                 dialog.dismiss()
-                val intent = Intent(activity, RechargeActivity::class.java)
+                val intent = Intent(activity, PaymentActivity::class.java)
                 activity.startActivity(intent)
             }
 

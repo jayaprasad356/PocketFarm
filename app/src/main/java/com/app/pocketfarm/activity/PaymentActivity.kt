@@ -9,25 +9,27 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.canhub.cropper.CropImage
 import com.app.pocketfarm.R
 import com.app.pocketfarm.adapter.RechargeHistoryAdapter
-import com.app.pocketfarm.adapter.TransactionAdapter
 import com.app.pocketfarm.databinding.ActivityPaymentBinding
 import com.app.pocketfarm.helper.ApiConfig
 import com.app.pocketfarm.helper.Constant
 import com.app.pocketfarm.model.Recharge
-import com.app.pocketfarm.model.Transaction
 import com.app.pocketfarm.utils.DialogUtils
+import com.canhub.cropper.CropImage
 import com.google.gson.Gson
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.File
+
 
 class PaymentActivity : AppCompatActivity() {
     lateinit var binding: ActivityPaymentBinding
@@ -54,6 +56,11 @@ class PaymentActivity : AppCompatActivity() {
         binding.ibBack.setOnClickListener {
             onBackPressed()
         }
+
+
+        val animation: Animation =
+            AnimationUtils.loadAnimation(applicationContext, com.app.pocketfarm.R.anim.blink_anim)
+        binding.tvtiming.startAnimation(animation)
 
 
         binding.btnUpload.setOnClickListener {
@@ -177,7 +184,7 @@ class PaymentActivity : AppCompatActivity() {
                         showCustomDialog()
 
                     } else {
-                        Toast.makeText(activity, "" + jsonObject.getString(com.app.pocketfarm.helper.Constant.MESSAGE), Toast.LENGTH_SHORT).show()
+                        DialogUtils.showCustomDialog(this, ""+jsonObject.getString(Constant.MESSAGE))
 
                     }
                 } catch (e: JSONException) {
