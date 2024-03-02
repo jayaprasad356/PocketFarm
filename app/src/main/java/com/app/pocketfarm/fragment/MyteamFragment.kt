@@ -129,6 +129,7 @@ class MyteamFragment : Fragment() {
 
     private fun referlist(level: String) {
         binding.rvMyTeamB.visibility = View.GONE
+        binding.tvMember.text = "Team - " + 0;
         val params: MutableMap<String, String> = HashMap()
         params[com.app.pocketfarm.helper.Constant.USER_ID] = session.getData(com.app.pocketfarm.helper.Constant.USER_ID)
         params[com.app.pocketfarm.helper.Constant.LEVEL] = level

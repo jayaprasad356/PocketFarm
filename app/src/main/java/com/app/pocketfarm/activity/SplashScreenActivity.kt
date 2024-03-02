@@ -133,7 +133,7 @@ class SplashScreenActivity : AppCompatActivity() {
                         val link = jsonArray.getJSONObject(0).getString(Constant.LINK)
                      //   Toast.makeText(activity,latestVersion + currentVersion!!.toInt() , Toast.LENGTH_SHORT).show()
                         val description = jsonArray.getJSONObject(0).getString("description")
-                        if (currentVersion!!.toInt() == latestVersion.toInt()) {
+                        if (currentVersion!!.toInt() >= latestVersion.toInt()) {
                             GotoActivity()
                         } else {
                             showUpdateDialog(link,description)

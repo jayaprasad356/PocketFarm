@@ -69,7 +69,7 @@ class ActivateplansAdapter(
         holder.btnActivate.setOnClickListener {
 
             if (report.claim.equals("1")) {
-                showCustomDialog(report.plan_id,report.daily_quantity,report.unit,report.products,report.income)
+                showCustomDialog(report.plan_id,report.daily_quantity,report.unit,report.products,report.daily_income)
             } else {
 
             }
