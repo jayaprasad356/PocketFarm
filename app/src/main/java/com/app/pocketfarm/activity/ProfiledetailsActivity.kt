@@ -142,13 +142,13 @@ class ProfiledetailsActivity : AppCompatActivity() {
     private fun register() {
 
         val params = HashMap<String, String>()
-        params[Constant.MOBILE] = mobilenumber.toString()
-        params[Constant.NAME] = binding.etName.text.toString()
-        params[Constant.EMAIL] = binding.etEmail.text.toString()
-        params[Constant.AGE] = binding.etAge.text.toString()
-        params[Constant.CITY] = binding.etCity.text.toString()
-        params[Constant.STATE] = binding.autoCompleteTextView.text.toString()
-        params[Constant.REFERRED_BY] = binding.etReferCode.text.toString()
+        params[Constant.MOBILE] = mobilenumber.toString().trim()
+        params[Constant.NAME] = binding.etName.text.toString().trim()
+        params[Constant.EMAIL] = binding.etEmail.text.toString().trim()
+        params[Constant.AGE] = binding.etAge.text.toString().trim()
+        params[Constant.CITY] = binding.etCity.text.toString().trim()
+        params[Constant.STATE] = binding.autoCompleteTextView.text.toString().trim()
+        params[Constant.REFERRED_BY] = binding.etReferCode.text.toString().trim()
         params[Constant.DEVICE_ID] = Constant.getDeviceId(activity)
 
 

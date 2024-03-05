@@ -73,11 +73,11 @@ class UpdatebankActivity : AppCompatActivity() {
     private fun updateBankDetails() {
         val params: MutableMap<String, String> = HashMap()
         params[Constant.USER_ID] = session!!.getData(Constant.USER_ID)
-        params[Constant.HOLDER_NAME] = binding.etHolderName.text.toString()
-        params[Constant.ACCOUNT_NUM] = binding.etAccountNumber.text.toString()
-        params[Constant.IFSC] = binding.etIFSCCode.text.toString()
-        params[Constant.BANK] = binding.etBankName.text.toString()
-        params[Constant.BRANCH] = binding.etBranchName.text.toString()
+        params[Constant.HOLDER_NAME] = binding.etHolderName.text.toString().trim()
+        params[Constant.ACCOUNT_NUM] = binding.etAccountNumber.text.toString().trim()
+        params[Constant.IFSC] = binding.etIFSCCode.text.toString().trim()
+        params[Constant.BANK] = binding.etBankName.text.toString().trim()
+        params[Constant.BRANCH] = binding.etBranchName.text.toString().trim()
         ApiConfig.RequestToVolley({ result, response ->
             if (result) {
                 try {

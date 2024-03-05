@@ -130,7 +130,7 @@ public class Constant {
     public static final  String getDeviceId(Activity activity) {
         String deviceId;
 
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
             deviceId = android.provider.Settings.Secure.getString(activity.getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
             // Toast.makeText(context,  deviceId, Toast.LENGTH_SHORT).show();

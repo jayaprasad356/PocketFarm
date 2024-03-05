@@ -1,9 +1,12 @@
 package com.app.pocketfarm.activity
 
+import android.app.Activity
 import android.os.Bundle
 import android.text.Html
+import android.util.Log
 import android.view.MenuItem
 import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -14,11 +17,18 @@ import com.app.pocketfarm.fragment.MyteamFragment
 import com.app.pocketfarm.fragment.PlanFragment
 import com.app.pocketfarm.R
 import com.app.pocketfarm.databinding.ActivityHomeBinding
+import com.app.pocketfarm.helper.Constant
+import com.app.pocketfarm.helper.Session
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
+import com.onesignal.OneSignal
+import com.onesignal.debug.LogLevel
 import com.zoho.commons.InitConfig
 import com.zoho.livechat.android.listeners.InitListener
 import com.zoho.salesiqembed.ZohoSalesIQ
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class HomeActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
 
@@ -26,6 +36,9 @@ class HomeActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
     private var fragment_container: FrameLayout? = null
     private var bottomNavigationView: BottomNavigationView? = null
     lateinit var binding: ActivityHomeBinding
+
+    private lateinit var activity: Activity
+    private lateinit var session: com.app.pocketfarm.helper.Session
 
     private lateinit var fm: FragmentManager
 
@@ -35,15 +48,17 @@ class HomeActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
     private lateinit var moreFragment: MoreFragment
     private lateinit var planFragment: PlanFragment
 
+    val ONESIGNAL_APP_ID = "510e6dfc-a8e6-403a-9167-188e73d5c048"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        activity = this
+        session = com.app.pocketfarm.helper.Session(activity)
         //tvTitle text is double color text "We" and "Agri"
-        val tvTitle = "<font color='#F8B328'>Pocket</font> "+"<font color='#00B251'>Farm</font>"
+        val tvTitle = "<font color='#F8B328'>Pocket</font> " + "<font color='#00B251'>Farm</font>"
 
         binding.tvTitle.text = Html.fromHtml(tvTitle)
 
@@ -70,9 +85,19 @@ class HomeActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         }
 
 
+        // Verbose Logging set to help debug issues, remove before releasing your app.
+        OneSignal.Debug.logLevel = LogLevel.VERBOSE
 
+        // OneSignal Initialization
+        OneSignal.initWithContext(this, ONESIGNAL_APP_ID)
 
-
+        // requestPermission will show the native Android notification permission prompt.
+        // NOTE: It's recommended to use a OneSignal In-App Message to prompt instead.
+        CoroutineScope(Dispatchers.IO).launch {
+            OneSignal.Notifications.requestPermission(true)
+            val externalId = session.getData(Constant.USER_ID)
+            OneSignal.login(externalId)
+        }
 
 
     }
@@ -130,11 +155,9 @@ class HomeActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
 
     // onBackPress method is not present in SplashScreen Activity.kt
     override fun onBackPressed() {
-        if (fm.backStackEntryCount > 0) {
-            fm.popBackStack()
-        } else {
-            super.onBackPressed()
-        }
+        super.onBackPressed()
+        finishAffinity()
     }
+
 
 }

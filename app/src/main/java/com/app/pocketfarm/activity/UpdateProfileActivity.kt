@@ -84,10 +84,10 @@ class UpdateProfileActivity : AppCompatActivity() {
     }
 
     private fun update() {
-        val name = binding.etName.text.toString()
-        val email = binding.etEmail.text.toString()
-        val age = binding.etAge.text.toString()
-        val city = binding.etCity.text.toString()
+        val name = binding.etName.text.toString().trim()
+        val email = binding.etEmail.text.toString().trim()
+        val age = binding.etAge.text.toString().trim()
+        val city = binding.etCity.text.toString().trim()
         val state = session.getData(Constant.STATE)
 
         val params: MutableMap<String, String> = HashMap()

@@ -41,6 +41,7 @@ class PaymentActivity : AppCompatActivity() {
 
     private val REQUEST_IMAGE_GALLERY = 2
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
