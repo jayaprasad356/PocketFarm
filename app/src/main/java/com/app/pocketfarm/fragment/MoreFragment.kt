@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.app.pocketfarm.Phonepe.PaymentActivity
 import com.app.pocketfarm.activity.InviteActivity
 import com.app.pocketfarm.activity.HomeActivity
 import com.app.pocketfarm.activity.MyProductionActivity
@@ -82,7 +81,7 @@ class MoreFragment : Fragment() {
         }
 
         binding.cvRecharge.setOnClickListener {
-            startActivity(Intent(activity, PaymentActivity::class.java))
+            //startActivity(Intent(activity, PaymentActivity::class.java))
         }
 
         binding.rlhistory.setOnClickListener {
