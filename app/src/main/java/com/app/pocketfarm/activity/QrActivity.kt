@@ -1,5 +1,6 @@
 package com.app.pocketfarm.activity
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -10,7 +11,10 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.graphics.drawable.toBitmap
+import com.app.pocketfarm.R
 import com.app.pocketfarm.databinding.ActivityQrBinding
+import com.app.pocketfarm.helper.Constant
+import com.bumptech.glide.Glide
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -18,6 +22,8 @@ import java.io.IOException
 class QrActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityQrBinding
+    lateinit var activity: Activity
+    lateinit var session: com.app.pocketfarm.helper.Session
 
     private val WRITE_EXTERNAL_STORAGE_REQUEST_CODE = 101
     private val FILE_PROVIDER_AUTHORITY = "com.app.pocketfarm.provider"
@@ -25,10 +31,18 @@ class QrActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityQrBinding.inflate(layoutInflater)
+        activity = this
+        session = com.app.pocketfarm.helper.Session(activity)
 
         binding.ibBack.setOnClickListener {
             onBackPressed()
         }
+
+
+        val qrimage = session.getData(Constant.QR_IMAGE)
+
+        Glide.with(this).load(qrimage).placeholder(R.drawable.logo)
+            .into(binding.ivQr)
 
         binding.btnDownload.setOnClickListener {
             if (isWritePermissionGranted()) {
@@ -59,6 +73,9 @@ class QrActivity : AppCompatActivity() {
         // Get the bitmap from ImageView
         val imageView = binding.ivQr
         val bitmap = (imageView.drawable).toBitmap()
+
+
+
 
         // Check if external storage is available
         val state = Environment.getExternalStorageState()

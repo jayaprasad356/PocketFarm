@@ -45,6 +45,7 @@ public class Constant {
     public static final String ACTIVATE_PLAN = BaseUrl + "activate_plan.php";
     public static final String CLAIM = BaseUrl + "claim.php";
     public static final String RECHARGE_HISTORY = BaseUrl + "recharge_history.php";
+    public static final String PAYMENT_SETTING = BaseUrl + "payment_setting.php";
 
     public static final String APPUPDATE= BaseUrl + "appupdate.php";
 
@@ -69,6 +70,7 @@ public class Constant {
     public static final String DEVICE_ID = "device_id";
     public static final String ID = "id";
     public static final String USER_ID = "user_id";
+    public static final String QR_IMAGE = "qr_image";
     public static final String LEVEL = "level";
     public static final String LOG_STATUS = "log_status";
     public static final String AGE = "age";

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Acitivity.PaymentActivity"
     android:padding="@dimen/_14sdp"
     >
 
@@ -57,7 +56,6 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="@dimen/_100sdp"
-            android:background="@drawable/qr_bharath"
             android:layout_gravity="center"
             />
 

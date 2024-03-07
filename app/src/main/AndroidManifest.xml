@@ -24,9 +24,7 @@
         android:theme="@style/Theme.Weagri"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <activity
-            android:name=".Phonepe.PaymentActivity"
-            android:exported="false" />
+
 
 
         <activity

@@ -23,6 +23,7 @@ import com.app.pocketfarm.helper.ApiConfig
 import com.app.pocketfarm.helper.Constant
 import com.app.pocketfarm.model.Recharge
 import com.app.pocketfarm.utils.DialogUtils
+import com.bumptech.glide.Glide
 import com.canhub.cropper.CropImage
 import com.google.gson.Gson
 import org.json.JSONArray
@@ -48,6 +49,9 @@ class PaymentActivity : AppCompatActivity() {
         binding = ActivityPaymentBinding.inflate(layoutInflater)
         activity = this
         session = com.app.pocketfarm.helper.Session(activity)
+
+
+        paymentsetting()
 
         binding.cvImage.setOnClickListener {
             pickImageFromGallery()
@@ -133,6 +137,46 @@ class PaymentActivity : AppCompatActivity() {
                 Toast.makeText(this, java.lang.String.valueOf(response) + java.lang.String.valueOf(result), Toast.LENGTH_SHORT).show()
             }
         }, this, com.app.pocketfarm.helper.Constant.RECHARGE_HISTORY, params, true)
+
+
+    }
+    private fun paymentsetting() {
+        val params: MutableMap<String, String> = HashMap()
+        params[Constant.USER_ID] = session.getData(Constant.USER_ID)
+        com.app.pocketfarm.helper.ApiConfig.RequestToVolley({ result, response ->
+            if (result) {
+                try {
+                    val jsonObject = JSONObject(response)
+                    if (jsonObject.getBoolean(com.app.pocketfarm.helper.Constant.SUCCESS)) {
+                        val `object` = JSONObject(response)
+                        val jsonArray: JSONArray = `object`.getJSONArray(com.app.pocketfarm.helper.Constant.DATA)
+
+                        session.setData(Constant.QR_IMAGE, jsonArray.getJSONObject(0).getString(Constant.QR_IMAGE))
+                        val qrimage = jsonArray.getJSONObject(0).getString(Constant.QR_IMAGE)
+
+                        Glide.with(activity).load(qrimage).placeholder(R.drawable.logo)
+                            .into(binding.ivQr)
+
+
+
+                    } else {
+
+
+                        Toast.makeText(
+                            this,
+                            "" + jsonObject.getString(Constant.MESSAGE),
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            } else {
+                Toast.makeText(this, java.lang.String.valueOf(response) + java.lang.String.valueOf(result), Toast.LENGTH_SHORT).show()
+            }
+        }, this, com.app.pocketfarm.helper.Constant.PAYMENT_SETTING, params, true)
 
 
     }

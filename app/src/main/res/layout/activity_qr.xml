@@ -34,13 +34,12 @@
 
 
     <ImageView
-        android:layout_centerInParent="true"
         android:id="@+id/ivQr"
         android:layout_width="@dimen/_250sdp"
         android:layout_height="@dimen/_250sdp"
-        android:src="@drawable/qr_bharath"
+        android:layout_centerInParent="true"
         android:layout_gravity="center"
-        />
+         />
 
 
     <com.google.android.material.button.MaterialButton
