@@ -82,7 +82,7 @@ class MoreFragment : Fragment() {
         }
 
         binding.cvRecharge.setOnClickListener {
-            startActivity(Intent(activity, PaymentActivity::class.java))
+            //startActivity(Intent(activity, PaymentActivity::class.java))
         }
 
         binding.rlhistory.setOnClickListener {

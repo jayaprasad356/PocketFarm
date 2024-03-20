@@ -43,7 +43,7 @@
             android:name=".activity.MyProductionActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.RechargeActivity"
+            android:name=".activity.SplashScreenActivity"
             android:exported="false" />
         <activity
             android:name=".activity.WelcomeActivity"
@@ -58,7 +58,7 @@
             android:name=".activity.TransactionActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.SplashScreenActivity"
+            android:name=".activity.RechargeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
