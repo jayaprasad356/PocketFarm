@@ -39,7 +39,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Login/Sign up"
+                    android:text="Login"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_20sdp" />
 
@@ -65,6 +65,27 @@
                         android:maxLength="10" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:hint="Password"
+                    app:hintTextColor="@color/primary_color"
+                    android:textColorHint="@color/grey_light"
+                    app:boxStrokeColor="@color/primary_color"
+                    app:startIconDrawable="@drawable/baseline_lock_24">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/poppins_medium"
+                        android:inputType="textPassword"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
 
 
@@ -81,6 +102,28 @@
                     android:text="Log in"
                     android:textAllCaps="false"
                     android:fontFamily="@font/poppins_medium"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="or"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:fontFamily="@font/poppins_medium"
+                    />
+
+
+                <TextView
+                    android:id="@+id/tvSignin"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sign up"
+                    android:textColor="@color/primary_color"
+                    android:textSize="@dimen/_14sdp"
+                    android:fontFamily="@font/poppins_semibold"
                     />
 
 

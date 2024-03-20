@@ -249,4 +249,64 @@ class OtpActivity : AppCompatActivity() {
         resetCountdown()
     }
 
+    private fun register() {
+
+        val params = HashMap<String, String>()
+        params[Constant.MOBILE] = session.getData(Constant.MOBILE)
+        params[Constant.PASSWORD] = session.getData(Constant.PASSWORD)
+        params[Constant.NAME] = session.getData(Constant.NAME)
+        params[Constant.EMAIL] = session.getData(Constant.EMAIL)
+        params[Constant.AGE] = session.getData(Constant.AGE)
+        params[Constant.CITY] = session.getData(Constant.CITY)
+        params[Constant.STATE] = session.getData(Constant.STATE)
+        params[Constant.REFERRED_BY] = session.getData(Constant.REFERRED_BY)
+        params[Constant.DEVICE_ID] = Constant.getDeviceId(activity)
+
+
+        ApiConfig.RequestToVolley({ result, response ->
+            if (result) {
+                try {
+                    val jsonObject = JSONObject(response)
+                    Log.d("SIGNUP_RES", response)
+                    if (jsonObject.getBoolean(Constant.SUCCESS)) {
+                        val jsonArray =
+                            jsonObject.getJSONArray(Constant.DATA)
+
+                        session.setBoolean("is_logged_in", true)
+                        session.setData(Constant.USER_ID, jsonArray.getJSONObject(0).getString(Constant.ID))
+                        session.setData(Constant.NAME, jsonArray.getJSONObject(0).getString(Constant.NAME))
+                        session.setData(Constant.MOBILE, jsonArray.getJSONObject(0).getString(Constant.MOBILE))
+                        session.setData(Constant.EMAIL, jsonArray.getJSONObject(0).getString(Constant.EMAIL))
+                        session.setData(Constant.AGE, jsonArray.getJSONObject(0).getString(Constant.AGE))
+                        session.setData(Constant.CITY, jsonArray.getJSONObject(0).getString(Constant.CITY))
+                        session.setData(Constant.STATE, jsonArray.getJSONObject(0).getString(Constant.STATE))
+                        session.setData(Constant.REFER_CODE,jsonArray.getJSONObject(0).getString(Constant.REFER_CODE))
+                        val intent = Intent(activity, OtpActivity::class.java)
+                        startActivity(intent)
+                        finish()
+
+                    } else {
+
+                        Toast.makeText(
+                            this,
+                            "" + jsonObject.getString(Constant.MESSAGE),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            } else {
+                Toast.makeText(
+                    this,
+                    java.lang.String.valueOf(response) + java.lang.String.valueOf(result),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }, this, Constant.REGISTER, params, true)
+
+
+    }
+
+
 }

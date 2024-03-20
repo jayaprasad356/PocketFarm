@@ -3,10 +3,16 @@ package com.app.pocketfarm.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.app.pocketfarm.R
 import com.app.pocketfarm.databinding.ActivityLoginBinding
+import com.app.pocketfarm.helper.ApiConfig
 import com.app.pocketfarm.helper.Constant
+import com.app.pocketfarm.utils.DialogUtils
+import org.json.JSONException
+import org.json.JSONObject
 
 class LoginActivity : AppCompatActivity() {
 
@@ -25,10 +31,9 @@ class LoginActivity : AppCompatActivity() {
         session = com.app.pocketfarm.helper.Session(activity)
 
 
-//        binding.btnLogin.setOnClickListener {
-//            Toast.makeText(this, "Login", Toast.LENGTH_SHORT).show()
-//            startActivity(Intent(this, OtpActivity::class.java))
-//        }
+        binding.tvSignin.setOnClickListener {
+            startActivity(Intent(this, ProfiledetailsActivity::class.java))
+        }
 
 
         setupViews()
@@ -47,16 +52,87 @@ class LoginActivity : AppCompatActivity() {
             } else if (binding.etPhoneNumber.text.toString().length != 10) {
                 binding.etPhoneNumber.error = "Please enter valid mobile number"
                 binding.etPhoneNumber.requestFocus()
-            } else {
-                session.setData(Constant.MOBILE, binding.etPhoneNumber.text.toString())
-                val intent = Intent(activity, OtpActivity::class.java)
-                startActivity(intent)
-                finish()
+            }else if (binding.etPassword.text.toString().length <= 3){
+                binding.etPassword.error = "Password minimum 4 letters"
+                binding.etPassword.requestFocus()
+            }
+            else {
+                login()
             }
         }
     }
 
 
+    private fun login() {
+        val params: MutableMap<String, String> = HashMap()
+        params[Constant.MOBILE] = binding.etPhoneNumber.text.toString().trim()
+        params[Constant.DEVICE_ID] =  Constant.getDeviceId(activity)
+        params[Constant.PASSWORD] = binding.etPassword.text.toString().trim()
+        ApiConfig.RequestToVolley({ result, response ->
+            if (result) {
+                try {
+                    val jsonObject = JSONObject(response)
+                    Log.d("SIGNUP_RES", response)
+                    if (jsonObject.getBoolean(com.app.pocketfarm.helper.Constant.SUCCESS)) {
+                        val jsonArray = jsonObject.getJSONArray(com.app.pocketfarm.helper.Constant.DATA)
+                        //Toast.makeText(activity, jsonObject.getString(com.app.pocketfarm.helper.Constant.MESSAGE), Toast.LENGTH_SHORT).show()
+                        session!!.setBoolean("is_logged_in", true)
+                        session!!.setData(
+                            com.app.pocketfarm.helper.Constant.USER_ID, jsonArray.getJSONObject(0).getString(
+                                com.app.pocketfarm.helper.Constant.ID))
+                        session.setData(
+                            com.app.pocketfarm.helper.Constant.NAME, jsonArray.getJSONObject(0).getString(
+                                com.app.pocketfarm.helper.Constant.NAME))
+                        session.setData(
+                            com.app.pocketfarm.helper.Constant.MOBILE, jsonArray.getJSONObject(0).getString(
+                                com.app.pocketfarm.helper.Constant.MOBILE))
+                        session.setData(
+                            com.app.pocketfarm.helper.Constant.EMAIL, jsonArray.getJSONObject(0).getString(
+                                com.app.pocketfarm.helper.Constant.EMAIL))
+                        session.setData(
+                            com.app.pocketfarm.helper.Constant.AGE, jsonArray.getJSONObject(0).getString(
+                                com.app.pocketfarm.helper.Constant.AGE))
+                        session.setData(
+                            com.app.pocketfarm.helper.Constant.CITY, jsonArray.getJSONObject(0).getString(
+                                com.app.pocketfarm.helper.Constant.CITY))
+                        session.setData(
+                            com.app.pocketfarm.helper.Constant.STATE, jsonArray.getJSONObject(0).getString(
+                                com.app.pocketfarm.helper.Constant.STATE))
+                        session.setData(
+                            com.app.pocketfarm.helper.Constant.REFER_CODE, jsonArray.getJSONObject(0).getString(
+                                com.app.pocketfarm.helper.Constant.REFER_CODE))
+
+
+                        val intent = Intent(this, HomeActivity::class.java)
+                        startActivity(intent)
+                        finish()
+
+                    } else {
+                        val message = jsonObject.getString(Constant.MESSAGE)
+
+                        if (message.equals("Your Mobile Number is not Registered")) {
+                            Toast.makeText(this,""+jsonObject.getString(com.app.pocketfarm.helper.Constant.MESSAGE),Toast.LENGTH_SHORT).show()
+                          //  DialogUtils.showCustomDialog(this, ""+jsonObject.getString(com.app.pocketfarm.helper.Constant.MESSAGE))
+                            val intent = Intent(this, ProfiledetailsActivity::class.java)
+                            startActivity(intent)
+                        }
+                        else {
+                            DialogUtils.showCustomDialog(this, ""+jsonObject.getString(com.app.pocketfarm.helper.Constant.MESSAGE))
+                        }
+
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            } else {
+                // Toast.makeText(this, , Toast.LENGTH_SHORT).show()
+                DialogUtils.showCustomDialog(this, ""+java.lang.String.valueOf(response) + java.lang.String.valueOf(result))
+
+            }
+        }, this, com.app.pocketfarm.helper.Constant.LOGIN, params, true)
+
+
+    }
 
 
 

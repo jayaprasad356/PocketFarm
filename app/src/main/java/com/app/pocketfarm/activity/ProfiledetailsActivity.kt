@@ -5,8 +5,10 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import android.util.Patterns
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +17,7 @@ import com.app.pocketfarm.databinding.ActivityProfiledetailsBinding
 import com.app.pocketfarm.helper.ApiConfig
 import com.app.pocketfarm.helper.Constant
 import com.app.pocketfarm.helper.Session
+import com.app.pocketfarm.utils.DialogUtils
 import com.google.firebase.dynamiclinks.PendingDynamicLinkData
 import com.google.firebase.dynamiclinks.dynamicLinks
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
@@ -31,6 +34,13 @@ class ProfiledetailsActivity : AppCompatActivity() {
     lateinit var session: Session
 
     var mobilenumber: String? = null
+    var otp_get: String? = null
+
+    var verify: Boolean? = false
+
+    private var countDownTimer: CountDownTimer? = null
+    private val COUNTDOWN_TIME = 45000L // 45 seconds in milliseconds
+
 
 
     private val indianStates = arrayOf(
@@ -77,6 +87,54 @@ class ProfiledetailsActivity : AppCompatActivity() {
 
 
 
+        binding.btnsent.setOnClickListener{
+            if (binding.etPhoneNumber.text.toString().isEmpty()) {
+                binding.etPhoneNumber.error = "Please enter mobile number"
+                binding.etPhoneNumber.requestFocus()
+            } else if (binding.etPhoneNumber.text.toString().length != 10) {
+                binding.etPhoneNumber.error = "Please enter valid mobile number"
+                binding.etPhoneNumber.requestFocus()
+            }
+            else{
+                binding.btnsent.visibility = View.GONE
+
+                otp()
+                startCountdown()
+
+
+            }
+
+        }
+
+        // Set click listener for the "Resend" button
+        binding.btnResend.setOnClickListener {
+            // Reset the timer
+            resetCountdown()
+            // Start the countdown timer again
+            startCountdown()
+            otp()
+            // Disable the button
+            binding.btnResend.isEnabled = false
+        }
+
+        binding.btnverify.setOnClickListener{
+
+            if (binding.etOTP.text.toString() == otp_get){
+                binding.btnverify.visibility  = View.GONE
+                binding.rlcheck.visibility  = View.VISIBLE
+                binding.etOTP.isEnabled = false
+                verify = true
+            }
+
+            else {
+                Toast.makeText(this,"Invalid",Toast.LENGTH_SHORT).show()
+            }
+
+
+        }
+
+
+
 
 
 
@@ -88,8 +146,31 @@ class ProfiledetailsActivity : AppCompatActivity() {
                 binding.autoCompleteTextView.setAdapter(arrayAdapter)
 
 
+
+
                 binding.btnSave.setOnClickListener {
-                    if (binding.etName.text.toString().isEmpty()) {
+                    val cp = binding.etPassword.text.toString()
+                    if (verify!!.equals(false)){
+                        Toast.makeText(this,"Verify Otp",Toast.LENGTH_SHORT).show()
+                    }
+
+                    else if (binding.etPhoneNumber.text.toString().isEmpty()) {
+                        binding.etPhoneNumber.error = "Please enter mobile number"
+                        binding.etPhoneNumber.requestFocus()
+                    } else if (binding.etPhoneNumber.text.toString().length != 10) {
+                        binding.etPhoneNumber.error = "Please enter valid mobile number"
+                        binding.etPhoneNumber.requestFocus()
+                    }
+                    else if (binding.etPassword.text.toString().length <= 3){
+                        binding.etPassword.error = "Password minimum 4 letters"
+                        binding.etPassword.requestFocus()
+                    }
+                    else if (binding.etConfirmPassword.text.toString() != cp) {
+                        binding.etConfirmPassword.error = "Password mismatch"
+                        binding.etConfirmPassword.requestFocus()
+                    }
+
+                    else if (binding.etName.text.toString().isEmpty()) {
                         binding.etName.error = "Enter Name"
                         return@setOnClickListener
                     } else if (binding.etName.text.toString().length < 4) {
@@ -140,9 +221,9 @@ class ProfiledetailsActivity : AppCompatActivity() {
 
 
     private fun register() {
-
         val params = HashMap<String, String>()
-        params[Constant.MOBILE] = mobilenumber.toString().trim()
+        params[Constant.MOBILE] = binding.etPhoneNumber.toString().trim()
+        params[Constant.PASSWORD] = binding.etPassword.toString().trim()
         params[Constant.NAME] = binding.etName.text.toString().trim()
         params[Constant.EMAIL] = binding.etEmail.text.toString().trim()
         params[Constant.AGE] = binding.etAge.text.toString().trim()
@@ -198,7 +279,6 @@ class ProfiledetailsActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle("Exit")
         alertDialogBuilder.setMessage("Are you sure you want to exit?")
@@ -216,7 +296,168 @@ class ProfiledetailsActivity : AppCompatActivity() {
         alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextColor(resources.getColor(R.color.primary_color))
     }
 
+    private fun login() {
+        val params: MutableMap<String, String> = HashMap()
+        params[Constant.MOBILE] = session!!.getData(Constant.MOBILE)
+        params[Constant.DEVICE_ID] =  Constant.getDeviceId(activity)
+        params["otp"] = binding.etOTP.text.toString()
+        ApiConfig.RequestToVolley({ result, response ->
+            if (result) {
+                try {
+                    val jsonObject = JSONObject(response)
+                    Log.d("SIGNUP_RES", response)
+                    if (jsonObject.getBoolean(com.app.pocketfarm.helper.Constant.SUCCESS)) {
+                        val jsonArray = jsonObject.getJSONArray(com.app.pocketfarm.helper.Constant.DATA)
+                        //Toast.makeText(activity, jsonObject.getString(com.app.pocketfarm.helper.Constant.MESSAGE), Toast.LENGTH_SHORT).show()
+                        session!!.setBoolean("is_logged_in", true)
+                        session!!.setData(
+                            com.app.pocketfarm.helper.Constant.USER_ID, jsonArray.getJSONObject(0).getString(
+                                com.app.pocketfarm.helper.Constant.ID))
+                        session.setData(
+                            com.app.pocketfarm.helper.Constant.NAME, jsonArray.getJSONObject(0).getString(
+                                com.app.pocketfarm.helper.Constant.NAME))
+                        session.setData(
+                            com.app.pocketfarm.helper.Constant.MOBILE, jsonArray.getJSONObject(0).getString(
+                                com.app.pocketfarm.helper.Constant.MOBILE))
+                        session.setData(
+                            com.app.pocketfarm.helper.Constant.EMAIL, jsonArray.getJSONObject(0).getString(
+                                com.app.pocketfarm.helper.Constant.EMAIL))
+                        session.setData(
+                            com.app.pocketfarm.helper.Constant.AGE, jsonArray.getJSONObject(0).getString(
+                                com.app.pocketfarm.helper.Constant.AGE))
+                        session.setData(
+                            com.app.pocketfarm.helper.Constant.CITY, jsonArray.getJSONObject(0).getString(
+                                com.app.pocketfarm.helper.Constant.CITY))
+                        session.setData(
+                            com.app.pocketfarm.helper.Constant.STATE, jsonArray.getJSONObject(0).getString(
+                                com.app.pocketfarm.helper.Constant.STATE))
+                        session.setData(
+                            com.app.pocketfarm.helper.Constant.REFER_CODE, jsonArray.getJSONObject(0).getString(
+                                com.app.pocketfarm.helper.Constant.REFER_CODE))
 
 
+                        val intent = Intent(this, HomeActivity::class.java)
+                        startActivity(intent)
+                        finish()
+
+                    } else {
+                        val message = jsonObject.getString(Constant.MESSAGE)
+
+                        if (message.equals("Your Mobile Number is not Registered")) {
+                            val intent = Intent(this, ProfiledetailsActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                        else {
+                            DialogUtils.showCustomDialog(this, ""+jsonObject.getString(com.app.pocketfarm.helper.Constant.MESSAGE))
+                        }
+
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            } else {
+                // Toast.makeText(this, , Toast.LENGTH_SHORT).show()
+                DialogUtils.showCustomDialog(this, ""+java.lang.String.valueOf(response) + java.lang.String.valueOf(result))
+
+            }
+        }, this, com.app.pocketfarm.helper.Constant.LOGIN, params, true)
+
+
+    }
+
+
+
+
+
+    private fun otp() {
+        val params = HashMap<String, String>()
+        params[Constant.MOBILE] = session!!.getData(Constant.MOBILE)
+
+        ApiConfig.RequestToVolley({ result, response ->
+            if (result) {
+                try {
+                    val jsonObject = JSONObject(response)
+                    Log.d("SIGNUP_RES", response)
+                    if (jsonObject.getBoolean(Constant.SUCCESS)) {
+                        val jsonArray =
+                            jsonObject.getJSONArray(Constant.DATA)
+
+//                        session.setBoolean("is_logged_in", true)
+//                        session.setData(Constant.USER_ID, jsonArray.getJSONObject(0).getString(Constant.ID))
+//
+                        val  otp = jsonArray.getJSONObject(0).getString("otp")
+//
+                        //  Toast.makeText(this, otp, Toast.LENGTH_SHORT).show()
+                        // Toast.makeText(this, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show()
+
+                        sendotp(otp);
+
+
+
+                    } else {
+
+                        Toast.makeText(
+                            this,
+                            "" + jsonObject.getString(Constant.MESSAGE),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            } else {
+
+            }
+        }, this, Constant.OTP, params, true)
+    }
+
+    private fun sendotp(otp : String) {
+        val params: MutableMap<String, String> = HashMap()
+        ApiConfig.RequestToVolley({ result, response ->
+            if (result) {
+                binding.btnverify.visibility = View.VISIBLE
+                binding.btnsent.visibility = View.GONE
+                otp_get = otp
+                Toast.makeText(this,"OTP Sent Successfully", Toast.LENGTH_SHORT).show()
+            } else {
+                // Toast.makeText(this, , Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"OTP Failed", Toast.LENGTH_SHORT).show()
+
+            }
+        }, this, Constant.getOTPUrl("b45c58db6d261f2a",session!!.getData(Constant.MOBILE),otp), params, true)
+
+    }
+
+
+    private fun startCountdown() {
+        countDownTimer = object : CountDownTimer(COUNTDOWN_TIME, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                val secondsLeft = millisUntilFinished / 1000
+                // Update UI to show remaining seconds
+                binding.btnResend.text = " $secondsLeft Resend"
+                binding.btnResend.visibility = View.GONE
+
+
+            }
+
+            override fun onFinish() {
+                // Enable the button when countdown finishes
+                binding.btnResend.visibility = View.VISIBLE
+                binding.btnverify.visibility = View.GONE
+                binding.btnResend.isEnabled = true
+                binding.btnResend.text = "Resent"
+            }
+        }.start()
+    }
+
+    private fun resetCountdown() {
+        countDownTimer?.cancel()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        resetCountdown()
+    }
 
 }

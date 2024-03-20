@@ -71,7 +71,9 @@
             android:exported="false" />
         <activity
             android:name=".activity.ProfiledetailsActivity"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 

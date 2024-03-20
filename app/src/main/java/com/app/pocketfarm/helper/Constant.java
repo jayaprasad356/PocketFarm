@@ -10,7 +10,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class Constant {
     //public static final String MainBaseUrl = "http://weagri.graymatterworks.com/";
-    public static final String MainBaseUrl = "https://admin.pocketfarm.in/";
+    //public static final String MainBaseUrl = "https://admin.pocketfarm.in/";
+    public static final String MainBaseUrl = "https://demo.pocketfarm.in/";
 
     public static final String BaseUrl = MainBaseUrl + "api/";
 
@@ -68,6 +69,8 @@ public class Constant {
 
     public static final String MOBILE = "mobile";
     public static final String DEVICE_ID = "device_id";
+    public static final String PASSWORD = "password";
+
     public static final String ID = "id";
     public static final String USER_ID = "user_id";
     public static final String QR_IMAGE = "qr_image";
@@ -100,8 +103,7 @@ public class Constant {
     public static final String NAME = "name";
     public static final String SEARCH = "search";
     public static final String EMAIL = "email";
-    public static final String PASSWORD = "password";
-    public static final String CONFIRM_PASSWORD = "confirm password";
+    public static final String CONFIRM_PASSWORD = "confirm_password";
     public static final String LOGIN_STATUS = "false";
 
     public static final String SUCCESS = "success";

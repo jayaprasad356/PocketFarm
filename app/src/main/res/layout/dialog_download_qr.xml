@@ -18,7 +18,6 @@
     <ImageView
         android:layout_width="@dimen/_200sdp"
         android:layout_height="@dimen/_200sdp"
-        android:background="@drawable/qr_bharath"
         android:layout_gravity="center"
         />
 
@@ -31,6 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Download"
+        android:visibility="gone"
         android:fontFamily="@font/poppins_medium"
         android:textAllCaps="false"/>
 

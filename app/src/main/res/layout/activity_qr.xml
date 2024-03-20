@@ -38,8 +38,7 @@
         android:layout_width="@dimen/_250sdp"
         android:layout_height="@dimen/_250sdp"
         android:layout_centerInParent="true"
-        android:layout_gravity="center"
-         />
+        android:layout_gravity="center" />
 
 
     <com.google.android.material.button.MaterialButton
@@ -52,6 +51,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/primary_color"
         android:text="Download QR"
+        android:visibility="gone"
         android:textAllCaps="false"
         android:layout_alignParentBottom="true"
         android:fontFamily="@font/poppins_medium"
