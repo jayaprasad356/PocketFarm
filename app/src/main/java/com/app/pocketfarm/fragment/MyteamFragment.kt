@@ -15,6 +15,7 @@ import com.app.pocketfarm.adapter.MyTeamAdapter
 import com.app.pocketfarm.model.MyTeam
 import com.app.pocketfarm.databinding.FragmentMyteamBinding
 import com.app.pocketfarm.helper.Constant
+import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import org.json.JSONArray
 import org.json.JSONException
@@ -42,6 +43,9 @@ class MyteamFragment : Fragment() {
 
 
         binding.tvMobile.text = session.getData(Constant.MOBILE)
+
+
+        Glide.with(activity).load(session.getData(Constant.PROFILE)).placeholder(com.app.pocketfarm.R.drawable.profile).into(binding.ivProfile)
 
 
         binding.rlBonus1.setOnClickListener {

@@ -15,6 +15,7 @@ class MyPlan {
     var income : String? = null
     var joined_date : String? = null
     var claim : String? = null
+    var num_times : String? = null
 
     constructor(
         id: String?,
@@ -30,7 +31,8 @@ class MyPlan {
         daily_quantity: String?,
         income: String?,
         joined_date: String?,
-        claim: String?
+        claim: String?,
+        num_times: String?
     ) {
         this.id = id
         this.products = products
@@ -46,5 +48,6 @@ class MyPlan {
         this.joined_date = joined_date
         this.claim = claim
         this.plan_id = plan_id
+        this.num_times = num_times
     }
 }

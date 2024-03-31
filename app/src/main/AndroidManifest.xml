@@ -9,6 +9,9 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
 
     <application
         android:name=".helper.ApiConfig"
@@ -24,9 +27,29 @@
         android:theme="@style/Theme.Weagri"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
-
-
+        <activity
+            android:name=".activity.ChangepasswordActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            />
+        <activity
+            android:name=".activity.SelltomarketActivity"
+            android:exported="false" />
+        <activity
+            android:name=".gateway.PaymentStatusActivity"
+            android:exported="false" />
+        <activity
+            android:name=".gateway.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".gateway.SelectPaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ResetotpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ForgototpActivity"
+            android:exported="false" />
         <activity
             android:name=".activity.QrActivity"
             android:exported="false" />
@@ -44,13 +67,25 @@
             android:exported="false" />
         <activity
             android:name=".activity.SplashScreenActivity"
+            android:exported="true"
+            android:launchMode="singleInstance">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".upismartintent.MainActivity"
             android:exported="false" />
         <activity
             android:name=".activity.WelcomeActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleInstance" />
         <activity
             android:name=".activity.WithdrawalStatusActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleInstance" />
         <activity
             android:name="com.canhub.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
@@ -59,21 +94,14 @@
             android:exported="false" />
         <activity
             android:name=".activity.RechargeActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".activity.PaymentActivity"
             android:exported="false" />
         <activity
             android:name=".activity.ProfiledetailsActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustResize"
-            >
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -116,21 +144,16 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
-        </provider>
-
-
-        <!-- Keep it true in UAT environment for both the flags-->
+        </provider> <!-- Keep it true in UAT environment for both the flags -->
         <meta-data
             android:name="com.phonepe.android.sdk.isUAT"
-            android:value="true"/>
+            android:value="true" />
         <meta-data
             android:name="com.phonepe.android.sdk.isSimulator"
-            android:value="true"/>
-
-        <!-- The value will be the MID-->
+            android:value="true" /> <!-- The value will be the MID -->
         <meta-data
             android:name="com.phonepe.android.sdk.MerchantId"
-            android:value="ATMOSTUAT"/>
+            android:value="ATMOSTUAT" />
     </application>
 
 </manifest>

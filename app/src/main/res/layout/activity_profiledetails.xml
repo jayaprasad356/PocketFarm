@@ -107,23 +107,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:backgroundTint="@color/primary_color"
-                android:text="sent"
+                android:text="Sent"
+                android:textSize="@dimen/_16sdp"
                 android:textAllCaps="false"
                 />
 
 
-            <Button
-                android:visibility="gone"
-                android:paddingVertical="@dimen/_10sdp"
-                android:layout_weight="1.2"
-                android:id="@+id/btnResend"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/primary_color"
-                android:text=""
-                android:textAllCaps="false"
-                />
+
 
 
             <Button
@@ -136,6 +126,7 @@
                 android:layout_gravity="center"
                 android:backgroundTint="@color/primary_color"
                 android:text="Verify"
+                android:textSize="@dimen/_16sdp"
                 android:textAllCaps="false"
                 />
             
@@ -161,6 +152,20 @@
 
 
         </LinearLayout>
+
+
+        <TextView
+            android:layout_marginTop="@dimen/_5sdp"
+            android:visibility="gone"
+            android:gravity="right"
+            android:id="@+id/tvResend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Resent"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14sdp"
+            android:fontFamily="@font/poppins_medium"
+            />
 
 
 
@@ -217,6 +222,7 @@
             app:hintTextColor="@color/primary_color"
             android:textColorHint="@color/grey_light"
             app:boxStrokeColor="@color/primary_color"
+            app:passwordToggleEnabled="true"
             app:startIconDrawable="@drawable/baseline_lock_24">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -238,6 +244,7 @@
             app:hintTextColor="@color/primary_color"
             android:textColorHint="@color/grey_light"
             app:boxStrokeColor="@color/primary_color"
+            app:passwordToggleEnabled="true"
             app:startIconDrawable="@drawable/baseline_lock_24">
 
             <com.google.android.material.textfield.TextInputEditText

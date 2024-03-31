@@ -34,6 +34,9 @@ class LoginActivity : AppCompatActivity() {
         binding.tvSignin.setOnClickListener {
             startActivity(Intent(this, ProfiledetailsActivity::class.java))
         }
+        binding.tvForgotPassword.setOnClickListener {
+            startActivity(Intent(this, ForgototpActivity::class.java))
+        }
 
 
         setupViews()

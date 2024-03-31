@@ -41,16 +41,18 @@ class ScartchcardActivity : AppCompatActivity() {
 
 
 
+
+
+        val chance = session.getData(com.app.pocketfarm.helper.Constant.CHANCES)
+
         dialog = Dialog(this)
+
+
         binding.scratchView.setRevealListener(object : IRevealListener {
             override fun onRevealed(scratchView: ScratchView) {
-                Toast.makeText(
-                    this@ScartchcardActivity,
-                    "Revealed!", Toast.LENGTH_SHORT
-                ).show()
 
-                // overlay is removed when the scratch is revealed
-
+                Toast.makeText(this@ScartchcardActivity, "Revealed!", Toast.LENGTH_SHORT).show()
+                userdetails()
                 scratchView.visibility = View.GONE
 
             }
@@ -60,14 +62,29 @@ class ScartchcardActivity : AppCompatActivity() {
             }
         })
 
-        apicall()
+
+        if(chance.equals("0")){
+            binding.ScarchImg.visibility = View.GONE
+            binding.image.visibility = View.VISIBLE
+            DialogUtils.showCustomDialog(activity, "No More Chances")
+        }
+        else{
+
+            binding.ScarchImg.visibility = View.VISIBLE
+            binding.image.visibility = View.GONE
+            apicall()
+        }
+        userdetails()
+
 
         return setContentView(binding!!.root)
     }
 
-    private fun apicall() {
+
+    private fun userdetails() {
         val params: MutableMap<String, String> = HashMap()
         params[Constant.USER_ID] = session!!.getData(Constant.USER_ID)
+//        Toast.makeText(this,"" + session!!.getData(Constant.USER_ID),Toast.LENGTH_SHORT).show()
         ApiConfig.RequestToVolley({ result, response ->
             if (result) {
                 try {
@@ -77,8 +94,44 @@ class ScartchcardActivity : AppCompatActivity() {
                             jsonObject.getJSONArray(Constant.DATA)
 
 
-                        binding.tvAmount.text = jsonArray.getJSONObject(0).getString("amount")
 
+                        session!!.setData(Constant.CHANCES, jsonArray.getJSONObject(0).getString(Constant.CHANCES))
+
+
+
+
+                        binding.tvChance.text =  session.getData(com.app.pocketfarm.helper.Constant.CHANCES) + " Chances left"
+
+
+
+
+
+                    } else {
+                        DialogUtils.showCustomDialog(activity, ""+jsonObject.getString(Constant.MESSAGE))
+
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                    Toast.makeText(activity, e.toString(), Toast.LENGTH_SHORT).show()
+                }
+            }
+        }, activity, Constant.USER_DETAILS, params, true)
+
+        // Return a dummy intent, as the actual navigation is handled inside the callback
+
+    }
+
+
+    private fun apicall() {
+        val params: MutableMap<String, String> = HashMap()
+        params[Constant.USER_ID] = session!!.getData(Constant.USER_ID)
+        ApiConfig.RequestToVolley({ result, response ->
+            if (result) {
+                try {
+                    val jsonObject = JSONObject(response)
+                    if (jsonObject.getBoolean(Constant.SUCCESS)) {
+
+                        binding.tvAmount.text = jsonObject.getString("amount")
 
                     } else {
                         DialogUtils.showCustomDialog(activity, ""+jsonObject.getString(Constant.MESSAGE))

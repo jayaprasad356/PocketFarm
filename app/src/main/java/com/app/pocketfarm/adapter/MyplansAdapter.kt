@@ -16,10 +16,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 
 import com.bumptech.glide.Glide
-import com.app.pocketfarm.activity.RechargeActivity
 import com.app.pocketfarm.model.MyPlan
 import com.app.pocketfarm.R
 import com.app.pocketfarm.activity.PaymentActivity
+import com.app.pocketfarm.activity.RechargeActivity
 import com.app.pocketfarm.helper.ApiConfig
 import com.app.pocketfarm.helper.Constant
 import com.app.pocketfarm.helper.Session
@@ -33,6 +33,7 @@ class MyplansAdapter(
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     val myplan: ArrayList<MyPlan>
     val activitys: Activity
+    val session = Session(activity)
 
     init {
         this.myplan = myplan
@@ -66,7 +67,7 @@ class MyplansAdapter(
 
         holder.tvplan.text = "₹ " + report.price
         holder.tvDailyIncome.text = "₹ " + report.daily_income
-        holder.tvTotalIncome.text = "₹ " + report.monthly_income
+        holder.tvTotalIncome.text =  report.num_times
         holder.tvInvitebonus.text = "₹ " + report.invite_bonus
         holder.tvQuantity.text = report.daily_quantity + " " + report.unit
         // holder.tvValidity.text = report.validity + " days"
@@ -181,8 +182,18 @@ class MyplansAdapter(
             ivSuccess.visibility = View.GONE
             btnOk.setOnClickListener {
                 dialog.dismiss()
-                val intent = Intent(activity, PaymentActivity::class.java)
-                activity.startActivity(intent)
+
+
+
+                if (session.getData(Constant.PAYGATEWAY).equals("1")) {
+                    val intent = Intent(activity, RechargeActivity::class.java)
+                    activity.startActivity(intent)
+
+                } else if (session.getData(Constant.PAYGATEWAY).equals("0")) {
+                    val intent = Intent(activity, PaymentActivity::class.java)
+                    activity.startActivity(intent)
+
+                }
             }
 
 

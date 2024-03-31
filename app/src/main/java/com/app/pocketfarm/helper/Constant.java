@@ -10,14 +10,16 @@ import org.jetbrains.annotations.Nullable;
 
 public class Constant {
     //public static final String MainBaseUrl = "http://weagri.graymatterworks.com/";
-    //public static final String MainBaseUrl = "https://admin.pocketfarm.in/";
-    public static final String MainBaseUrl = "https://demo.pocketfarm.in/";
+   //public static final String MainBaseUrl = "https://admin.pocketfarm.in/";
+  public static final String MainBaseUrl = "https://demo.pocketfarm.in/";
 
     public static final String BaseUrl = MainBaseUrl + "api/";
 
 
     public static final String LOGIN = BaseUrl + "login.php";
+    public static final String FORGOT_PASSWORD = BaseUrl + "forgot_password.php";
     public static final String REGISTER = BaseUrl + "register.php";
+    public static final String CHANGE_PASSWORD = BaseUrl + "change_password.php";
     public static final String OTP = BaseUrl + "otp.php";
 
     public static final  String getOTPUrl(String key,String mobile,String otp) {
@@ -32,10 +34,14 @@ public class Constant {
     public static final String USER_DETAILS = BaseUrl + "user_details.php";
     public static final String SCRATCH_CARD= BaseUrl + "scratch_card.php";
     public static final String SETTINGS= BaseUrl + "settings.php";
+    public static final String UPDATE_LOCATION= BaseUrl + "update_location.php";
+    public static final String RECHARGE_STATUS = BaseUrl + "recharge_status.php";
+    public static final String RECHARGE_CREATE = BaseUrl + "recharge_create.php";
     public static final String UPDATE_BANK= BaseUrl + "update_bank_details.php";
     public static final String MY_TEAM = BaseUrl + "my_team.php";
     public static final String TEAM_LIST = BaseUrl + "team_list.php";
     public static final String UPDATE_PROFILE = BaseUrl + "update_profile.php";
+    public static final String UPDATE_IMAGE = BaseUrl + "update_image.php";
 
     public static final String PLAN_SLIDE_LIST = BaseUrl + "plan_slide_list.php";
     public static final String RECHARGE_URL = BaseUrl + "recharge.php";
@@ -45,8 +51,10 @@ public class Constant {
     public static final String WITHDRAWAL_LIST = BaseUrl + "withdrawals_list.php";
     public static final String ACTIVATE_PLAN = BaseUrl + "activate_plan.php";
     public static final String CLAIM = BaseUrl + "claim.php";
+    public static final String MARKETS_LIST = BaseUrl + "markets_list.php";
     public static final String RECHARGE_HISTORY = BaseUrl + "recharge_history.php";
     public static final String PAYMENT_SETTING = BaseUrl + "payment_setting.php";
+    public static final String GATEWAY = "https://api.ekqr.in/api/create_order";
 
     public static final String APPUPDATE= BaseUrl + "appupdate.php";
 
@@ -54,6 +62,30 @@ public class Constant {
 
 
 
+
+
+    public static final String PAYGATEWAY = "pay_gateway";
+    public static final String LOCATION_STATUS = "false";
+
+
+
+    public static final String KEY = "key";
+    public static final String CLIENT_TXN_ID = "client_txn_id";
+    public static final String AMOUNT = "amount";
+    public static final String P_INFO = "p_info";
+    public static final String CUSTOMER_NAME = "customer_name";
+    public static final String CUSTOMER_EMAIL = "customer_email";
+    public static final String CUSTOMER_MOBILE = "customer_mobile";
+    public static final String REDIRECT_URL = "redirect_url";
+    public static final String UDF1 = "udf1";
+    public static final String UDF2 = "udf2";
+    public static final String UDF3 = "udf3";
+    public static final String DATE = "date";
+    public static final String TXN_ID = "txn_id";
+    public static final String MARKET_ID = "market_id";
+    public static final String OFFERIMAGE = "false";
+
+    
 
 
 
@@ -73,6 +105,8 @@ public class Constant {
 
     public static final String ID = "id";
     public static final String USER_ID = "user_id";
+    public static final String LATITUDE = "latitude";
+    public static final String LONGITUDE = "longitude";
     public static final String QR_IMAGE = "qr_image";
     public static final String LEVEL = "level";
     public static final String LOG_STATUS = "log_status";
@@ -85,6 +119,7 @@ public class Constant {
 
 
     public static final String ACCOUNT_NUM = "account_num";
+    public static final String CHANCES = "chances";
     public static final String HOLDER_NAME = "holder_name";
     public static final String BANK = "bank";
     public static final String BRANCH = "branch";
@@ -107,18 +142,20 @@ public class Constant {
     public static final String LOGIN_STATUS = "false";
 
     public static final String SUCCESS = "success";
+    public static final String STATUS = "status";
     public static final String MESSAGE = "message";
 
     public static final String DATA = "data";
     public static final String ADDRESS = "address";
     public static final String REFER_CODE = "refer_code";
+    public static final String BLOCKED = "blocked";
+    public static final String PROFILE = "profile";
     public static final String REFERRED_BY= "referred_by";
 
 
     public static final String IMAGE = "image";
     public static final String PAYMENT_PROOF = "payment_proof";
 
-    public static final String PROFILE = "profile";
     public static final String BOOKID = "book_id";
     public static final String CART_ID = "cart_id";
     public static final String APPUPDATE_ID = "app_update_id";

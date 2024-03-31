@@ -105,6 +105,7 @@ class SplashScreenActivity : AppCompatActivity() {
     private fun GotoActivity() {
         handler?.postDelayed({
             if (session!!.getBoolean("is_logged_in")) {
+                session!!.setData(Constant.OFFERIMAGE, "true")
                 val intent = Intent(activity, HomeActivity::class.java)
                 startActivity(intent)
                 finish()

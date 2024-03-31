@@ -24,6 +24,7 @@ import com.bumptech.glide.Glide
 import com.app.pocketfarm.model.MyPlan
 import com.app.pocketfarm.R
 import com.app.pocketfarm.activity.HomeActivity
+import com.app.pocketfarm.activity.SelltomarketActivity
 import com.app.pocketfarm.helper.ApiConfig
 import com.app.pocketfarm.helper.Constant
 import com.app.pocketfarm.helper.Session
@@ -69,7 +70,18 @@ class ActivateplansAdapter(
         holder.btnActivate.setOnClickListener {
 
             if (report.claim.equals("1")) {
-                showCustomDialog(report.plan_id,report.daily_quantity,report.unit,report.products,report.daily_income)
+//                showCustomDialog(report.plan_id,report.daily_quantity,report.unit,report.products,report.daily_income)
+
+                // next activity
+                val intent = Intent(activity, SelltomarketActivity::class.java)
+                intent.putExtra("plan_id", report.plan_id)
+                intent.putExtra("daily_quantity", report.daily_quantity)
+                intent.putExtra("unit", report.unit)
+                intent.putExtra("products", report.products)
+                intent.putExtra("daily_income", report.daily_income)
+                activity.startActivity(intent)
+                activity.finish()
+
             } else {
 
             }

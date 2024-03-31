@@ -44,6 +44,41 @@
             android:layout_height="wrap_content">
 
 
+            <RelativeLayout
+                android:id="@+id/rlprofile"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/profile"
+                    android:id="@+id/profile"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"/>
+
+
+
+
+                <TextView
+                    android:id="@+id/tvadd"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:layout_below="@+id/profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textColor="@color/blue_color"
+                    android:textSize="@dimen/_12sdp"
+                    />
+
+
+
+            </RelativeLayout>
+
+
 
 
             <com.google.android.material.textfield.TextInputLayout

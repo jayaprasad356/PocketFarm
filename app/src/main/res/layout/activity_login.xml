@@ -22,10 +22,10 @@
             <ImageView
                 android:layout_gravity="center"
                 android:id="@+id/ivLogo"
-                android:layout_width="@dimen/_230sdp"
-                android:layout_height="@dimen/_180sdp"
+                android:layout_width="@dimen/_130sdp"
+                android:layout_height="@dimen/_120sdp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/_100sdp"
+                android:layout_marginTop="@dimen/_30sdp"
                 android:background="@drawable/login_bg" />
 
 
@@ -74,7 +74,9 @@
                     app:hintTextColor="@color/primary_color"
                     android:textColorHint="@color/grey_light"
                     app:boxStrokeColor="@color/primary_color"
-                    app:startIconDrawable="@drawable/baseline_lock_24">
+                    app:startIconDrawable="@drawable/baseline_lock_24"
+                    app:passwordToggleEnabled="true"
+                    >
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etPassword"
@@ -83,12 +85,23 @@
                         android:textColor="@color/black"
                         android:fontFamily="@font/poppins_medium"
                         android:inputType="textPassword"
+
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
 
-
+                <TextView
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:gravity="right"
+                    android:id="@+id/tvForgotPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Forgot Password ?"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:fontFamily="@font/poppins_medium"
+                    />
 
 
                 <com.google.android.material.button.MaterialButton
@@ -120,7 +133,7 @@
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Sign up"
+                    android:text="Create an account"
                     android:textColor="@color/primary_color"
                     android:textSize="@dimen/_14sdp"
                     android:fontFamily="@font/poppins_semibold"

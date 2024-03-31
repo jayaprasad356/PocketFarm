@@ -2,6 +2,8 @@ package com.app.pocketfarm.activity
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.BitmapFactory
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -14,14 +16,23 @@ import com.app.pocketfarm.helper.ApiConfig
 import com.app.pocketfarm.helper.Constant
 import com.app.pocketfarm.helper.Session
 import com.app.pocketfarm.utils.DialogUtils
+import com.bumptech.glide.Glide
+import com.canhub.cropper.CropImage
 import org.json.JSONException
 import org.json.JSONObject
+import java.io.File
 
 class UpdateProfileActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityUpdateProfileBinding
     lateinit var activity: Activity
     lateinit var session: Session
+
+
+    var filePath1: String? = null
+    var imageUri: Uri? = null
+
+    private val REQUEST_IMAGE_GALLERY = 2
 
 
     private val indianStates = arrayOf(
@@ -49,6 +60,21 @@ class UpdateProfileActivity : AppCompatActivity() {
 
         val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_item, indianStates)
         binding.autoCompleteTextView.setAdapter(arrayAdapter)
+
+
+        Glide.with(activity).load(session.getData(Constant.PROFILE)).placeholder(com.app.pocketfarm.R.drawable.profile).into(binding.profile)
+
+
+        if (session.getData(Constant.PROFILE).isEmpty()) {
+            binding.tvadd.text = "Add Profile"
+        } else {
+            binding.tvadd.text = "Change Profile"
+        }
+
+        binding.rlprofile.setOnClickListener {
+            pickImageFromGallery()
+
+        }
 
         binding.ibBack.setOnClickListener {
           onBackPressed()
@@ -145,6 +171,71 @@ class UpdateProfileActivity : AppCompatActivity() {
 
 
 
+    }
+    private fun updateimage() {
+
+        val params: MutableMap<String, String> = HashMap()
+        params[Constant.USER_ID] = session.getData(Constant.USER_ID)
+        val FileParams: MutableMap<String, String> = HashMap()
+        FileParams[com.app.pocketfarm.helper.Constant.IMAGE] = filePath1!!
+
+        ApiConfig.RequestToVolley({ result, response ->
+            if (result) {
+                try {
+                    val jsonObject = JSONObject(response)
+                    Log.d("SIGNUP_RES", response)
+                    if (jsonObject.getBoolean(Constant.SUCCESS)) {
+                      session.setData(Constant.PROFILE, jsonObject.getString(Constant.PROFILE))
+                        Glide.with(activity).load(session.getData(Constant.PROFILE)).placeholder(com.app.pocketfarm.R.drawable.profile).into(binding.profile)
+
+
+                    } else {
+
+                        DialogUtils.showCustomDialog(this, ""+jsonObject.getString(Constant.MESSAGE))
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            } else {
+                Toast.makeText(this, java.lang.String.valueOf(response) + java.lang.String.valueOf(result), Toast.LENGTH_SHORT).show()
+            }
+        }, this, Constant.UPDATE_IMAGE, params, FileParams)
+
+
+
+    }
+
+
+    private fun pickImageFromGallery() {
+
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(
+            Intent.createChooser(intent, "Select Picture"), REQUEST_IMAGE_GALLERY
+        )
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_IMAGE_GALLERY) {
+                imageUri = data?.data
+                CropImage.activity(imageUri)
+                    .start(activity)
+            } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+                val result: CropImage.ActivityResult = CropImage.getActivityResult(data)!!
+                filePath1 = result.getUriFilePath(activity, true)
+                val imgFile: File = File(filePath1)
+                if (imgFile.exists()) {
+
+                    val myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
+                    binding.profile.setImageBitmap(myBitmap)
+                    binding.tvadd.text = "Change Profile"
+                    updateimage()
+                }
+            }
+        }
     }
 
 }

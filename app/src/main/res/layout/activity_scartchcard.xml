@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:fontFamily="@font/poppins_regular"
-            android:text="Scaratch Card"
+            android:text="Scratch card"
             android:textColor="@color/black"
             android:textSize="@dimen/_14sdp" />
 
@@ -48,6 +48,7 @@
         android:padding="@dimen/_14sdp">
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/Scarch_img"
             android:layout_centerHorizontal="true"
             android:layout_width="@dimen/_200sdp"
             android:layout_height="@dimen/_200sdp"
@@ -92,12 +93,45 @@
                 app:overlay_image="@drawable/greenoverlay"
                 app:overlay_width="@dimen/_200sdp" />
         </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            android:visibility="gone"
+            android:id="@+id/image"
+            android:layout_centerHorizontal="true"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_200sdp"
+            android:background="@color/white"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            android:elevation="0dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:contentDescription="@string/app_name"
+                android:gravity="center"
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/greenoverlay" />
+
+
+            </LinearLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
 
 
 
 
     </RelativeLayout>
     <TextView
+        android:id="@+id/tvChance"
         android:gravity="center"
         android:layout_below="@+id/rlInvite"
         android:layout_width="match_parent"

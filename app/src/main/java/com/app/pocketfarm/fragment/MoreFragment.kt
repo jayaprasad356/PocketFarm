@@ -3,15 +3,16 @@ package com.app.pocketfarm.fragment
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.app.pocketfarm.activity.InviteActivity
+import androidx.fragment.app.Fragment
 import com.app.pocketfarm.activity.HomeActivity
+import com.app.pocketfarm.activity.InviteActivity
 import com.app.pocketfarm.activity.MyProductionActivity
 import com.app.pocketfarm.activity.PaymentActivity
+import com.app.pocketfarm.activity.RechargeActivity
 import com.app.pocketfarm.activity.TransactionActivity
 import com.app.pocketfarm.activity.UpdateProfileActivity
 import com.app.pocketfarm.activity.WithdrawalActivity
@@ -19,6 +20,7 @@ import com.app.pocketfarm.databinding.FragmentMoreBinding
 import com.app.pocketfarm.helper.ApiConfig
 import com.app.pocketfarm.helper.Constant
 import com.app.pocketfarm.utils.DialogUtils
+import com.bumptech.glide.Glide
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -44,6 +46,7 @@ class MoreFragment : Fragment() {
         activity = getActivity() as Activity
         session = com.app.pocketfarm.helper.Session(activity)
 
+        Glide.with(activity).load(session.getData(Constant.PROFILE)).placeholder(com.app.pocketfarm.R.drawable.profile).into(binding.ivProfile)
 
 
         (activity as HomeActivity).binding.rlToolbar.visibility = View.GONE
@@ -57,8 +60,8 @@ class MoreFragment : Fragment() {
         }
 
         binding.llScartchCard.setOnClickListener {
-            Toast.makeText(activity, "Coming soon", Toast.LENGTH_SHORT).show()
-            //startActivity(Intent(activity, com.app.pocketfarm.activity.ScartchcardActivity::class.java))
+
+          startActivity(Intent(activity, com.app.pocketfarm.activity.ScartchcardActivity::class.java))
         }
 
 
@@ -82,7 +85,20 @@ class MoreFragment : Fragment() {
         }
 
         binding.cvRecharge.setOnClickListener {
-            //startActivity(Intent(activity, PaymentActivity::class.java))
+
+            if (session.getData(Constant.PAYGATEWAY).equals("1")) {
+                startActivity(Intent(activity, RechargeActivity::class.java))
+            } else if (session.getData(Constant.PAYGATEWAY).equals("0")) {
+                startActivity(Intent(activity, PaymentActivity::class.java))
+
+            }
+         //  startActivity(Intent(activity, PaymentActivity::class.java))
+//           startActivity(Intent(activity, RechargeActivity::class.java))
+        }
+
+
+        binding.rlChangepassword.setOnClickListener {
+            startActivity(Intent(activity, com.app.pocketfarm.activity.ChangepasswordActivity::class.java))
         }
 
         binding.rlhistory.setOnClickListener {
@@ -130,6 +146,7 @@ class MoreFragment : Fragment() {
                         val jsonArray: JSONArray =
                             jsonObject.getJSONArray(Constant.DATA)
 
+                        session!!.setData(Constant.CHANCES, jsonArray.getJSONObject(0).getString(Constant.CHANCES))
 
 
                         session!!.setData(

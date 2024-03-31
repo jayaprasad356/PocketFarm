@@ -85,7 +85,15 @@ class ProfiledetailsActivity : AppCompatActivity() {
             }
             .addOnFailureListener(this) { e -> Log.w(ApiConfig.TAG, "getDynamicLink:onFailure", e) }
 
-
+        // Set click listener for the "Resend" button
+        binding.tvResend.setOnClickListener {
+            // Reset the timer
+            resetCountdown()
+            // Start the countdown timer again
+            startCountdown()
+            otp()
+            // Disable the button
+        }
 
         binding.btnsent.setOnClickListener{
             if (binding.etPhoneNumber.text.toString().isEmpty()) {
@@ -99,23 +107,14 @@ class ProfiledetailsActivity : AppCompatActivity() {
                 binding.btnsent.visibility = View.GONE
 
                 otp()
-                startCountdown()
+                binding.etPhoneNumber.isEnabled = false
+
 
 
             }
 
         }
 
-        // Set click listener for the "Resend" button
-        binding.btnResend.setOnClickListener {
-            // Reset the timer
-            resetCountdown()
-            // Start the countdown timer again
-            startCountdown()
-            otp()
-            // Disable the button
-            binding.btnResend.isEnabled = false
-        }
 
         binding.btnverify.setOnClickListener{
 
@@ -124,6 +123,8 @@ class ProfiledetailsActivity : AppCompatActivity() {
                 binding.rlcheck.visibility  = View.VISIBLE
                 binding.etOTP.isEnabled = false
                 verify = true
+                binding.tvResend.visibility = View.GONE
+
             }
 
             else {
@@ -200,6 +201,7 @@ class ProfiledetailsActivity : AppCompatActivity() {
                     }
                 }
 
+
                 setContentView(binding.root)
 
 
@@ -222,8 +224,8 @@ class ProfiledetailsActivity : AppCompatActivity() {
 
     private fun register() {
         val params = HashMap<String, String>()
-        params[Constant.MOBILE] = binding.etPhoneNumber.toString().trim()
-        params[Constant.PASSWORD] = binding.etPassword.toString().trim()
+        params[Constant.MOBILE] = binding.etPhoneNumber.text.toString().trim()
+        params[Constant.PASSWORD] = binding.etPassword.text.toString().trim()
         params[Constant.NAME] = binding.etName.text.toString().trim()
         params[Constant.EMAIL] = binding.etEmail.text.toString().trim()
         params[Constant.AGE] = binding.etAge.text.toString().trim()
@@ -231,7 +233,6 @@ class ProfiledetailsActivity : AppCompatActivity() {
         params[Constant.STATE] = binding.autoCompleteTextView.text.toString().trim()
         params[Constant.REFERRED_BY] = binding.etReferCode.text.toString().trim()
         params[Constant.DEVICE_ID] = Constant.getDeviceId(activity)
-
 
         ApiConfig.RequestToVolley({ result, response ->
             if (result) {
@@ -251,17 +252,27 @@ class ProfiledetailsActivity : AppCompatActivity() {
                         session.setData(Constant.CITY, jsonArray.getJSONObject(0).getString(Constant.CITY))
                         session.setData(Constant.STATE, jsonArray.getJSONObject(0).getString(Constant.STATE))
                         session.setData(Constant.REFER_CODE,jsonArray.getJSONObject(0).getString(Constant.REFER_CODE))
-                        val intent = Intent(activity, SplashScreenActivity::class.java)
+
+
+                        session!!.setData(com.app.pocketfarm.helper.Constant.USER_ID, jsonArray.getJSONObject(0).getString(com.app.pocketfarm.helper.Constant.ID))
+                        session.setData(com.app.pocketfarm.helper.Constant.NAME, jsonArray.getJSONObject(0).getString(com.app.pocketfarm.helper.Constant.NAME))
+                        session.setData(com.app.pocketfarm.helper.Constant.MOBILE, jsonArray.getJSONObject(0).getString(com.app.pocketfarm.helper.Constant.MOBILE))
+                        session.setData(com.app.pocketfarm.helper.Constant.EMAIL, jsonArray.getJSONObject(0).getString(com.app.pocketfarm.helper.Constant.EMAIL))
+                        session.setData(com.app.pocketfarm.helper.Constant.AGE, jsonArray.getJSONObject(0).getString(com.app.pocketfarm.helper.Constant.AGE))
+                        session.setData(com.app.pocketfarm.helper.Constant.CITY, jsonArray.getJSONObject(0).getString(com.app.pocketfarm.helper.Constant.CITY))
+                        session.setData(com.app.pocketfarm.helper.Constant.STATE, jsonArray.getJSONObject(0).getString(com.app.pocketfarm.helper.Constant.STATE))
+                        session.setData(com.app.pocketfarm.helper.Constant.REFER_CODE, jsonArray.getJSONObject(0).getString(com.app.pocketfarm.helper.Constant.REFER_CODE))
+
+
+                        Toast.makeText(this, "" + jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show()
+
+                        val intent = Intent(activity, HomeActivity::class.java)
                         startActivity(intent)
                         finish()
 
                     } else {
 
-                        Toast.makeText(
-                            this,
-                            "" + jsonObject.getString(Constant.MESSAGE),
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(this, "" + jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show()
                     }
                 } catch (e: JSONException) {
                     e.printStackTrace()
@@ -310,30 +321,14 @@ class ProfiledetailsActivity : AppCompatActivity() {
                         val jsonArray = jsonObject.getJSONArray(com.app.pocketfarm.helper.Constant.DATA)
                         //Toast.makeText(activity, jsonObject.getString(com.app.pocketfarm.helper.Constant.MESSAGE), Toast.LENGTH_SHORT).show()
                         session!!.setBoolean("is_logged_in", true)
-                        session!!.setData(
-                            com.app.pocketfarm.helper.Constant.USER_ID, jsonArray.getJSONObject(0).getString(
-                                com.app.pocketfarm.helper.Constant.ID))
-                        session.setData(
-                            com.app.pocketfarm.helper.Constant.NAME, jsonArray.getJSONObject(0).getString(
-                                com.app.pocketfarm.helper.Constant.NAME))
-                        session.setData(
-                            com.app.pocketfarm.helper.Constant.MOBILE, jsonArray.getJSONObject(0).getString(
-                                com.app.pocketfarm.helper.Constant.MOBILE))
-                        session.setData(
-                            com.app.pocketfarm.helper.Constant.EMAIL, jsonArray.getJSONObject(0).getString(
-                                com.app.pocketfarm.helper.Constant.EMAIL))
-                        session.setData(
-                            com.app.pocketfarm.helper.Constant.AGE, jsonArray.getJSONObject(0).getString(
-                                com.app.pocketfarm.helper.Constant.AGE))
-                        session.setData(
-                            com.app.pocketfarm.helper.Constant.CITY, jsonArray.getJSONObject(0).getString(
-                                com.app.pocketfarm.helper.Constant.CITY))
-                        session.setData(
-                            com.app.pocketfarm.helper.Constant.STATE, jsonArray.getJSONObject(0).getString(
-                                com.app.pocketfarm.helper.Constant.STATE))
-                        session.setData(
-                            com.app.pocketfarm.helper.Constant.REFER_CODE, jsonArray.getJSONObject(0).getString(
-                                com.app.pocketfarm.helper.Constant.REFER_CODE))
+                        session!!.setData(com.app.pocketfarm.helper.Constant.USER_ID, jsonArray.getJSONObject(0).getString(com.app.pocketfarm.helper.Constant.ID))
+                        session.setData(com.app.pocketfarm.helper.Constant.NAME, jsonArray.getJSONObject(0).getString(com.app.pocketfarm.helper.Constant.NAME))
+                        session.setData(com.app.pocketfarm.helper.Constant.MOBILE, jsonArray.getJSONObject(0).getString(com.app.pocketfarm.helper.Constant.MOBILE))
+                        session.setData(com.app.pocketfarm.helper.Constant.EMAIL, jsonArray.getJSONObject(0).getString(com.app.pocketfarm.helper.Constant.EMAIL))
+                        session.setData(com.app.pocketfarm.helper.Constant.AGE, jsonArray.getJSONObject(0).getString(com.app.pocketfarm.helper.Constant.AGE))
+                        session.setData(com.app.pocketfarm.helper.Constant.CITY, jsonArray.getJSONObject(0).getString(com.app.pocketfarm.helper.Constant.CITY))
+                        session.setData(com.app.pocketfarm.helper.Constant.STATE, jsonArray.getJSONObject(0).getString(com.app.pocketfarm.helper.Constant.STATE))
+                        session.setData(com.app.pocketfarm.helper.Constant.REFER_CODE, jsonArray.getJSONObject(0).getString(com.app.pocketfarm.helper.Constant.REFER_CODE))
 
 
                         val intent = Intent(this, HomeActivity::class.java)
@@ -372,7 +367,7 @@ class ProfiledetailsActivity : AppCompatActivity() {
 
     private fun otp() {
         val params = HashMap<String, String>()
-        params[Constant.MOBILE] = session!!.getData(Constant.MOBILE)
+        params[Constant.MOBILE] = binding.etPhoneNumber.text.toString().trim()
 
         ApiConfig.RequestToVolley({ result, response ->
             if (result) {
@@ -416,16 +411,18 @@ class ProfiledetailsActivity : AppCompatActivity() {
         val params: MutableMap<String, String> = HashMap()
         ApiConfig.RequestToVolley({ result, response ->
             if (result) {
+                binding.tvResend.visibility = View.VISIBLE
                 binding.btnverify.visibility = View.VISIBLE
                 binding.btnsent.visibility = View.GONE
                 otp_get = otp
+                startCountdown()
                 Toast.makeText(this,"OTP Sent Successfully", Toast.LENGTH_SHORT).show()
             } else {
                 // Toast.makeText(this, , Toast.LENGTH_SHORT).show()
                 Toast.makeText(this,"OTP Failed", Toast.LENGTH_SHORT).show()
 
             }
-        }, this, Constant.getOTPUrl("b45c58db6d261f2a",session!!.getData(Constant.MOBILE),otp), params, true)
+        }, this, Constant.getOTPUrl("b45c58db6d261f2a",binding.etPhoneNumber.text.toString().trim(),otp), params, true)
 
     }
 
@@ -434,19 +431,14 @@ class ProfiledetailsActivity : AppCompatActivity() {
         countDownTimer = object : CountDownTimer(COUNTDOWN_TIME, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val secondsLeft = millisUntilFinished / 1000
+
                 // Update UI to show remaining seconds
-                binding.btnResend.text = " $secondsLeft Resend"
-                binding.btnResend.visibility = View.GONE
-
-
+                binding.tvResend.text = "Resend in $secondsLeft seconds"
             }
 
             override fun onFinish() {
                 // Enable the button when countdown finishes
-                binding.btnResend.visibility = View.VISIBLE
-                binding.btnverify.visibility = View.GONE
-                binding.btnResend.isEnabled = true
-                binding.btnResend.text = "Resent"
+                binding.tvResend.text = "Don’t  receive any code  ? Resent"
             }
         }.start()
     }
@@ -459,5 +451,6 @@ class ProfiledetailsActivity : AppCompatActivity() {
         super.onDestroy()
         resetCountdown()
     }
+
 
 }

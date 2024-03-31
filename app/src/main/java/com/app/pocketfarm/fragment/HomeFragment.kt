@@ -1,13 +1,19 @@
 package com.app.pocketfarm.fragment
 
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.pocketfarm.R
+import com.app.pocketfarm.activity.ChangepasswordActivity
 import com.app.pocketfarm.activity.HomeActivity
 import com.app.pocketfarm.activity.PaymentActivity
 import com.app.pocketfarm.adapter.WithdrawalAdapter
@@ -15,7 +21,9 @@ import com.app.pocketfarm.model.Withdrawal
 import com.app.pocketfarm.databinding.FragmentHomeBinding
 import com.app.pocketfarm.helper.ApiConfig
 import com.app.pocketfarm.helper.Constant
+import com.app.pocketfarm.helper.LocationHelper
 import com.app.pocketfarm.utils.DialogUtils
+import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import org.json.JSONArray
 import org.json.JSONException
@@ -40,8 +48,12 @@ class HomeFragment : Fragment() {
 
 
 
+
         activity = getActivity() as Activity
         session = com.app.pocketfarm.helper.Session(activity)
+
+
+
 
         userdetails()
 
@@ -56,7 +68,6 @@ class HomeFragment : Fragment() {
         binding.rvtransactionitem.layoutManager = linearLayoutManager
 
         transaction()
-
 
         return binding.root
 
@@ -119,25 +130,11 @@ class HomeFragment : Fragment() {
 
 
 
-                        session!!.setData(
-                            Constant.ACCOUNT_NUM,
-                            jsonArray.getJSONObject(0).getString(Constant.ACCOUNT_NUM)
-                        )
-                        session!!.setData(
-                            Constant.HOLDER_NAME,
-                            jsonArray.getJSONObject(0).getString(Constant.HOLDER_NAME)
-                        )
-                        session!!.setData(
-                            Constant.BANK,
-                            jsonArray.getJSONObject(0).getString(Constant.BANK)
-                        )
-                        session!!.setData(
-                            Constant.BRANCH,
-                            jsonArray.getJSONObject(0).getString(Constant.BRANCH)
-                        )
-                        session!!.setData(
-                            Constant.IFSC,
-                            jsonArray.getJSONObject(0).getString(Constant.IFSC)
+                        session!!.setData(Constant.ACCOUNT_NUM, jsonArray.getJSONObject(0).getString(Constant.ACCOUNT_NUM))
+                        session!!.setData(Constant.HOLDER_NAME, jsonArray.getJSONObject(0).getString(Constant.HOLDER_NAME))
+                        session!!.setData(Constant.BANK, jsonArray.getJSONObject(0).getString(Constant.BANK))
+                        session!!.setData(Constant.BRANCH, jsonArray.getJSONObject(0).getString(Constant.BRANCH))
+                        session!!.setData(Constant.IFSC, jsonArray.getJSONObject(0).getString(Constant.IFSC)
                         )
                         session!!.setData(
                             Constant.AGE,
@@ -165,6 +162,26 @@ class HomeFragment : Fragment() {
                         session!!.setData(Constant.TOTAL_WITHDRAWAL, jsonArray.getJSONObject(0).getString(Constant.TOTAL_WITHDRAWAL))
                         session!!.setData(Constant.TEAM_INCOME, jsonArray.getJSONObject(0).getString(Constant.TEAM_INCOME))
                         session!!.setData(Constant.TOTAL_ASSETS, jsonArray.getJSONObject(0).getString(Constant.TOTAL_ASSETS))
+                        session!!.setData(Constant.PROFILE, jsonArray.getJSONObject(0).getString(Constant.PROFILE))
+                        session!!.setData(Constant.PASSWORD, jsonArray.getJSONObject(0).getString(Constant.PASSWORD))
+                        session!!.setData(Constant.BLOCKED, jsonArray.getJSONObject(0).getString(Constant.BLOCKED))
+
+
+                        // if paassword is empty or null move change password activity
+                        if (session.getData(Constant.PASSWORD).isEmpty() || session.getData(Constant.PASSWORD).equals("null")) {
+                            val intent = Intent(activity, ChangepasswordActivity::class.java)
+                            startActivity(intent)
+                            activity.finish()
+                        }
+
+
+                        val blocked  = jsonArray.getJSONObject(0).getString(Constant.BLOCKED)
+
+
+                        if (blocked.equals("1")) {
+                            session.logoutUser(activity)
+                        }
+
 
 
                         binding.tvRecharge.text =  "Recharge Rs." + session.getData(Constant.RECHARGE)
@@ -192,6 +209,7 @@ class HomeFragment : Fragment() {
         // Return a dummy intent, as the actual navigation is handled inside the callback
 
     }
+
 
 
 
