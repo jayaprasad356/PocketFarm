@@ -21,6 +21,9 @@ public class Constant {
     public static final String REGISTER = BaseUrl + "register.php";
     public static final String CHANGE_PASSWORD = BaseUrl + "change_password.php";
     public static final String OTP = BaseUrl + "otp.php";
+ public static final String JWT_KEY = "black_kite";
+ public static final String AccessKey = "accesskey";
+   public static final String AccessKeyVal = "90336";
 
     public static final  String getOTPUrl(String key,String mobile,String otp) {
 
@@ -105,6 +108,8 @@ public class Constant {
 
     public static final String ID = "id";
     public static final String USER_ID = "user_id";
+    public static final String SCRATCH_ID = "scratch_id";
+
     public static final String LATITUDE = "latitude";
     public static final String LONGITUDE = "longitude";
     public static final String QR_IMAGE = "qr_image";

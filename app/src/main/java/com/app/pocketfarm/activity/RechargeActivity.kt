@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import com.app.pocketfarm.R
 import com.app.pocketfarm.databinding.ActivityRechargeBinding
+import com.app.pocketfarm.gateway.MainActivity
 import com.app.pocketfarm.gateway.SelectPaymentActivity
 import com.app.pocketfarm.helper.Constant
 import com.app.pocketfarm.helper.DecimalFormatTextWatcher
@@ -51,7 +52,7 @@ class RechargeActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             else{
-                val Intent = Intent(this,SelectPaymentActivity ::class.java)
+                val Intent = Intent(this,MainActivity ::class.java)
                 startActivity(Intent)
                 session.setData(Constant.AMOUNT,binding.etAmount.text.toString())
             }

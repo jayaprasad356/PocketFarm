@@ -145,69 +145,26 @@ class MyplansAdapter(
 
         builder.setView(dialogView)
         val dialog = builder.create()
-        val ivSuccess = dialogView.findViewById<ImageView>(R.id.ivSuccess)
-        val tvStatus = dialogView.findViewById<TextView>(R.id.tvStatus)
         val tvMessage = dialogView.findViewById<TextView>(R.id.tvMessage)
-        val btnOk = dialogView.findViewById<Button>(R.id.btnOk)
-        val avRecharge = dialogView.findViewById<LottieAnimationView>(R.id.avRecharge)
-        val avRefer = dialogView.findViewById<LottieAnimationView>(R.id.avRefer)
+
 
 
         if (status.equals("Production started successfully")) {
-            ivSuccess.setImageResource(R.drawable.success)
-            tvStatus.text = "Production Started Successfully"
             tvMessage.text = "Start sell from tomorrow."
-            btnOk.text = "Done"
-            avRecharge.visibility = View.GONE
-            btnOk.setOnClickListener {
-                dialog.dismiss()
 
-            }
+
         } else if (status.equals("You have already started this production")) {
-            ivSuccess.setImageResource(R.drawable.warning)
-            tvStatus.text = "Unable to start this production"
             tvMessage.text = status
-            btnOk.text = "Done"
-            avRecharge.visibility = View.GONE
-            btnOk.setOnClickListener {
-                dialog.dismiss()
-            }
+
+
 
         } else if (status.equals("Insufficient balance to start this production")) {
-            ivSuccess.setImageResource(R.drawable.warning)
-            tvStatus.text = "Unable to start this Production"
             tvMessage.text = "Insufficient recharge to start this production"
-            btnOk.text = "Recharge Now"
-            avRecharge.visibility = View.VISIBLE
-            ivSuccess.visibility = View.GONE
-            btnOk.setOnClickListener {
-                dialog.dismiss()
 
-
-
-                if (session.getData(Constant.PAYGATEWAY).equals("1")) {
-                    val intent = Intent(activity, RechargeActivity::class.java)
-                    activity.startActivity(intent)
-
-                } else if (session.getData(Constant.PAYGATEWAY).equals("0")) {
-                    val intent = Intent(activity, PaymentActivity::class.java)
-                    activity.startActivity(intent)
-
-                }
-            }
 
 
         } else {
-            ivSuccess.setImageResource(R.drawable.warning)
-            tvStatus.text = "You are not eligible"
             tvMessage.text = status
-            btnOk.visibility = View.GONE
-            avRecharge.visibility = View.GONE
-            avRefer.visibility = View.VISIBLE
-            ivSuccess.visibility = View.GONE
-            btnOk.setOnClickListener {
-                dialog.dismiss()
-            }
 
         }
             dialog.show()

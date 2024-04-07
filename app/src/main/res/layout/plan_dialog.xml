@@ -13,51 +13,24 @@
 
 
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:layout_centerHorizontal="true"
-        android:id="@+id/avRecharge"
-        android:layout_width="@dimen/_150sdp"
-        android:layout_height="@dimen/_150sdp"
-        app:lottie_rawRes="@raw/recharge"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        />
-    <com.airbnb.lottie.LottieAnimationView
-        android:visibility="gone"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/avRefer"
-        android:layout_width="@dimen/_150sdp"
-        android:layout_height="@dimen/_150sdp"
-        app:lottie_rawRes="@raw/refer"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        />
+
 
     <ImageView
         android:id="@+id/ivSuccess"
         android:layout_centerHorizontal="true"
         android:layout_width="@dimen/_150sdp"
         android:layout_height="@dimen/_150sdp"
+        android:background="@drawable/logo"
         />
 
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/tvStatus"
-        android:layout_below="@+id/rlLottie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:text=""
-        android:fontFamily="@font/poppins_semibold"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_14sdp" />
+
 
 
     <TextView
         android:id="@+id/tvMessage"
-        android:layout_below="@+id/tvStatus"
+        android:layout_below="@+id/rlLottie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -65,17 +38,10 @@
         android:text=""
         android:textColor="#273240"
         android:textAlignment="center"
-        android:fontFamily="@font/poppins_medium"
-        android:textSize="@dimen/_12sdp" />
+        android:fontFamily="@font/poppins_semibold"
+        android:textSize="@dimen/_14sdp" />
 
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnOk"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvMessage"
-        android:backgroundTint="@color/primary_color"
-        android:fontFamily="@font/poppins_medium"
-        />
+
 
 </RelativeLayout>

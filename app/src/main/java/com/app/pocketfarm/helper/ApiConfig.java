@@ -24,7 +24,16 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.security.Key;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
+
+import javax.crypto.spec.SecretKeySpec;
+
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 public class ApiConfig extends Application {
     static ApiConfig mInstance;
@@ -60,6 +69,26 @@ public class ApiConfig extends Application {
         }
         return message;
     }
+    public static String createJWT(String issuer, String subject) {
+        try {
+            SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
+            long nowMillis = System.currentTimeMillis();
+            Date now = new Date(nowMillis);
+            byte[] apiKeySecretBytes = Constant.JWT_KEY.getBytes();
+            Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
+            JwtBuilder builder = Jwts.builder()
+                    .setIssuedAt(now)
+                    .setSubject(subject)
+                    .setIssuer(issuer)
+                    .signWith(signatureAlgorithm, signingKey);
+
+            return builder.compact();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public static void RequestToVolley(final VolleyCallback callback, final Activity activity, final String url, final Map<String, String> params, final boolean isProgress) {
         if (ProgressDisplay.mCustomDialogBox != null) {
@@ -85,9 +114,17 @@ public class ApiConfig extends Application {
                 Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
         }) {
 
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> params1 = new HashMap<>();
+                params1.put(Constant.AUTHORIZATION, "Bearer " + createJWT("eKart", "eKart Authentication"));
+                return params1;
+            }
+
 
             @Override
             protected Map<String, String> getParams() {
+                params.put(Constant.AccessKey, Constant.AccessKeyVal);
 
                 return params;
             }

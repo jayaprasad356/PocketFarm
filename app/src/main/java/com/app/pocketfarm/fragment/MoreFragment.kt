@@ -53,15 +53,11 @@ class MoreFragment : Fragment() {
         userdetails()
 
         binding.llInvite.setOnClickListener {
-
             startActivity(Intent(activity, InviteActivity::class.java))
-
-
         }
 
         binding.llScartchCard.setOnClickListener {
-
-          startActivity(Intent(activity, com.app.pocketfarm.activity.ScartchcardActivity::class.java))
+            startActivity(Intent(activity, com.app.pocketfarm.activity.ScartchcardActivity::class.java))
         }
 
 
@@ -93,7 +89,7 @@ class MoreFragment : Fragment() {
 
             }
          //  startActivity(Intent(activity, PaymentActivity::class.java))
-//           startActivity(Intent(activity, RechargeActivity::class.java))
+      //   startActivity(Intent(activity, RechargeActivity::class.java))
         }
 
 

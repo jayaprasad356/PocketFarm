@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.app.pocketfarm.R
 import com.app.pocketfarm.activity.HomeActivity
+import com.app.pocketfarm.databinding.ActivitySelectPaymentBinding
 import com.app.pocketfarm.helper.ApiConfig
 import com.app.pocketfarm.helper.Constant
 import com.app.pocketfarm.helper.Session
@@ -22,16 +23,38 @@ import com.app.pocketfarm.utils.DialogUtils
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
     var mWebView: WebView? = null
     var context: Context? = null
     var TAG = "MainActivity"
-    var session: Session? = null
+
+
+    private lateinit var session: Session
+    private lateinit var gpayLink: String
+    private lateinit var paytmLink: String
+    private lateinit var phonepeLink: String
+    private lateinit var paymentUrl: String
+    private lateinit var bhim_link: String
+    private lateinit var currentDateAndTime: String
+    private var amount: String? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         session = Session(this)
+
+
+        amount = session.getData(Constant.AMOUNT) + ".00"
+
+        val sdf = SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault())
+        currentDateAndTime = sdf.format(Date())
+        apicall1(currentDateAndTime)
+
         if (0 != applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE) {
             WebView.setWebContentsDebuggingEnabled(true)
         }
@@ -39,20 +62,11 @@ class MainActivity : AppCompatActivity() {
         mWebView = findViewById<View>(R.id.payment_webview) as WebView
         initWebView()
 
-        val qrValue = intent.getStringExtra("QR_VALUE")
-        // 👍 Call the Create Order API from your server and you will get the Payment URL.
-        //    you will also get UPI intent if you are using Enterprise Plan.
-        //    you can use upi intent in payment url and it will directly ask for UPI App.
-        // 🚫 Do not Call UPIGateway API in Android App Directly
-        val PAYMENT_URL = ""+qrValue
-        //        String PAYMENT_URL = "upi://pay?pa=...";
-        if (PAYMENT_URL.startsWith("upi:")) {
-            val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = Uri.parse(PAYMENT_URL)
-            startActivity(intent)
-        } else {
-            mWebView!!.loadUrl(PAYMENT_URL)
-        }
+
+
+
+
+
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -74,9 +88,9 @@ class MainActivity : AppCompatActivity() {
             // this function is called when payment is done (success, scanning ,timeout or cancel by user).
             // You must call the check order status API in server and get update about payment.
             // 🚫 Do not Call UpiGateway API in Android App Directly.
-            Toast.makeText(context, "Order ID: $client_txn_id, Txn ID: $txn_id", Toast.LENGTH_SHORT).show()
+          //  Toast.makeText(context, "Order ID: $client_txn_id, Txn ID: $txn_id", Toast.LENGTH_SHORT).show()
 
-            apicall()
+            apicall2()
 
             // Close the Webview.
         }
@@ -91,12 +105,67 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun apicall() {
+
+    private fun apicall1(currentDateAndTime: String) {
+        val params = hashMapOf(
+            Constant.USER_ID to session!!.getData(Constant.USER_ID),
+            Constant.KEY to "707029bb-78d4-44b6-9f72-0d7fe80e338b",
+            Constant.TXN_ID to currentDateAndTime,
+            Constant.AMOUNT to amount.toString(),
+            Constant.DATE to currentDate()
+        )
+
+        ApiConfig.RequestToVolley({ result, response ->
+            if (result) {
+                try {
+                    val jsonObject = JSONObject(response)
+                    if (jsonObject.getBoolean(Constant.STATUS)) {
+                        val dataObject = jsonObject.getJSONObject(Constant.DATA)
+                        val orderId = dataObject.getInt("order_id")
+                        paymentUrl = dataObject.getString("payment_url")
+                        val upiIntent = dataObject.getJSONObject("upi_intent")
+
+                        bhim_link = upiIntent.getString("bhim_link")
+                        gpayLink = upiIntent.getString("gpay_link")
+                        phonepeLink = upiIntent.getString("phonepe_link")
+                        paytmLink = upiIntent.getString("paytm_link")
+
+
+                        val qrValue = paymentUrl.toString()
+                        val PAYMENT_URL = ""+qrValue
+
+                        if (PAYMENT_URL.startsWith("upi:")) {
+                            val intent = Intent(Intent.ACTION_VIEW)
+                            intent.data = Uri.parse(PAYMENT_URL)
+                            startActivity(intent)
+                        } else {
+                            mWebView!!.loadUrl(PAYMENT_URL)
+                        }
+
+
+
+                    } else {
+                        val message = jsonObject.getString(Constant.MESSAGE)
+                        Toast.makeText(this,""+ message, Toast.LENGTH_SHORT).show()
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                    Toast.makeText(this, "Error parsing response", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(this, "Network error: $response", Toast.LENGTH_SHORT).show()
+            }
+        }, this, Constant.RECHARGE_CREATE, params, true)
+    }
+
+
+
+    private fun apicall2() {
         val params: MutableMap<String, String> = HashMap()
         params[Constant.USER_ID] = session!!.getData(Constant.USER_ID)
-        params[Constant.TXN_ID] = session!!.getData(Constant.TXN_ID)
-        params[Constant.DATE] = session!!.getData(Constant.DATE)
-        params[Constant.KEY] = session!!.getData(Constant.KEY)
+        params[Constant.TXN_ID] = currentDateAndTime
+        params[Constant.DATE] = currentDate()
+        params[Constant.KEY] = "707029bb-78d4-44b6-9f72-0d7fe80e338b"
         ApiConfig.RequestToVolley({ result, response ->
             if (result) {
                 try {
@@ -128,6 +197,14 @@ class MainActivity : AppCompatActivity() {
         // Do nothing
     }
 
+
+    private fun currentDate(): String {
+        val sdf = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        return sdf.format(Date())
+    }
+
+
+    // Assume you have integrated a QR code scanning library and received the scanned data in 'scannedData' variable
 
 
 

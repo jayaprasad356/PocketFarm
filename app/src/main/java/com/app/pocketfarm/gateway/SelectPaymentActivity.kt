@@ -92,12 +92,12 @@ class SelectPaymentActivity : AppCompatActivity() {
             Log.d("UpiAppVisibility", p + " | " + isAppInstalled(p).toString() + " | " + isAppUpiReady(p))
             if(isAppInstalled(p)&&isAppUpiReady(p)) {
                 b.visibility = View.VISIBLE
-                b.setOnClickListener{
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(bhim_link))
-                    intent.data = Uri.parse(bhim_link)
-                    intent.setPackage(p)
-                    startActivityForResult(intent, REQUEST_CODE)
-                }
+//                b.setOnClickListener{
+//                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(bhim_link))
+//                    intent.data = Uri.parse(bhim_link)
+//                    intent.setPackage(p)
+//                    startActivityForResult(intent, REQUEST_CODE)
+//                }
             }
             else{
                 b.visibility = View.GONE
@@ -116,10 +116,41 @@ class SelectPaymentActivity : AppCompatActivity() {
 
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("QR_VALUE", paymentUrl)
+            session.setData(Constant.TXN_ID, currentDateAndTime)
+            session.setData(Constant.DATE, currentDate())
+            session.setData(Constant.KEY, "707029bb-78d4-44b6-9f72-0d7fe80e338b")
             startActivity(intent)
             finish()
 
         }
+
+        paytmButton.setOnClickListener{
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(paytmLink))
+            intent.data = Uri.parse(paytmLink)
+            startActivityForResult(intent, REQUEST_CODE)
+        }
+
+        gpayButton.setOnClickListener{
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(gpayLink))
+            intent.data = Uri.parse(gpayLink)
+            startActivityForResult(intent, REQUEST_CODE)
+        }
+
+        phonepeButton.setOnClickListener{
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(phonepeLink))
+            intent.data = Uri.parse(phonepeLink)
+            startActivityForResult(intent, REQUEST_CODE)
+        }
+
+        bhimButton.setOnClickListener{
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(bhim_link))
+            intent.data = Uri.parse(bhim_link)
+            startActivityForResult(intent, REQUEST_CODE)
+        }
+
+
+
+
 
     }
 
@@ -214,7 +245,7 @@ class SelectPaymentActivity : AppCompatActivity() {
 
                     } else {
                         val message = jsonObject.getString(Constant.MESSAGE)
-                        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this,""+ message, Toast.LENGTH_SHORT).show()
                     }
                 } catch (e: JSONException) {
                     e.printStackTrace()

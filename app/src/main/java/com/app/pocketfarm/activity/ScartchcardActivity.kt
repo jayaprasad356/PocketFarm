@@ -26,6 +26,9 @@ class ScartchcardActivity : AppCompatActivity() {
 
     var dialog: Dialog? = null
 
+    lateinit var scratch_id:String
+    lateinit var chance:String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,16 +46,16 @@ class ScartchcardActivity : AppCompatActivity() {
 
 
 
-        val chance = session.getData(com.app.pocketfarm.helper.Constant.CHANCES)
+         chance = session.getData(com.app.pocketfarm.helper.Constant.CHANCES)
 
         dialog = Dialog(this)
 
 
         binding.scratchView.setRevealListener(object : IRevealListener {
             override fun onRevealed(scratchView: ScratchView) {
-
-                Toast.makeText(this@ScartchcardActivity, "Revealed!", Toast.LENGTH_SHORT).show()
+              //  Toast.makeText(this@ScartchcardActivity, "Revealed!", Toast.LENGTH_SHORT).show()
                 userdetails()
+                apicall1()
                 scratchView.visibility = View.GONE
 
             }
@@ -69,7 +72,6 @@ class ScartchcardActivity : AppCompatActivity() {
             DialogUtils.showCustomDialog(activity, "No More Chances")
         }
         else{
-
             binding.ScarchImg.visibility = View.VISIBLE
             binding.image.visibility = View.GONE
             apicall()
@@ -96,13 +98,9 @@ class ScartchcardActivity : AppCompatActivity() {
 
 
                         session!!.setData(Constant.CHANCES, jsonArray.getJSONObject(0).getString(Constant.CHANCES))
-
-
-
-
                         binding.tvChance.text =  session.getData(com.app.pocketfarm.helper.Constant.CHANCES) + " Chances left"
 
-
+                        chance = session.getData(com.app.pocketfarm.helper.Constant.CHANCES)
 
 
 
@@ -132,6 +130,37 @@ class ScartchcardActivity : AppCompatActivity() {
                     if (jsonObject.getBoolean(Constant.SUCCESS)) {
 
                         binding.tvAmount.text = jsonObject.getString("amount")
+                        scratch_id = jsonObject.getString("scratch_id")
+
+                       Toast.makeText(this@ScartchcardActivity,jsonObject.getString(Constant.MESSAGE) , Toast.LENGTH_SHORT).show()
+
+
+
+                    } else {
+                        DialogUtils.showCustomDialog(activity, ""+jsonObject.getString(Constant.MESSAGE))
+
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                    Toast.makeText(activity, e.toString(), Toast.LENGTH_SHORT).show()
+                }
+            }
+        }, activity, Constant.SCRATCH_CARD, params, true)
+
+        // Return a dummy intent, as the actual navigation is handled inside the callback
+
+    }
+    private fun apicall1() {
+        val params: MutableMap<String, String> = HashMap()
+        params[Constant.USER_ID] = session!!.getData(Constant.USER_ID)
+        params[Constant.SCRATCH_ID] = scratch_id.toString()
+        ApiConfig.RequestToVolley({ result, response ->
+            if (result) {
+                try {
+                    val jsonObject = JSONObject(response)
+                    if (jsonObject.getBoolean(Constant.SUCCESS)) {
+
+                        Toast.makeText(this@ScartchcardActivity,jsonObject.getString(Constant.MESSAGE) , Toast.LENGTH_SHORT).show()
 
                     } else {
                         DialogUtils.showCustomDialog(activity, ""+jsonObject.getString(Constant.MESSAGE))

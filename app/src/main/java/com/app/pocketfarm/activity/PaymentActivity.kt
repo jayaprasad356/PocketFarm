@@ -196,20 +196,21 @@ class PaymentActivity : AppCompatActivity() {
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_IMAGE_GALLERY) {
                 imageUri = data?.data
-                CropImage.activity(imageUri)
-                    .start(activity)
-            } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-                val result: CropImage.ActivityResult = CropImage.getActivityResult(data)!!
-                filePath1 = result.getUriFilePath(activity, true)
-                val imgFile: File = File(filePath1)
-                if (imgFile.exists()) {
-                    binding.btnUpload.isEnabled = true // Corrected method name
-                    val myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
-                    binding.ivImage.setImageBitmap(myBitmap)
+                // Perform your desired action with the imageUri here, without cropping
+                // For example:
+                if (imageUri != null) {
+                    // Load the image into ImageView or perform any other operation
+                    val inputStream = contentResolver.openInputStream(imageUri!!)
+                    val bitmap = BitmapFactory.decodeStream(inputStream)
+                    binding.ivImage.setImageBitmap(bitmap)
+                    inputStream?.close()
+                    // Enable your upload button if needed
+                    binding.btnUpload.isEnabled = true
                 }
             }
         }
     }
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
