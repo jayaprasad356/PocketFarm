@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.view.animation.Animation
@@ -196,19 +197,32 @@ class PaymentActivity : AppCompatActivity() {
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_IMAGE_GALLERY) {
                 imageUri = data?.data
-                // Perform your desired action with the imageUri here, without cropping
-                // For example:
-                if (imageUri != null) {
-                    // Load the image into ImageView or perform any other operation
-                    val inputStream = contentResolver.openInputStream(imageUri!!)
-                    val bitmap = BitmapFactory.decodeStream(inputStream)
-                    binding.ivImage.setImageBitmap(bitmap)
-                    inputStream?.close()
-                    // Enable your upload button if needed
-                    binding.btnUpload.isEnabled = true
+                // Get file path from the imageUri
+                val filePath: String? = getImageFilePath(imageUri)
+                if (filePath != null) {
+                    filePath1 = filePath
+                    val imgFile: File = File(filePath1)
+                    if (imgFile.exists()) {
+                        binding.btnUpload.isEnabled = true // Corrected method name
+                        val myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
+                        binding.ivImage.setImageBitmap(myBitmap)
+                    }
                 }
             }
         }
+    }
+
+    private fun getImageFilePath(uri: Uri?): String? {
+        if (uri == null) return null
+        var filePath: String? = null
+        val projection = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor = contentResolver.query(uri, projection, null, null, null)
+        cursor?.use {
+            val columnIndex = it.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+            it.moveToFirst()
+            filePath = it.getString(columnIndex)
+        }
+        return filePath
     }
 
 
@@ -224,8 +238,6 @@ class PaymentActivity : AppCompatActivity() {
                 try {
                     val jsonObject = JSONObject(response)
                     if (jsonObject.getBoolean(com.app.pocketfarm.helper.Constant.SUCCESS)) {
-
-
 
                         showCustomDialog()
 
