@@ -21,11 +21,24 @@
             android:orientation="vertical"
             >
 
+            <TextView
+                android:id="@+id/tvRecharge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Recharge"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/blue_color"
+                android:textSize="@dimen/_12sdp"
+
+                />
+
 
 
 
 
         <androidx.cardview.widget.CardView
+            android:visibility="gone"
             android:id="@+id/cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,17 +79,15 @@
 
 
             <com.google.android.material.card.MaterialCardView
-                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:strokeWidth="1dp"
-                app:strokeColor="@color/primary_color"
+                app:strokeColor="@color/secondary_color"
                 app:cardCornerRadius="@dimen/_10sdp"
                 >
 
 
 <LinearLayout
-    android:visibility="gone"
     android:weightSum="2"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -85,7 +96,7 @@
         android:id="@+id/rlPlan"
         android:padding="@dimen/_8sdp"
         android:background="@drawable/rounded_corner"
-        android:backgroundTint="@color/primary_color"
+        android:backgroundTint="@color/secondary_color"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -96,10 +107,10 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Plan"
-            android:fontFamily="@font/poppins_medium"
+            android:text="Fruits"
+            android:fontFamily="@font/poppins_semibold"
             android:textColor="@color/white"
-            android:textSize="@dimen/_10sdp"
+            android:textSize="@dimen/_12sdp"
 
             />
 
@@ -119,10 +130,10 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Active Plan"
-            android:fontFamily="@font/poppins_medium"
+            android:text="Vegetables"
+            android:fontFamily="@font/poppins_semibold"
             android:textColor="@color/black"
-            android:textSize="@dimen/_10sdp"
+            android:textSize="@dimen/_12sdp"
             />
 
 
@@ -141,6 +152,7 @@
 
 
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:layout_marginTop="@dimen/_10sdp"
                 android:id="@+id/swipeRefreshLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

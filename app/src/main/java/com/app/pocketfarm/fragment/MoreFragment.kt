@@ -76,6 +76,10 @@ class MoreFragment : Fragment() {
             startActivity(Intent(activity,MyProductionActivity::class.java))
         }
 
+        binding.rlRatingIncome.setOnClickListener{
+            startActivity(Intent(activity, com.app.pocketfarm.activity.RatingIncomeActivity::class.java))
+        }
+
         binding.llServices.setOnClickListener{
             startActivity(Intent(activity, com.app.pocketfarm.activity.SupportActivity::class.java))
         }

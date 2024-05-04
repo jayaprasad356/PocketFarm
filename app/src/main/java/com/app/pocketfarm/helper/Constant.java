@@ -10,8 +10,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class Constant {
     //public static final String MainBaseUrl = "http://weagri.graymatterworks.com/";
-   public static final String MainBaseUrl = "https://admin.pocketfarm.in/";
- // public static final String MainBaseUrl = "https://demo.pocketfarm.in/";
+ public static final String MainBaseUrl = "https://admin.pocketfarm.in/";
+  //public static final String MainBaseUrl = "https://demo.pocketfarm.in/";
 
     public static final String BaseUrl = MainBaseUrl + "api/";
 
@@ -45,9 +45,14 @@ public class Constant {
     public static final String TEAM_LIST = BaseUrl + "team_list.php";
     public static final String UPDATE_PROFILE = BaseUrl + "update_profile.php";
     public static final String UPDATE_IMAGE = BaseUrl + "update_image.php";
+    public static final String ADD_TO_MAIN_BALANCE = BaseUrl + "add_to_main_balance.php";
+    public static final String TRANSFER_WALLET = BaseUrl + "transfer_wallet.php";
 
     public static final String PLAN_SLIDE_LIST = BaseUrl + "plan_slide_list.php";
     public static final String RECHARGE_URL = BaseUrl + "recharge.php";
+    public static final String REVIEW_URL = BaseUrl + "review.php";
+    public static final String REVIEW_LIST = BaseUrl + "review_list.php";
+    public static final String PLAYSTORE_RATINGS = BaseUrl + "playstore_ratings.php";
 
     public static final String EXPLORE_LIST = BaseUrl + "explore_list.php";
     public static final String WITHDRAWALS = BaseUrl + "withdrawals.php";
@@ -108,6 +113,8 @@ public class Constant {
 
     public static final String ID = "id";
     public static final String USER_ID = "user_id";
+    public static final String WALLET_TYPE = "wallet_type";
+    public static final String CATEGORY = "category";
     public static final String SCRATCH_ID = "scratch_id";
 
     public static final String LATITUDE = "latitude";
@@ -154,6 +161,9 @@ public class Constant {
     public static final String ADDRESS = "address";
     public static final String REFER_CODE = "refer_code";
     public static final String BLOCKED = "blocked";
+ public static final String VEG_WALLET = "veg_wallet";
+ public static final String FRUIT_WALLET = "fruit_wallet";
+ public static final String RECHARGE_DIALOGUE = "recharge_dialogue";
     public static final String PROFILE = "profile";
     public static final String REFERRED_BY= "referred_by";
 

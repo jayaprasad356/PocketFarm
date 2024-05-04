@@ -76,8 +76,10 @@ class PlanFragment : Fragment() {
 
 
 
+        binding.tvRecharge.text = "Balance Recharge"+" : ₹"+session.getData(com.app.pocketfarm.helper.Constant.RECHARGE)
+
         binding.rlPlan.setOnClickListener(View.OnClickListener {
-            binding.rlPlan.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#02B153"))
+            binding.rlPlan.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#F8B328"))
             binding.rlActivate.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
             binding.tvPlan.setTextColor(Color.parseColor("#FFFFFF"))
             binding.tvActivate.setTextColor(Color.parseColor("#000000"))
@@ -86,7 +88,7 @@ class PlanFragment : Fragment() {
         })
 
         binding.rlActivate.setOnClickListener(View.OnClickListener {
-            binding.rlActivate.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#02B153"))
+            binding.rlActivate.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#F8B328"))
             binding.rlPlan.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
             binding.tvActivate.setTextColor(Color.parseColor("#FFFFFF"))
             binding.tvPlan.setTextColor(Color.parseColor("#000000"))
@@ -149,6 +151,8 @@ class PlanFragment : Fragment() {
         swipeRefreshLayout.setOnRefreshListener { myplans(swipeRefreshLayout) }
         val params: MutableMap<String, String> = HashMap()
         params[com.app.pocketfarm.helper.Constant.USER_ID]= session.getData(com.app.pocketfarm.helper.Constant.USER_ID)
+        params[com.app.pocketfarm.helper.Constant.CATEGORY]= "fruits"
+
         com.app.pocketfarm.helper.ApiConfig.RequestToVolley({ result, response ->
             if (result) {
                 try {
@@ -197,6 +201,8 @@ class PlanFragment : Fragment() {
         swipeRefreshLayout.setOnRefreshListener { activateplan(swipeRefreshLayout) }
         val params: MutableMap<String, String> = HashMap()
         params[com.app.pocketfarm.helper.Constant.USER_ID]= session.getData(com.app.pocketfarm.helper.Constant.USER_ID)
+        params[com.app.pocketfarm.helper.Constant.CATEGORY]= "vegetables"
+
         com.app.pocketfarm.helper.ApiConfig.RequestToVolley({ result, response ->
             if (result) {
                 try {
@@ -218,7 +224,7 @@ class PlanFragment : Fragment() {
                         }
                         //    Toast.makeText(getActivity(), "1" + jsonObject.getString(Constant.MESSAGE).toString(), Toast.LENGTH_SHORT).show()
                         //important
-                        val adapter = ActivateplansAdapter(activity, myPlans)
+                        val adapter = MyplansAdapter(activity, myPlans)
                         binding.rvplan.adapter = adapter
                         binding.rvplan.visibility = View.VISIBLE
                         binding.animationView.visibility = View.GONE
@@ -235,7 +241,7 @@ class PlanFragment : Fragment() {
                     Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_SHORT).show()
                 }
             }
-        }, activity, com.app.pocketfarm.helper.Constant.USER_PLAN_LIST, params, true)
+        }, activity, com.app.pocketfarm.helper.Constant.PLAN_LIST, params, true)
 
 
 

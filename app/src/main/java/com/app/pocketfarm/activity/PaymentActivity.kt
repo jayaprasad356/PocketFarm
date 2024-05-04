@@ -183,7 +183,6 @@ class PaymentActivity : AppCompatActivity() {
     }
 
     private fun pickImageFromGallery() {
-
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
@@ -192,21 +191,28 @@ class PaymentActivity : AppCompatActivity() {
         )
     }
 
+
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_IMAGE_GALLERY) {
                 imageUri = data?.data
-                // Get file path from the imageUri
-                val filePath: String? = getImageFilePath(imageUri)
-                if (filePath != null) {
-                    filePath1 = filePath
-                    val imgFile: File = File(filePath1)
-                    if (imgFile.exists()) {
-                        binding.btnUpload.isEnabled = true // Corrected method name
-                        val myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
-                        binding.ivImage.setImageBitmap(myBitmap)
-                    }
+                // Start cropping activity with the provided image URI
+                CropImage.activity(imageUri)
+                    //.setAspectRatio(1, 1) // Set aspect ratio to 1:1 for a square crop
+                    // .setRequestedSize(512, 512) // Set output image size
+                    .start(activity)
+            } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+                // Get the result URI after cropping
+                val result: CropImage.ActivityResult = CropImage.getActivityResult(data)!!
+                filePath1 = result.getUriFilePath(activity, true)
+                val imgFile: File = File(filePath1)
+                if (imgFile.exists()) {
+                    binding.btnUpload.isEnabled = true // Corrected method name
+                    // Decode the cropped image file into a Bitmap and display it
+                    val myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
+                    binding.ivImage.setImageBitmap(myBitmap)
                 }
             }
         }
