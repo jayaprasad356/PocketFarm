@@ -38,7 +38,7 @@ class SplashScreenActivity : AppCompatActivity() {
         session = Session(activity)
         handler = Handler()
 
-        val tvTitle = "<font color='#F8B328'>Pocket</font> "+"<font color='#00B251'>Farm</font>"
+        val tvTitle = "<font color='#F8B328'>Farmy</font>"
 
             val textView = findViewById<TextView>(R.id.textView)
 

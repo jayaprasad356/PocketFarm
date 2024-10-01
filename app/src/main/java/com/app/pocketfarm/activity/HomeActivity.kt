@@ -82,7 +82,7 @@ class HomeActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         activity = this
         session = com.app.pocketfarm.helper.Session(activity)
         //tvTitle text is double color text "We" and "Agri"
-        val tvTitle = "<font color='#F8B328'>Pocket</font> " + "<font color='#00B251'>Farm</font>"
+        val tvTitle = "<font color='#F8B328'>Farmy</font>"
 
         binding.tvTitle.text = Html.fromHtml(tvTitle)
 
